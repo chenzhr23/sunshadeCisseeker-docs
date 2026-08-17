@@ -68,6 +68,13 @@ Fonts and remote displays
   window closes even on broken remote displays.
 * **Open results** on hosts without a file manager/browser shows a copyable
   path dialog instead of calling ``xdg-open``.
+* **Remote status-bar mode**: on X-forwarded displays the run panels do not
+  paint the live log (which would flood the X tunnel). They show a single
+  status line — elapsed time plus the latest step message — refreshed every
+  two seconds, while the full output keeps flowing into
+  ``log/sunshadeCisseeker_*.log`` and each step's own ``.log`` file. Start the
+  GUI with ``SUNSHADE_LOG=full sunshadeCisseeker gui`` to force the live log
+  even on remote displays.
 
 Display requirements
 --------------------
