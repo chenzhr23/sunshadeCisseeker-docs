@@ -1,5 +1,5 @@
-Ecology comparison (steps 07–09)
-================================
+Ecology comparison
+==================
 
 The ecology comparison answers one question: **do the promoter
 cis-regulatory elements of sun, facultative and shade plants differ

@@ -1,5 +1,5 @@
-Desktop window (GUI)
-====================
+GUI
+===
 
 The interface follows the **psiFinder framework and look**: the same flat tab
 widget with page-change animation, the same splash screen and the same
@@ -38,8 +38,8 @@ There are exactly five sliding pages, in this order:
    * - **Compare ecology**
      - runs the cross-genome ecology comparison (steps 07-09)
 
-Each analysis page shows the step description, the result directory hint and a
-live log panel.
+Each analysis page shows the step description, the result directory hint and
+a live log panel.
 
 Menu bar
 --------
@@ -63,11 +63,6 @@ Fonts and remote displays
 * On X-forwarded connections (``DISPLAY`` contains a host) the page-change
   animations are switched off automatically to keep the window responsive;
   ``SUNSHADE_ANIM=1`` forces them back on.
-* Startup never blocks: the two XLSX label tables load in the background, all
-  notices are non-modal, and a watchdog guarantees the process exits after the
-  window closes even on broken remote displays.
-* **Open results** on hosts without a file manager/browser shows a copyable
-  path dialog instead of calling ``xdg-open``.
 * **Remote status-bar mode**: on X-forwarded displays the run panels do not
   paint the live log (which would flood the X tunnel). They show a single
   status line — elapsed time plus the latest step message — refreshed every
@@ -75,16 +70,11 @@ Fonts and remote displays
   ``log/sunshadeCisseeker_*.log`` and each step's own ``.log`` file. Start the
   GUI with ``SUNSHADE_LOG=full sunshadeCisseeker gui`` to force the live log
   even on remote displays.
-
-Display requirements
---------------------
-
-* **WSL2 on Windows 11** — WSLg shows the window directly; with an older
-  setup, start VcXsrv or Xming on Windows first.
-* **Remote server** — reconnect with ``ssh -Y user@server``, then run
-  ``sunshadeCisseeker gui``.
-* **No display** — the launcher refuses to start with a clear message; use
-  ``sunshadeCisseeker run`` instead.
+* Startup never blocks: the two XLSX label tables load in the background, all
+  notices are non-modal, and a watchdog guarantees the process exits after
+  the window closes even on broken remote displays.
+* **Open results** on hosts without a file manager/browser shows a copyable
+  path dialog instead of calling ``xdg-open``.
 
 Rebuilding the interface
 ------------------------

@@ -1,0 +1,7 @@
+/* Custom styles for sunshadeCisseeker docs */
+
+/* Text role defined via ".. role:: red" in the rst sources. */
+.red {
+    color: #cc0000;
+    font-weight: bold;
+}

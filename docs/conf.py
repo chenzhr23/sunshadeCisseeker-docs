@@ -1,12 +1,16 @@
 # sunshadeCisseeker documentation build configuration.
+#
+# The documentation follows the psiFinder style: Sphinx' built-in bizstyle
+# theme with the same custom.css override, content pages under content/, and
+# the "<page> — sunshadeCisseeker vX.Y.Z documentation" title pattern.
 
 project = "sunshadeCisseeker"
 author = "sunshadeCisseeker developers"
 copyright = "2026, sunshadeCisseeker developers"
 
 # The short X.Y version and the full release version.
-version = "1.3.4"
-release = "1.3.4"
+version = "v1.3.4"
+release = "v1.3.4"
 
 extensions = [
     "sphinx.ext.autosectionlabel",
@@ -15,13 +19,9 @@ extensions = [
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
-# Read the Docs uses the classic RTD theme, in the same style as psiFinder.
-html_theme = "sphinx_rtd_theme"
+html_theme = "bizstyle"
 html_static_path = ["_static"]
-html_title = "sunshadeCisseeker"
-html_theme_options = {
-    "navigation_depth": 3,
-    "collapse_navigation": False,
-    "sticky_navigation": True,
-}
-html_show_sourcelink = True
+html_css_files = ["custom.css"]
+
+# The :red: text role used by the psiFinder docs.
+rst_prolog = ".. role:: red\n"

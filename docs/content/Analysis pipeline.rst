@@ -1,5 +1,5 @@
-Pipeline
-========
+Analysis pipeline
+=================
 
 The pipeline runs nine strict steps: six per genome type (nuclear /
 chloroplast / mitochondrial) and three cross-genome ecology steps.
@@ -92,4 +92,4 @@ promoters can be scanned in bounded memory. Outputs:
 Steps 07–09 — ecology comparison
 --------------------------------
 
-See :doc:`ecology` for the full business logic.
+See :doc:`Ecology comparison` for the full business logic.

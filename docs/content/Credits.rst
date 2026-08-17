@@ -38,6 +38,5 @@ inferred by the software.
 Documentation
 -------------
 
-Built with `Sphinx <https://www.sphinx-doc.org/>`_ and the
-`Read the Docs Sphinx theme <https://github.com/readthedocs/sphinx_rtd_theme>`_,
-hosted on Read the Docs.
+Built with `Sphinx <https://www.sphinx-doc.org/>`_ and the built-in
+``bizstyle`` theme, hosted on Read the Docs.

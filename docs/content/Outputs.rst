@@ -27,8 +27,8 @@ Per genome type
    * - ``result/<type>/06_ciselement/<type>_ciselement_summary.pdf``
      - six-panel CRE landscape figure
 
-Ecology comparison
-------------------
+Ecology comparison outputs
+--------------------------
 
 .. list-table::
    :header-rows: 1
