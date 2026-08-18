@@ -48,7 +48,13 @@ Step 03 — retry failed
 ----------------------
 
 Re-reads the task list and retries failed downloads across alternative URL
-mirrors with exponential backoff.
+mirrors with exponential backoff. Deterministic client errors (HTTP 4xx
+except 429, e.g. a malformed or removed URL) fail immediately instead of
+burning all retries, and NCBI rate limiting (HTTP 429) is probed a bounded
+number of times with short waits before being recorded cleanly — so the step
+finishes in minutes rather than hours and can simply be re-run later once the
+throttle clears. Extra flags: ``--retries=``, ``--rate-retries=``,
+``--timeout=``, ``--workers=``, ``--check-all=true``.
 
 Step 04 — promoter extraction
 -----------------------------
