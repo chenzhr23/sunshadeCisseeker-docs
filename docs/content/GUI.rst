@@ -63,13 +63,13 @@ Fonts and remote displays
 * On X-forwarded connections (``DISPLAY`` contains a host) the page-change
   animations are switched off automatically to keep the window responsive;
   ``SUNSHADE_ANIM=1`` forces them back on.
-* **Remote status-bar mode**: on X-forwarded displays the run panels do not
-  paint the live log (which would flood the X tunnel). They show a single
-  status line — elapsed time plus the latest step message — refreshed every
-  two seconds, while the full output keeps flowing into
-  ``log/sunshadeCisseeker_*.log`` and each step's own ``.log`` file. Start the
-  GUI with ``SUNSHADE_LOG=full sunshadeCisseeker gui`` to force the live log
-  even on remote displays.
+* **Live log everywhere**: the run panels show the full live log on local
+  and remote displays alike (the run itself is detached and the display is
+  polled once per second, so forwarded sessions stay responsive). The full
+  output also flows into ``log/sunshadeCisseeker_*.log`` and each step's own
+  ``.log`` file. For very constrained links a compact status bar (one status
+  line per second) is available with
+  ``SUNSHADE_LOG=status sunshadeCisseeker gui``.
 * Startup never blocks: the two XLSX label tables load in the background, all
   notices are non-modal, and a watchdog guarantees the process exits after
   the window closes even on broken remote displays.

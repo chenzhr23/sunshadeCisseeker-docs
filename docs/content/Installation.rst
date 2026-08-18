@@ -108,11 +108,12 @@ A remote server, through X11 forwarding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Reconnect with ``ssh -Y user@server`` and run ``sunshadeCisseeker gui``. On
-forwarded displays the interface switches off animations automatically and
-the run panels use the **status-bar mode** (one status line every two
-seconds instead of a live log), keeping the X tunnel usable. Start with
-``SUNSHADE_LOG=full sunshadeCisseeker gui`` to force the live log. For
-heavier usage on servers, prefer X2Go / TigerVNC / MobaXterm over raw X11
+forwarded displays the interface switches off the page-change animations
+automatically, and the run panels show the same full live log as on a local
+display (the run is detached and polled once per second, so the tunnel stays
+usable). ``SUNSHADE_LOG=status sunshadeCisseeker gui`` switches the panels to
+a compact status bar for very constrained links. For heavier usage on
+servers, X2Go / TigerVNC / MobaXterm are still preferable to raw X11
 forwarding.
 
 No display at all, run the pipeline directly
