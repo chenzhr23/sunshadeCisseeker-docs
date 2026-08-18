@@ -20,7 +20,7 @@ uses, so results are identical either way.
 Sliding pages
 -------------
 
-There are exactly five sliding pages, in this order:
+There are exactly six sliding pages, in this order:
 
 .. list-table::
    :header-rows: 1
@@ -35,8 +35,10 @@ There are exactly five sliding pages, in this order:
      - runs the chloroplast part (steps 01-06)
    * - **Mitochondrial genome**
      - runs the mitochondrial part (steps 01-06)
+   * - **Label ecology**
+     - assigns the sun/facultative/shade labels to the three merged datasets (cross-genome step 06)
    * - **Compare ecology**
-     - runs the cross-genome ecology comparison (steps 07-09)
+     - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first)
 
 Each analysis page shows the step description, the result directory hint and
 a live log panel.

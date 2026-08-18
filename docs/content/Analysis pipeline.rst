@@ -1,18 +1,18 @@
 Analysis pipeline
 =================
 
-The pipeline runs nine strict steps: six per genome type (nuclear /
-chloroplast / mitochondrial) and three cross-genome ecology steps.
+The pipeline runs ten strict steps: six per genome type (nuclear /
+chloroplast / mitochondrial) and four cross-genome steps (label ecology plus
+the ecology comparison).
 
 .. code-block:: text
 
    per genome type:
      01 species metadata -> 02 download FASTA+GFF3 -> 03 retry failed
-     -> 04 promoter extraction -> 05 merge NCBI+Custom + ecology labels
-     -> 06 universal CRE scan
+     -> 04 promoter extraction -> 05 merge NCBI+Custom -> 06 universal CRE scan
 
    cross-genome:
-     07 merge -> 08 differential statistics -> 09 publication figures
+     06 label ecology -> 07 merge -> 08 differential statistics -> 09 figures
 
 Each step reads the exact outputs of the previous one and writes a multi-sheet
 XLSX workbook (README sheet first) plus its own ``.log``.
@@ -42,7 +42,12 @@ Step 02 — download FASTA + GFF3
 Builds exactly **one FASTA + one GFF3 task per species** from the
 representative URLs and downloads them in parallel (paced to respect the NCBI
 rate limit, with ``failonerror``, error-page detection, clean retries with
-jitter and resumable ``.part`` files). Completed files are skipped on re-runs.
+jitter and resumable ``.part`` files). Deterministic HTTP 4xx errors fail
+immediately and NCBI rate limiting (429) is probed a bounded number of times
+(``--rate-retries=``), so a dead URL never burns the whole retry budget.
+Completed files are skipped on re-runs, and every kept file passes a cheap
+format check (FASTA starts with ``>``, GFF3 with ``#``; ``gzip -t`` for
+``.gz``), so incomplete or mislabelled content is re-downloaded.
 
 Step 03 — retry failed
 ----------------------
@@ -53,7 +58,8 @@ except 429, e.g. a malformed or removed URL) fail immediately instead of
 burning all retries, and NCBI rate limiting (HTTP 429) is probed a bounded
 number of times with short waits before being recorded cleanly — so the step
 finishes in minutes rather than hours and can simply be re-run later once the
-throttle clears. Extra flags: ``--retries=``, ``--rate-retries=``,
+throttle clears. Files that exist but fail the FASTA/GFF3 format check are
+re-downloaded as well. Extra flags: ``--retries=``, ``--rate-retries=``,
 ``--timeout=``, ``--workers=``, ``--check-all=true``.
 
 Step 04 — promoter extraction
@@ -73,13 +79,19 @@ The extraction engine is chosen per genome:
   tools exist and the FASTA is uncompressed; otherwise a streaming R
   extractor that reads ``.gz`` files directly (identical results).
 
+Re-runs are incremental: a species whose promoter FASTA and detail table are
+newer than its inputs (and the requested ``promoter_len`` is unchanged) is
+skipped, so a re-run only processes new or changed genomes.
+
 Step 05 — input merge
 ---------------------
 
-Merges NCBI and Custom promoters, gives every promoter a short unique ID
-(``N/C/M`` + 9 digits) and writes the ID map
-(``all_species_<type>_id_map.xlsx``) with species, source, gene, strand,
-coordinates and the ecology label.
+Merges NCBI and Custom promoters (no ecology labels here), gives every
+promoter a short unique ID (``N/C/M`` + 9 digits) and writes the ID map
+(``all_species_<type>_id_map.xlsx``) with species, source, gene, strand and
+coordinates. Ecology labels are attached separately by the Label ecology
+step. The merge is skipped when its outputs are already newer than every
+input and the script itself.
 
 Step 06 — universal CRE scan
 ----------------------------
@@ -95,7 +107,9 @@ promoters can be scanned in bounded memory. Outputs:
 * ``<type>_ciselement_sites.xlsx`` — full per-promoter × element records;
 * ``<type>_ciselement_summary.pdf`` — the six-panel summary figure.
 
-Steps 07–09 — ecology comparison
---------------------------------
+Steps 06–09 — label ecology and ecology comparison
+--------------------------------------------------
 
+Step 06 (Label ecology) attaches the ``sun`` / ``facultative`` / ``shade``
+labels to the merged datasets and steps 07–09 run the comparison.
 See :doc:`Ecology comparison` for the full business logic.

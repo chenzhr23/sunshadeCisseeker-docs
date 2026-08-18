@@ -35,6 +35,8 @@ Ecology comparison outputs
 
    * - Location
      - Content
+   * - ``result/ecology_compare/06_label_ecology/species_ecology_assignment.xlsx``
+     - ``Assignment`` / ``Group_counts`` / ``Unlabeled`` label tables (single label source for 07–09)
    * - ``result/ecology_compare/07_merge/ecology_master_dataset.xlsx``
      - ``Master_long`` / ``Species_summary`` / ``Element_species`` / ``Group_species_n``
    * - ``result/ecology_compare/08_statistics/ecology_differential_results.xlsx``

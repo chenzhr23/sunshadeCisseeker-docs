@@ -91,7 +91,7 @@ Place your own genomes under ``Custom_genome_fa_gff/<genome_type>/``:
   ``gff/Sarcandra_glabra.gff3`` (extensions ``.fa/.fna/.fasta[.gz]`` and
   ``.gff/.gff3[.gz]`` are accepted);
 * the basename (``Sarcandra_glabra``) is the species key matched against the
-  ecology labels.
+  ecology labels in the Label ecology step (06).
 
 NCBI genomes need no manual placement: steps 01–03 download them into
 ``result/<type>/02_download/``.

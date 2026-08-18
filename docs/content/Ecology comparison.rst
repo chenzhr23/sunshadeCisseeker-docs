@@ -6,8 +6,20 @@ cis-regulatory elements of sun, facultative and shade plants differ
 systematically?** The ecological assignment is a **manual annotation** from
 ``config/species_ecology_labels.xlsx``; the software never infers the groups.
 
-Step 07 — merge and label
--------------------------
+Label ecology (step 06)
+-----------------------
+
+A standalone step between the per-genome pipelines and the comparison: it
+reads ``config/species_ecology_labels.xlsx`` and the three 05 id maps, and
+writes ``species_ecology_assignment.xlsx`` (``Assignment`` /
+``Group_counts`` / ``Unlabeled`` sheets) under
+``result/ecology_compare/06_label_ecology/``. This assignment is the single
+source of ecology labels for steps 07–09, so label changes only require
+re-running this step and then 07–09. Unlabelled species are listed in the
+``Unlabeled`` sheet and never enter the statistics.
+
+Step 07 — merge
+---------------
 
 1. For each of the three genome types, merge the per-species element counts
    (``Species_element_counts``) with the per-species **total promoter
@@ -18,9 +30,8 @@ Step 07 — merge and label
 
    (sites per 1000 promoters), so species with very different gene numbers
    and the three compartments are directly comparable.
-3. Join the ``sun`` / ``facultative`` / ``shade`` label by species name.
-   Unlabelled species stay in the summary tables but never enter the
-   statistics.
+3. Join the ``sun`` / ``facultative`` / ``shade`` label from the Label
+   ecology assignment (by genome type + species).
 4. Write the long-format ``Master_long`` table plus three auxiliary tables to
    ``ecology_master_dataset.xlsx``.
 
@@ -76,5 +87,5 @@ Reproducibility
 * All parameters are recorded in each step's ``run_info`` sheet and ``.log``.
 * Changing the motif library only affects steps 06–09: swap the library and
   rerun 06 for each genome type, then 07–09.
-* Changing the ecology labels only affects steps 07–09 (the id maps store the
-  label at step 05, so rerun 05–09 for label changes to take effect).
+* Changing the ecology labels only requires re-running Label ecology (06)
+  and then 07–09; the per-genome steps 01–06 are unaffected.
