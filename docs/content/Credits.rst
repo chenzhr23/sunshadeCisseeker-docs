@@ -8,7 +8,7 @@ Framework and interface
 
 The desktop window follows the **psiFinder framework and look**: the flat tab
 widget with page-change animation, the splash screen, the menu-bar main
-window (``pseudoTBMainWindow`` / ``FlatTabWidget``) and the psiFinder-style
+window (``sunshadeCisseekerMainWindow`` / ``FlatTabWidget``) and the psiFinder-style
 path/process helpers are modelled on psiFinder. The
 `Widget Animation Framework (WAF)
 <https://github.com/dimkanovikov/WidgetAnimationFramework>`_ provides the
