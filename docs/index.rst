@@ -1,7 +1,8 @@
 sunshadeCisseeker
 =================
 
-**All-in-one solution for promoter cis-regulatory element comparison.**
+All-in-one solution for promoter cis-regulatory element comparison.
+--------------------------------------------------------------------
 
 sunshadeCisseeker quantifies and compares promoter **cis-regulatory elements
 (CREs)** between three plant ecological groups — **sun (heliophyte)**,
@@ -16,9 +17,8 @@ exact same R/bash pipeline.
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
-   content/About sunshadeCisseeker
    content/Installation
    content/GUI
    content/Screenshots
@@ -27,3 +27,4 @@ Contents:
    content/Configuration
    content/Outputs
    content/Credits
+   content/About sunshadeCisseeker

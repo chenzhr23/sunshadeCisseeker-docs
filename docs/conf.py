@@ -23,5 +23,13 @@ html_theme = "bizstyle"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 
+# Sidebar layout exactly like psiFinder: one flat "Table of Contents" list of
+# the top-level pages (no local toc, no relations, no source link, no search
+# box), while the index body keeps the deep, fully expanded Contents tree.
+html_sidebars = {"**": ["globaltoc.html"]}
+html_theme_options = {
+    "globaltoc_maxdepth": 1,
+}
+
 # The :red: text role used by the psiFinder docs.
 rst_prolog = ".. role:: red\n"
