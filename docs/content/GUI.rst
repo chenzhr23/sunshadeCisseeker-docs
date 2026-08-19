@@ -73,6 +73,11 @@ Fonts and remote displays
   ``.log`` file. For very constrained links a compact status bar (one status
   line per second) is available with
   ``SUNSHADE_LOG=status sunshadeCisseeker gui``.
+* **Live progress bar**: every analysis page shows a Qt progress bar above
+  the log with the overall position (e.g. "Step 4/6 — promoter extraction —
+  46%"). The panel parses the pipeline's step markers
+  (``===== NN_name.log started =====``) and its percentage / ``[n/total]``
+  log lines once per second, so no pipeline changes were needed.
 * Startup never blocks: the two XLSX label tables load in the background, all
   notices are non-modal, and a watchdog guarantees the process exits after
   the window closes even on broken remote displays.
