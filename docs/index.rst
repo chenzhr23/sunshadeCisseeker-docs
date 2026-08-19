@@ -21,6 +21,7 @@ Contents:
    content/About sunshadeCisseeker
    content/Installation
    content/GUI
+   content/Screenshots
    content/Analysis pipeline
    content/Ecology comparison
    content/Configuration

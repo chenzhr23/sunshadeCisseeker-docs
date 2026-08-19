@@ -41,7 +41,8 @@ There are exactly six sliding pages, in this order:
      - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first)
 
 Each analysis page shows the step description, the result directory hint and
-a live log panel.
+a live log panel. A screenshot of every page and popup, with explanations, is
+on the :doc:`Screenshots` page.
 
 Menu bar
 --------
