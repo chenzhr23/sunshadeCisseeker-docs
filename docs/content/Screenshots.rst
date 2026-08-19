@@ -14,14 +14,14 @@ holds the parameter editor, the two XLSX table editors and the remaining
 functions.
 
 .. figure:: ../_static/screenshots/01-introduction.png
-   :width: 680
+   :width: 1360
 
    The **Introduction** page: the workflow overview and the six pages of the
    window (Nuclear / Chloroplast / Mitochondrial / Label ecology / Compare
    ecology).
 
 .. figure:: ../_static/screenshots/02-nuclear-genome.png
-   :width: 680
+   :width: 1360
 
    The **Nuclear genome** page runs nuclear steps 01–06: NCBI species metadata
    and FASTA+GFF3 downloads (01–03, complete-safe with instant fail on dead
@@ -30,20 +30,20 @@ functions.
    Results land under ``result/nuclear_genome/``.
 
 .. figure:: ../_static/screenshots/03-chloroplast-genome.png
-   :width: 680
+   :width: 1360
 
    The **Chloroplast genome** page runs the same six steps for the chloroplast
    compartment; step 04 is circular-aware, so promoters can wrap across the
    replication origin. Results land under ``result/chloroplast_genome/``.
 
 .. figure:: ../_static/screenshots/04-mitochondrial-genome.png
-   :width: 680
+   :width: 1360
 
    The **Mitochondrial genome** page runs the same six steps for the
    mitochondrial compartment. Results land under ``result/mitochondrial_genome/``.
 
 .. figure:: ../_static/screenshots/05-label-ecology.png
-   :width: 680
+   :width: 1360
 
    The **Label ecology** page (cross-genome step 06): assigns the
    ``sun`` / ``facultative`` / ``shade`` labels from
@@ -55,7 +55,7 @@ functions.
    Compare ecology; re-run only this page after editing the label table.
 
 .. figure:: ../_static/screenshots/06-compare-ecology.png
-   :width: 680
+   :width: 1360
 
    The **Compare ecology** page runs steps 07–09: merge the three datasets
    into the ecology master table (07), differential statistics —
@@ -69,7 +69,7 @@ Menu-bar popup windows
 The three parameter/table editors open as popups from the **Tools** menu.
 
 .. figure:: ../_static/screenshots/07-run-pipeline.png
-   :width: 520
+   :width: 1040
 
    **Tools → Run pipeline…** — edit ``promoter_len``, ``workers``, ``cores``,
    ``min_group_n`` and the optional NCBI API key, tick the parts to run, pick
@@ -78,7 +78,7 @@ The three parameter/table editors open as popups from the **Tools** menu.
    ``quickstart_config.yml`` and are used by the command line identically.
 
 .. figure:: ../_static/screenshots/08-ecology-labels.png
-   :width: 520
+   :width: 1040
 
    **Tools → Ecology labels…** — the table editor for
    ``config/species_ecology_labels.xlsx``: add or remove species, assign each
@@ -86,7 +86,7 @@ The three parameter/table editors open as popups from the **Tools** menu.
    Changes take effect after re-running the Label ecology page.
 
 .. figure:: ../_static/screenshots/09-motif-library.png
-   :width: 520
+   :width: 1040
 
    **Tools → Motif library…** — the table editor for
    ``config/cis_element_motif_library.xlsx``: every CRE searched by the
