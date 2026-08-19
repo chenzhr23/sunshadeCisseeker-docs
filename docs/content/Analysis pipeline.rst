@@ -17,6 +17,19 @@ the ecology comparison).
 Each step reads the exact outputs of the previous one and writes a multi-sheet
 XLSX workbook (README sheet first) plus its own ``.log``.
 
+Running scopes in parallel
+--------------------------
+
+The genome scopes and the ecology scope write to separate result directories
+and separate run logs, so they can be started in parallel — from several GUI
+pages at once (each page tracks only its own run, see :doc:`GUI`) or from
+several terminals with ``bash run_all.sh nuclear`` /
+``bash run_all.sh chloroplast`` / ``bash run_all.sh mitochondrial``. The only
+shared resource is the NCBI rate limit (one IP address): parallel download
+phases simply see more 429 retries, which the pipeline absorbs automatically.
+For cleaner downloads, run the download-heavy scopes one after another or
+configure ``ncbi_api_key``.
+
 Step 01 — species metadata
 --------------------------
 

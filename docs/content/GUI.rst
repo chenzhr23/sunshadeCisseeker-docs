@@ -78,19 +78,40 @@ Fonts and remote displays
   46%"). The panel parses the pipeline's step markers
   (``===== NN_name.log started =====``) and its percentage / ``[n/total]``
   log lines once per second, so no pipeline changes were needed.
-* **Runs are independent per page**: every started run gets its own bookkeeping
-  files (``/tmp/sunshadecisseeker-gui/run-<scope>-<pid>-<time>-<seq>.pid/.status/.out``),
-  so several pages may run at the same time and each page's log, progress bar
-  and Run/Stop buttons track only its own run — one page finishing never
-  affects the others. The data directories per genome type are separate too,
-  so concurrent runs cannot corrupt each other's results. Note that concurrent
-  NCBI downloads share one IP address, so expect more 429 rate-limit retries
-  (the pipeline retries them automatically).
+* **Runs are independent per page**: every started run gets its own
+  bookkeeping files, so several pages may run at the same time and each page
+  tracks only its own run — see the next section for details.
 * Startup never blocks: the two XLSX label tables load in the background, all
   notices are non-modal, and a watchdog guarantees the process exits after
   the window closes even on broken remote displays.
 * **Open results** on hosts without a file manager/browser shows a copyable
   path dialog instead of calling ``xdg-open``.
+
+Running several pages at the same time
+--------------------------------------
+
+From version 1.3.5 every started run is fully independent, so the three
+genome pages (and the ecology pages) can be run **at the same time**:
+
+* Each page gets its own run id and its own bookkeeping files
+  ``/tmp/sunshadecisseeker-gui/run-<scope>-<pid>-<time>-<seq>.pid`` /
+  ``.status`` / ``.out``. The run id is the first line of the page's log
+  (``run started | id=... | scope=...``). The page's log, progress bar and
+  Run/Stop buttons therefore track **only that page's run**: one page
+  finishing never marks another page as finished, and **Stop** terminates
+  only the selected run.
+* The pipeline writes separate result directories and separate run logs per
+  scope (``log/sunshadeCisseeker_<scope>_<date>_<pid>.log``), so parallel
+  runs cannot corrupt each other's data.
+* To double-check which page is doing what on the server, compare the first
+  log line of each page (``scope=...``) with ``top``/``ps``: the R command
+  lines show the active step (``02_..._download_fagff.r``,
+  ``04_..._promoter_sequence.r``, ...). A page shows "Finished" only when
+  its own run really exited.
+* Concurrent runs share one IP address for NCBI, so expect more HTTP 429
+  rate-limit retries (absorbed automatically). If you want faster downloads,
+  set ``ncbi_api_key`` in ``quickstart_config.yml`` or run the
+  download-heavy pages one after another.
 
 Rebuilding the interface
 ------------------------
