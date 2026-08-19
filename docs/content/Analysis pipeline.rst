@@ -73,15 +73,28 @@ bodies are never included.
 
 The extraction engine is chosen per genome:
 
-* **Chloroplast / mitochondrial (circular)** — pure R, circular-aware:
-  promoters may wrap across the replication origin.
-* **Nuclear (linear)** — ``bedtools getfasta`` + ``samtools faidx`` when both
-  tools exist and the FASTA is uncompressed; otherwise a streaming R
-  extractor that reads ``.gz`` files directly (identical results).
+* **Chloroplast / mitochondrial (circular)** — constant-time interval
+  extraction per gene (the same blocker-interval mathematics as the linear
+  path), so a full organelle run takes minutes instead of hours; the output
+  is byte-identical to the previous per-base walk.
+* **Nuclear (linear)** — ``bedtools getfasta`` + ``samtools faidx`` whenever
+  both tools exist: the gzipped NCBI FASTA is decompressed once into a
+  temporary file (``gzip -dc``), indexed with ``samtools faidx`` (sequence
+  lengths come straight from the index, no R pass over the genome) and
+  extracted with ``bedtools``; the temp file is removed afterwards. Without
+  the tools, a streaming R extractor reads ``.gz`` directly (identical
+  results).
+* **GFF3 parsing** — ``data.table::fread`` (C-level parser, native ``.gz``
+  support, stops at the ``##FASTA`` section) with an automatic fallback to
+  the pure-R parser.
 
 Re-runs are incremental: a species whose promoter FASTA and detail table are
-newer than its inputs (and the requested ``promoter_len`` is unchanged) is
-skipped, so a re-run only processes new or changed genomes.
+newer than its inputs (and the requested ``promoter_len`` is unchanged, as
+recorded in the ``.promoter_len`` marker written at start-up) is skipped, so
+a re-run only processes new or changed genomes — even a run that was
+interrupted late resumes cheaply. The per-pair detail tables and the combined
+FASTA are assembled at the end by a streaming, bounded-memory combiner that
+tolerates unreadable files instead of aborting.
 
 Step 05 — input merge
 ---------------------
@@ -90,8 +103,9 @@ Merges NCBI and Custom promoters (no ecology labels here), gives every
 promoter a short unique ID (``N/C/M`` + 9 digits) and writes the ID map
 (``all_species_<type>_id_map.xlsx``) with species, source, gene, strand and
 coordinates. Ecology labels are attached separately by the Label ecology
-step. The merge is skipped when its outputs are already newer than every
-input and the script itself.
+step. The combined FASTA is written through a large buffer, so merging
+hundreds of thousands of promoters stays fast. The merge is skipped when its
+outputs are already newer than every input and the script itself.
 
 Step 06 — universal CRE scan
 ----------------------------

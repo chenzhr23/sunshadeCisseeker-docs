@@ -90,9 +90,19 @@ Options:
 
    bash install.sh -p /opt/sunshadeCisseeker   # custom install directory
    bash install.sh -e myenv                    # custom conda environment name
+   bash install.sh -y                          # do not prompt, accept the defaults
    bash install.sh -m                          # force the TUNA conda mirror
    bash install.sh -s                          # skip the dependency step
    bash install.sh -h                          # help
+
+With ``-y`` the installer never waits for input — in particular the
+"*target already exists, overwrite it?*" question is answered automatically,
+so the command is safe for scripts and remote sessions. Your results and
+configuration are still preserved. Without ``-y`` the installer asks for
+confirmation before overwriting an existing installation (answering anything
+but ``y`` aborts). Note that the conda calls inside the installer always use
+conda's own ``-y`` regardless of this flag, so the dependency phase never
+prompts either way.
 
 Ways to start sunshadeCisseeker
 -------------------------------
