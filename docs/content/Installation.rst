@@ -244,6 +244,18 @@ Troubleshooting
 14. **Re-installing wipes my results?** — no: ``install.sh`` preserves
     ``result/``, ``log/``, custom genomes, the two configuration XLSX files
     and ``quickstart_config.yml`` across re-installs.
+15. **Several pages started together all show "100% finished" while ``top``
+    still shows R processes running** — fixed in version 1.3.5. Older releases
+    keyed the per-run status files by the GUI process id, so simultaneous runs
+    (Nuclear + Chloroplast + Mitochondrial) overwrote each other's files and
+    every page displayed the first run's exit state. From 1.3.5 each started
+    run owns a separate file set
+    ``/tmp/sunshadecisseeker-gui/run-<scope>-<pid>-<time>-<seq>.{pid,status,out}``
+    (the run id is printed as the first line of each page's log), and the run
+    logs under ``log/`` are named per scope, so the pages, their logs and
+    their progress bars are fully independent. If you still see the symptom,
+    check the log line ``scope=...`` at the top of the page and compare it
+    with the R processes in ``top``.
 
 Uninstall
 ---------

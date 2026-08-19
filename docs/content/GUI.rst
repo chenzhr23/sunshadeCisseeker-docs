@@ -78,6 +78,14 @@ Fonts and remote displays
   46%"). The panel parses the pipeline's step markers
   (``===== NN_name.log started =====``) and its percentage / ``[n/total]``
   log lines once per second, so no pipeline changes were needed.
+* **Runs are independent per page**: every started run gets its own bookkeeping
+  files (``/tmp/sunshadecisseeker-gui/run-<scope>-<pid>-<time>-<seq>.pid/.status/.out``),
+  so several pages may run at the same time and each page's log, progress bar
+  and Run/Stop buttons track only its own run — one page finishing never
+  affects the others. The data directories per genome type are separate too,
+  so concurrent runs cannot corrupt each other's results. Note that concurrent
+  NCBI downloads share one IP address, so expect more 429 rate-limit retries
+  (the pipeline retries them automatically).
 * Startup never blocks: the two XLSX label tables load in the background, all
   notices are non-modal, and a watchdog guarantees the process exits after
   the window closes even on broken remote displays.
