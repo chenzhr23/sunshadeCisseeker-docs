@@ -6,13 +6,12 @@ sunshadeCisseeker is released under the **MIT** license.
 Framework and interface
 -----------------------
 
-The desktop window follows the **psiFinder framework and look**: the flat tab
-widget with page-change animation, the splash screen, the menu-bar main
-window (``sunshadeCisseekerMainWindow`` / ``FlatTabWidget``) and the psiFinder-style
-path/process helpers are modelled on psiFinder. The
-`Widget Animation Framework (WAF)
-<https://github.com/dimkanovikov/WidgetAnimationFramework>`_ provides the
-page-change animations, and the Qt 5.15 runtime is bundled from conda-forge.
+The desktop window is a native Qt 5.15 application: a flat tab widget with
+page-change animation, a splash screen and a menu-bar main window
+(``sunshadeCisseekerMainWindow`` / ``FlatTabWidget``). The page-change
+animations come from the `Widget Animation Framework (WAF)
+<https://github.com/dimkanovikov/WidgetAnimationFramework>`_, and the Qt 5.15
+runtime is bundled from conda-forge.
 
 R packages
 ----------
