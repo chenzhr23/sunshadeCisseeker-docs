@@ -256,6 +256,13 @@ Troubleshooting
     their progress bars are fully independent. If you still see the symptom,
     check the log line ``scope=...`` at the top of the page and compare it
     with the R processes in ``top``.
+16. **A run fails at the very end with ``CHARSXPs are limited to 2^31-1
+    bytes`` / ``stri_join``** — fixed in version 1.3.6: very large result
+    tables (promoter details, id maps, site records) are now written as
+    bounded part files (``<name>.partNN.xlsx`` plus an index workbook at the
+    canonical path, see :doc:`Outputs`). Simply re-run the same scope: the
+    already-extracted promoters are skipped as up to date and only the table
+    writing is redone.
 
 Uninstall
 ---------

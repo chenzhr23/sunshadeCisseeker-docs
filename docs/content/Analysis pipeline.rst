@@ -107,7 +107,9 @@ recorded in the ``.promoter_len`` marker written at start-up) is skipped, so
 a re-run only processes new or changed genomes — even a run that was
 interrupted late resumes cheaply. The per-pair detail tables and the combined
 FASTA are assembled at the end by a streaming, bounded-memory combiner that
-tolerates unreadable files instead of aborting.
+tolerates unreadable files instead of aborting; a combined detail table with
+more than 1,000,000 rows is written as bounded part files (see
+:doc:`Outputs`).
 
 Step 05 — input merge
 ---------------------
@@ -131,7 +133,8 @@ promoters can be scanned in bounded memory. Outputs:
 
 * ``<type>_ciselement_results.xlsx`` — ``Element_stats`` /
   ``Species_element_counts`` / ``Species_summary``;
-* ``<type>_ciselement_sites.xlsx`` — full per-promoter × element records;
+* ``<type>_ciselement_sites.xlsx`` — full per-promoter × element records
+  (written as bounded part files when they exceed 1,000,000 rows);
 * ``<type>_ciselement_summary.pdf`` — the six-panel summary figure.
 
 Steps 06–09 — label ecology and ecology comparison

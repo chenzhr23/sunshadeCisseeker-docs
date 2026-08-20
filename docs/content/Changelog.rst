@@ -1,8 +1,34 @@
 Changelog
 =========
 
-1.3.5 — independent parallel pages (current release)
-----------------------------------------------------
+1.3.6 — bounded large-table writing and truthful progress bars
+--------------------------------------------------------------
+
+* **Fixed: runs died at the very end with** ``Error in stri_join ...
+  CHARSXPs are limited to 2^31-1 bytes`` **when one giant XLSX was written**
+  (nuclear step 04 combine, step 06 site records). openxlsx assembles a whole
+  workbook's text in memory and R strings cannot exceed 2^31-1 bytes, so
+  tables with tens of millions of rows could not be saved as one file. The
+  large tables (``*_promoter_detail.xlsx``, ``*_id_map.xlsx``,
+  ``*_ciselement_sites.xlsx``) are now written as **bounded part files** with
+  an index workbook at the canonical path, and oversized sheets (e.g.
+  ``Master_long``) are split and recombined automatically — see
+  :doc:`Outputs`.
+* **Fixed: after a run failed, the page's progress bar showed a stale
+  mid-run value** (the reported 50% / 0% while the runs had already exited
+  with an error). The bar is now monotonic within a run, and when the run
+  ends it always shows a definitive terminal state: full green "Finished",
+  full red "Failed (exit code N)", full orange "Stopped by user".
+* Progress parsing now uses the most recent percentage / ``[n/total]`` after
+  each step marker (previously the oldest one, which froze the bar at a
+  stale mid-step fraction), and the last known step is carried forward when
+  its marker scrolls out of the log tail.
+* Step 04's incremental skip now keys on a separate per-pair extraction
+  version marker, so an update that only changes the final combine does not
+  force a full re-extraction of every genome on the next run.
+
+1.3.5 — independent parallel pages
+----------------------------------
 
 * **Fixed: pages started together showed "100% finished" while the other
   runs were still going.** The run bookkeeping files were keyed by the GUI

@@ -77,7 +77,13 @@ Fonts and remote displays
   the log with the overall position (e.g. "Step 4/6 — promoter extraction —
   46%"). The panel parses the pipeline's step markers
   (``===== NN_name.log started =====``) and its percentage / ``[n/total]``
-  log lines once per second, so no pipeline changes were needed.
+  log lines once per second, so no pipeline changes were needed. The bar is
+  **monotonic** within a run (it never moves backwards, even while a long
+  step's marker scrolls out of the visible log tail) and always ends in a
+  definitive terminal state: full **green** "Finished — all steps completed",
+  full **red** "Failed (exit code N) — see the log below", or full
+  **orange** "Stopped by user". A page therefore never lingers on a stale
+  mid-run percentage after its run has ended.
 * **Runs are independent per page**: every started run gets its own
   bookkeeping files, so several pages may run at the same time and each page
   tracks only its own run — see the next section for details.

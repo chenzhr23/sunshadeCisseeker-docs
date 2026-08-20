@@ -55,6 +55,29 @@ species with different gene numbers and the three compartments are directly
 comparable. Related columns: ``total_sites`` (per species) and
 ``sites_per_gene`` (mean sites per gene that carries at least one site).
 
+Very large tables are split into bounded parts
+----------------------------------------------
+
+R strings cannot exceed 2^31-1 bytes and openxlsx assembles a whole
+workbook's text in memory, so a single XLSX with tens of millions of rows
+(nuclear promoter details / id maps / site records) cannot be written as one
+file. From version 1.3.6 the large tables — ``<type>_promoter_detail.xlsx``,
+``all_species_<type>_id_map.xlsx`` and ``<type>_ciselement_sites.xlsx`` — are
+written automatically as **part files**:
+
+* up to 1,000,000 rows: one classic workbook, exactly as before;
+* beyond that: ``<name>.part01.xlsx``, ``<name>.part02.xlsx``, ... (each
+  holding at most 1,000,000 rows) plus a small **index workbook** at the
+  canonical ``<name>.xlsx`` path whose ``Parts`` sheet lists every part file
+  and its row count. Join the parts (same columns, in order) to reconstruct
+  the full table; stale parts from an earlier, larger run are removed
+  automatically.
+
+The same bound applies inside multi-sheet workbooks: sheets that would
+exceed the 1,048,576-row Excel limit (e.g. ``Master_long`` in
+``ecology_master_dataset.xlsx``) are split into ``<sheet>``, ``<sheet>_2``,
+... — steps 08/09 read and recombine them automatically.
+
 Logs
 ----
 
