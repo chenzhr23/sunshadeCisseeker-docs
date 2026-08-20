@@ -71,7 +71,8 @@ written automatically as **part files**:
   canonical ``<name>.xlsx`` path whose ``Parts`` sheet lists every part file
   and its row count. Join the parts (same columns, in order) to reconstruct
   the full table; stale parts from an earlier, larger run are removed
-  automatically.
+  automatically. Downstream steps (06, 07 and the ecology comparison) read
+  the parts back automatically.
 
 The same bound applies inside multi-sheet workbooks: sheets that would
 exceed the 1,048,576-row Excel limit (e.g. ``Master_long`` in
