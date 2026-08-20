@@ -1,6 +1,33 @@
 Changelog
 =========
 
+1.3.8 — faster step 06 cis-element scan
+---------------------------------------
+
+* Step 06 (cis-element scan) is faster with byte-identical results: the
+  per-record FASTA assembly is now a single vectorized pass per batch
+  instead of an R loop over every record, header detection uses a
+  vectorized prefix test, and the default read batch is larger (500,000
+  lines, still tunable with ``--batch-lines=``).
+* The step-06 id map and site-records tables are read and written with
+  bounded part files **in parallel** (up to 8 concurrent parts, capped for
+  shared-server memory safety); every part is produced by the exact same
+  writer call as before, so the files contain the same data in the same
+  order.
+* Step 06 keeps only the columns it needs before joining the (potentially
+  hundreds of millions of rows) hit table, lowering peak memory and join
+  time.
+* **Fixed: step 06 could abort in the PDF stage with**
+  ``factor level [N] is duplicated`` **when a species has genomes from both
+  NCBI and Custom.** The per-species summary plots now aggregate to species
+  level first; datasets without such duplicates produce the same plots as
+  before.
+* **Note (no behaviour change):** the motif library's degenerate IUPAC
+  motifs are currently detected as exact and matched as literal text (same
+  as 1.3.0–1.3.7); this release preserves that behaviour bit-for-bit. A
+  future release can switch them to true IUPAC matching; get in touch if
+  you want that.
+
 1.3.7 — content-aware part sizing for large tables
 --------------------------------------------------
 

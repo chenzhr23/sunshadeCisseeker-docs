@@ -77,6 +77,12 @@ table), so the row count is not the only limit:
   an earlier, larger run are removed automatically. Downstream steps (06, 07
   and the ecology comparison) read the parts back automatically.
 
+From version 1.3.8 the independent part files of the step-06 tables are
+written (and read back) concurrently — up to 8 parts at a time, capped for
+shared-server memory safety — which makes saving e.g. tens of millions of
+site records several times faster; the part contents themselves are
+unchanged.
+
 The same bound applies inside multi-sheet workbooks: sheets that would
 exceed the 1,048,576-row Excel limit (e.g. ``Master_long`` in
 ``ecology_master_dataset.xlsx``) are split into ``<sheet>``, ``<sheet>_2``,
