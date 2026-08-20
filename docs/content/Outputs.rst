@@ -59,20 +59,23 @@ Very large tables are split into bounded parts
 ----------------------------------------------
 
 R strings cannot exceed 2^31-1 bytes and openxlsx assembles a whole
-workbook's text in memory, so a single XLSX with tens of millions of rows
-(nuclear promoter details / id maps / site records) cannot be written as one
-file. From version 1.3.6 the large tables — ``<type>_promoter_detail.xlsx``,
+workbook's text in memory, so a single XLSX cannot be written as one file
+when the table holds either tens of millions of rows (nuclear promoter
+details / id maps / site records) or fewer rows that carry long per-row
+text. From version 1.3.6 the large tables — ``<type>_promoter_detail.xlsx``,
 ``all_species_<type>_id_map.xlsx`` and ``<type>_ciselement_sites.xlsx`` — are
-written automatically as **part files**:
+written automatically as **part files**, and from version 1.3.7 each part is
+also sized by an estimated per-part character budget (sampled over the
+table), so the row count is not the only limit:
 
-* up to 1,000,000 rows: one classic workbook, exactly as before;
-* beyond that: ``<name>.part01.xlsx``, ``<name>.part02.xlsx``, ... (each
-  holding at most 1,000,000 rows) plus a small **index workbook** at the
-  canonical ``<name>.xlsx`` path whose ``Parts`` sheet lists every part file
-  and its row count. Join the parts (same columns, in order) to reconstruct
-  the full table; stale parts from an earlier, larger run are removed
-  automatically. Downstream steps (06, 07 and the ecology comparison) read
-  the parts back automatically.
+* up to 1,000,000 rows (and within the per-part character budget): one
+  classic workbook, exactly as before;
+* beyond that: ``<name>.part01.xlsx``, ``<name>.part02.xlsx``, ... plus a
+  small **index workbook** at the canonical ``<name>.xlsx`` path whose
+  ``Parts`` sheet lists every part file and its row count. Join the parts
+  (same columns, in order) to reconstruct the full table; stale parts from
+  an earlier, larger run are removed automatically. Downstream steps (06, 07
+  and the ecology comparison) read the parts back automatically.
 
 The same bound applies inside multi-sheet workbooks: sheets that would
 exceed the 1,048,576-row Excel limit (e.g. ``Master_long`` in

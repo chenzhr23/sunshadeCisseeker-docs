@@ -1,6 +1,23 @@
 Changelog
 =========
 
+1.3.7 — content-aware part sizing for large tables
+--------------------------------------------------
+
+* **Fixed: step 05 crashed writing** ``*_id_map.xlsx`` **with** ``Error in
+  stri_join ... CHARSXPs are limited to 2^31-1 bytes`` even though the
+  table was written as bounded part files. Parts were sized by row count
+  alone (1,000,000 rows each), but a part can hit the 2 GB string ceiling
+  with far fewer rows when the rows themselves carry long text. Parts are
+  now also sized by an estimated per-part character budget (sampled over
+  the table), so any combination of row count and row width stays well
+  below the limit.
+* Circular promoter coordinates are now written in the compact
+  ``start..end`` form (the same format the linear pipeline always used)
+  instead of a per-position ``1;2;3;...`` list that cost roughly 7 bytes
+  per base — the actual cause of the oversized id-map and detail rows.
+  The information is identical; the columns are only smaller.
+
 1.3.6 — bounded large-table writing and truthful progress bars
 --------------------------------------------------------------
 
