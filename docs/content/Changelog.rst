@@ -1,6 +1,32 @@
 Changelog
 =========
 
+1.3.9 — step 06 cis-element scan rewritten as a C++ program
+------------------------------------------------------------
+
+* **Step 06 (cis-element identification) is now performed by a bundled C++
+  program** (``bin/cre_scan``) instead of the R stringi loop. The scanner
+  builds an Aho-Corasick multi-pattern automaton from the motif library and
+  reads the combined FASTA **once** for the whole motif set (previously one
+  full pass per motif), splitting the file across threads (up to 64,
+  defaulting to the machine's core count minus one as configured by the
+  pipeline). On multi-core servers this makes the scan several times faster
+  and removes the largest CPU cost of the step.
+* The counting semantics are **bit-identical** to the R backend: literal
+  fixed matching (degenerate IUPAC motifs keep their 1.3.0–1.3.8 behaviour),
+  non-overlapping occurrences counted greedily per record, repeated
+  (element, motif) rows counted with their multiplicity, and the per-record
+  site table sorted by promoter then element (the R backend now applies the
+  same deterministic sort, so both backends produce identical tables).
+* The R stringi backend is kept as an automatic fallback and is used when
+  ``bin/cre_scan`` is absent or not executable; the ``scan_method`` note in
+  the results workbook records which backend ran. Results are identical
+  either way (verified against the R reference on synthetic data plus 200
+  randomized adversarial cases).
+* ``cre_scan`` is built with the same conda toolchain and glibc 2.17 target
+  as the GUI, links only libc/libm/libpthread, and ships pre-built inside
+  the bundle — no new server-side dependencies.
+
 1.3.8 — faster step 06 cis-element scan
 ---------------------------------------
 
