@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.3.15 — unified per-type download-list format
+----------------------------------------------
+
+* **The shipped nuclear download list now uses the same standard format as
+  the chloroplast and mitochondrial lists** (``README`` + ``download_list``
+  sheets with the ``species | genome_download_url | annotation_download_url``
+  columns) instead of a plain ``Sheet1``. All 527 rows are preserved
+  value-for-value. The download step still reads both formats, so existing
+  installations with the old ``Sheet1`` file keep working unchanged.
+
 1.3.14 — drop the unused NCBI_genome_fa_gff directory
 ------------------------------------------------------
 
