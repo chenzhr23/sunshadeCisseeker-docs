@@ -1,6 +1,33 @@
 Changelog
 =========
 
+1.3.11 — Custom genome download from a URL list
+-----------------------------------------------
+
+* **New: Custom genomes can now be downloaded by the pipeline.** Fill
+  ``config/custom_genome_download_list.xlsx`` (one row per FASTA+GFF3 pair:
+  ``organism``, ``genome_type``, ``genome_fasta_url``,
+  ``annotation_gff3_url``; optional ``assembly_accession`` / ``file_stem``),
+  and the new first pipeline step downloads the files into
+  ``Custom_genome_fa_gff/<type>/{fa,gff}/`` with matching file stems, so step
+  04 picks them up automatically — no manual file placement needed.
+* The step reuses the hardened download machinery of steps 02/03 (resume from
+  partial files, bounded retries with backoff, HTTP 429 handling, error-page
+  detection, fork-free PSOCK worker pool with launch pacing) and skips
+  already-complete files on re-run (``skipped_complete``); duplicate file
+  stems for one genome type are refused with a clear ``failed`` record
+  instead of overwriting.
+* The config table is created as an empty template (README + header row) on
+  the first run when it is missing; a row may also carry only one of the two
+  URLs (the missing file is recorded as ``failed``).
+* **Pipeline integration:** a new ``custom`` scope runs only this download;
+  with the new ``custom_download: "true"`` key in ``quickstart_config.yml``
+  (checkbox in the GUI) the download also runs automatically before the
+  per-genome steps (01–06) of every run. The progress panel understands the
+  new step in both ``all`` and ``custom`` scopes.
+* The previous manual placement under ``Custom_genome_fa_gff/`` keeps working
+  unchanged; both sources are merged by step 04 as before.
+
 1.3.10 — fork-free parallel workers for the download/extraction steps
 -----------------------------------------------------------------------
 

@@ -36,6 +36,9 @@ Three user-editable files drive the whole analysis.
    * - ``ncbi_download``
      - ``"true"``
      - run NCBI steps 01–03; set ``"false"`` for custom-genome-only runs
+   * - ``custom_download``
+     - ``"true"``
+     - run the Custom genome download step (the ``config/custom_genome_download_list.xlsx`` URL list) before the per-genome steps; set ``"false"`` when you place custom files manually
 
 ``config/species_ecology_labels.xlsx`` (manual annotation)
 ----------------------------------------------------------
@@ -83,6 +86,32 @@ The universal CRE library used by step 06; edit through the GUI's
 
 Custom genomes
 --------------
+
+Two ways to bring your own genomes into the analysis:
+
+Download from a URL list (recommended)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Fill ``config/custom_genome_download_list.xlsx`` (created as a template on the
+first run; sheet ``download_list``), one row per FASTA+GFF3 pair:
+
+* ``organism`` — species name; the downloaded file stem unless ``file_stem`` is set;
+* ``genome_type`` — ``nuclear_genome`` / ``chloroplast_genome`` /
+  ``mitochondrial_genome`` (short forms accepted);
+* ``genome_fasta_url`` / ``annotation_gff3_url`` — direct download URLs
+  (``.fa/.fna/.fasta[.gz]`` and ``.gff/.gff3[.gz]``; http/https/file);
+* ``assembly_accession`` (optional record), ``file_stem`` (optional stem
+  override; if used, it is the species key for ecology labelling), ``notes``.
+
+The download runs as the first pipeline step (the ``custom`` scope, or
+automatically before steps 01–06 when ``custom_download: "true"`` in
+``quickstart_config.yml``). Files land in
+``Custom_genome_fa_gff/<genome_type>/{fa,gff}/`` with **matching stems**, so
+step 04 pairs them automatically. Re-runs skip already-complete files
+(``skipped_complete``); delete a file to force a re-download.
+
+Place files manually (offline)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Place your own genomes under ``Custom_genome_fa_gff/<genome_type>/``:
 
