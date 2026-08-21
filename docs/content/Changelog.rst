@@ -1,6 +1,24 @@
 Changelog
 =========
 
+1.3.12 — no more orphaned workers after an interrupted run
+----------------------------------------------------------
+
+* **Fixed: interrupted runs could leave R worker processes behind**, keeping
+  result files open so that deleting or replacing the installation failed
+  with ``rm: cannot remove .../.nfsXXXX...: Device or resource busy`` (NFS
+  silly-rename files). The pipeline launcher (``run_all.sh``) now cleans up
+  its whole process tree on interrupt: it traps INT/TERM/HUP and stops every
+  R step, PSOCK worker and helper it started.
+* A **watchdog** is armed for GUI-launched runs: if the GUI window is closed,
+  crashes, or loses its connection while the pipeline runs, the closing of
+  the output pipe triggers the same tree-wide stop — workers are no longer
+  orphaned and no ``.nfs`` files are left pinning the installation directory.
+* Terminal runs (``bash run_all.sh ...`` with Ctrl+C) keep working as
+  before, and normally finished runs are unaffected (the watchdog disarms
+  itself on completion). The GUI's Stop button already performed a
+  process-group kill; the new logic covers every other way a run can die.
+
 1.3.11 — Custom genome download from a URL list
 -----------------------------------------------
 
