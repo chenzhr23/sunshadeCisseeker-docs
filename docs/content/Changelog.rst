@@ -1,6 +1,33 @@
 Changelog
 =========
 
+1.3.10 — fork-free parallel workers for the download/extraction steps
+-----------------------------------------------------------------------
+
+* **Fixed: long runs could abort with the** ``mcfork`` **error**
+  ``unable to fork, possible reason: Cannot allocate memory`` **after hours
+  of work** (observed in step 02 at ~75% of downloads). Steps 02/03/04
+  previously ran their worker pool with fork-based ``mcparallel``; once the
+  parent R process had grown on a shared, cgroup/process-count-limited
+  server, ``fork()`` started failing and killed the whole run. The pools now
+  use a **PSOCK worker cluster** (separate ``Rscript`` processes started at
+  the beginning of the run, so new workers never depend on the parent's
+  address size).
+* The launch pacing (one download launch every 0.4 s, ~2.5 requests/s vs.
+  NCBI's 3/s limit), the 429 rate-limit backoff, the
+  ``ok/skip/fail`` accounting and every output file, column and status
+  value are unchanged. Re-running after an abort still skips every
+  already-complete file (``skipped_complete``), so the failed chloroplast
+  run only downloads the remaining ~25%.
+* **Graceful degradation:** if the worker cluster cannot be started (e.g.
+  the server forbids spawning child processes) or a worker dies mid-run, the
+  remaining tasks are processed sequentially in the running session with a
+  clear warning — the run always finishes instead of aborting.
+* The same protection was added to the remaining fork-based paths: the
+  step-06 R fallback scan (unused when ``bin/cre_scan`` runs, which remains
+  the default on Linux) and the parallel part-file xlsx reader/writer now
+  fall back to sequential processing with a warning instead of failing.
+
 1.3.9 — step 06 cis-element scan rewritten as a C++ program
 ------------------------------------------------------------
 
