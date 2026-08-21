@@ -1,6 +1,27 @@
 Changelog
 =========
 
+1.3.13 — per-genome-type Custom download lists
+----------------------------------------------
+
+* **New: one download list per genome type.** The Custom download step now
+  reads ``Custom_genome_fa_gff/<type>/Custom_genome_fa_gff_<type>.xlsx``
+  (standardized columns ``species | genome_download_url |
+  annotation_download_url``; the folder decides the genome type, so one file
+  per nuclear / chloroplast / mitochondrial type). Existing files in that
+  shape - including a plain ``Sheet1`` - are read as-is, so current lists
+  keep working unchanged; rows are merged with the optional global table
+  ``config/custom_genome_download_list.xlsx`` and de-duplicated per stem.
+* **Missing or empty per-type files are replaced by a header-only template**
+  (``README`` + ``download_list`` sheets with the three standardized
+  columns) in the standard location, so every genome type always has a
+  fillable, correctly named list after the first run. The chloroplast and
+  mitochondrial templates are also shipped in the bundle.
+* Downloaded files still land in ``Custom_genome_fa_gff/<type>/{fa,gff}/``
+  with matching stems (species name with spaces replaced by underscores),
+  and step 04 picks the pairs up automatically - no analysis-side changes
+  are needed.
+
 1.3.12 — no more orphaned workers after an interrupted run
 ----------------------------------------------------------
 

@@ -92,16 +92,24 @@ Two ways to bring your own genomes into the analysis:
 Download from a URL list (recommended)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Fill ``config/custom_genome_download_list.xlsx`` (created as a template on the
-first run; sheet ``download_list``), one row per FASTA+GFF3 pair:
+One download list per genome type, at the standard location
+``Custom_genome_fa_gff/<genome_type>/Custom_genome_fa_gff_<genome_type>.xlsx``:
 
-* ``organism`` — species name; the downloaded file stem unless ``file_stem`` is set;
-* ``genome_type`` — ``nuclear_genome`` / ``chloroplast_genome`` /
-  ``mitochondrial_genome`` (short forms accepted);
-* ``genome_fasta_url`` / ``annotation_gff3_url`` — direct download URLs
-  (``.fa/.fna/.fasta[.gz]`` and ``.gff/.gff3[.gz]``; http/https/file);
-* ``assembly_accession`` (optional record), ``file_stem`` (optional stem
-  override; if used, it is the species key for ecology labelling), ``notes``.
+* ``species`` — species name; the downloaded file stem (spaces → underscores)
+  and the species key for ecology labelling;
+* ``genome_download_url`` — direct FASTA URL (``.fa/.fna/.fasta[.gz]``);
+* ``annotation_download_url`` — direct GFF3 URL (``.gff/.gff3[.gz]``);
+  http/https/file are accepted.
+
+The folder decides the genome type, so the file itself has no type column
+(existing lists with a plain ``Sheet1`` are read as-is). **Missing or empty
+files are replaced by a header-only template** (``README`` + ``download_list``
+sheets) on the first run, so nuclear / chloroplast / mitochondrial always
+have a fillable, correctly named list.
+
+The optional global table ``config/custom_genome_download_list.xlsx`` (sheet
+``download_list``, with a ``genome_type`` column) is still supported; rows
+from both sources are merged and de-duplicated per stem.
 
 The download runs as the first pipeline step (the ``custom`` scope, or
 automatically before steps 01–06 when ``custom_download: "true"`` in
