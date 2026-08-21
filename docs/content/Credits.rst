@@ -17,8 +17,9 @@ R packages
 ----------
 
 openxlsx, data.table, stringi, ggplot2, patchwork, scales, curl, xml2, dplyr,
-rentrez, forcats, tidyr — the XLSX outputs are written by openxlsx, the CRE
-scan uses stringi's C-level counting, and all figures are made with ggplot2.
+rentrez, magrittr — the XLSX outputs are written by openxlsx, the CRE scan
+runs the bundled C++ Aho-Corasick backend (``bin/cre_scan``) with an R
+``stringi`` fallback, and all figures are made with ggplot2.
 
 Tools
 -----

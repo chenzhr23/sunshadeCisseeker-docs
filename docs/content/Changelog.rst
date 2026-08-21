@@ -1,6 +1,23 @@
 Changelog
 =========
 
+1.3.16 — clearer run records and pruned documentation
+-----------------------------------------------------
+
+* **Run records:** step 03's per-file log line no longer carries a
+  ``completeness=NN%`` percentage (the GUI progress bar misread it as the
+  intra-step progress, shadowing the real ``[done/total]`` value). Steps
+  01/02/03 and the Custom download now log their full parameters (retries,
+  timeouts, batches, search settings), and every step logs the path of its
+  summary workbook when it finishes.
+* **Documentation cleanup:** outdated and historical content was removed from
+  the manual, INSTALL/README, the workflow reference and the online docs —
+  old bug workarounds, stale version notes, the removed
+  ``NCBI_genome_fa_gff`` directory and references to the previous R-only
+  motif scan. The pipeline order, the run scopes (including ``custom`` and
+  ``label_ecology``), the configuration keys (``custom_download``) and the
+  per-type Custom download lists are now described consistently everywhere.
+
 1.3.15 — unified per-type download-list format
 ----------------------------------------------
 

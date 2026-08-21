@@ -20,7 +20,7 @@ Requirements
      - WSL2 works as well
    * - R + R packages
      - installed by ``install.sh``
-     - openxlsx, data.table, stringi, ggplot2, patchwork, scales, curl, xml2, dplyr, rentrez, forcats, tidyr
+     - openxlsx, data.table, stringi, ggplot2, patchwork, scales, curl, xml2, dplyr, rentrez, magrittr
    * - bedtools / samtools
      - installed by ``install.sh``
      - optional accelerators for uncompressed linear genomes
@@ -47,9 +47,11 @@ Unpack
 ------
 
 The archive contains the launcher, the compiled Qt interface with its own Qt
-runtime (``lib/`` + ``plugins/`` + ``qt.conf``), the installer, all analysis
-scripts (``script/``), the two XLSX configuration templates (``config/``),
-the interface sources (``src/``) and this documentation.
+runtime (``lib/`` + ``plugins/`` + ``qt.conf``), the bundled C++
+cis-element scanner (``bin/cre_scan``), the installer, all analysis scripts
+(``script/``), the XLSX configuration templates (``config/``), the per-type
+Custom download lists (``Custom_genome_fa_gff/``), the interface sources
+(``src/``) and this documentation.
 
 Install
 -------
@@ -67,12 +69,13 @@ What ``install.sh`` does:
    none exists. When ``conda.anaconda.org`` is unreachable it falls back to
    the TUNA mirror automatically (``-m`` forces the mirror).
 2. **Dependency environment** — creates the dedicated ``sunshadecisseeker``
-   conda environment with R, all 12 R packages and ``bedtools``,
+   conda environment with R, all required R packages and ``bedtools``,
    ``samtools``, ``gzip``.
 3. **Bundle installation** — copies the bundle to
    ``~/.local/opt/sunshadeCisseeker``, makes every script executable and
    creates the writable directories. Re-installing **preserves** your
-   ``result/``, ``log/``, custom genomes, the two configuration XLSX files and
+   ``result/``, ``log/``, ``Custom_genome_fa_gff/`` (manual genomes and the
+   per-type download lists), the two configuration XLSX files and
    ``quickstart_config.yml``.
 4. **Self-activating launcher** — registers ``~/.local/bin/sunshadeCisseeker``
    which activates the dependency environment itself, so
@@ -137,8 +140,8 @@ No display at all, run the pipeline directly
 Global configuration
 --------------------
 
-See :doc:`Configuration` for ``quickstart_config.yml``, the two XLSX
-templates and custom-genome placement.
+See :doc:`Configuration` for ``quickstart_config.yml``, the XLSX templates,
+the per-type Custom download lists and custom-genome placement.
 
 Running from the command line
 -----------------------------
@@ -148,7 +151,7 @@ Running from the command line
    Usage: sunshadeCisseeker <command> [options]
 
    Commands:
-     run [all|nuclear|chloroplast|mitochondrial|ecology]
+     run [all|nuclear|chloroplast|mitochondrial|custom|label_ecology|ecology]
                     run the pipeline; defaults to "all".
      gui            open the Qt desktop window.
      check [--install] [--yes]
@@ -164,6 +167,8 @@ Running from the command line
    sunshadeCisseeker run nuclear       # nuclear only (01-06)
    sunshadeCisseeker run chloroplast   # chloroplast only (01-06)
    sunshadeCisseeker run mitochondrial # mitochondrial only (01-06)
+   sunshadeCisseeker run custom        # Custom genome downloads only
+   sunshadeCisseeker run label_ecology # ecology-label assignment only
    sunshadeCisseeker run ecology       # cross-genome comparison only (07-09)
 
 Minimal working sequence
@@ -179,13 +184,13 @@ Minimal working sequence
    # 2. install everything (dependencies + launcher), no questions
    bash install.sh -y
 
-   # 3. configure (edit these two XLSX + the yml)
-   #    config/species_ecology_labels.xlsx
-   #    config/cis_element_motif_library.xlsx
-   #    quickstart_config.yml
+   # 3. configure: species_ecology_labels.xlsx, cis_element_motif_library.xlsx,
+   #    the per-type Custom download lists and quickstart_config.yml
 
    # 4. custom-genome-only smoke test (no network, no NCBI)
-   #    place FASTA+GFF3 pairs in Custom_genome_fa_gff/*/fa and gff/
+   #    either fill Custom_genome_fa_gff/<type>/Custom_genome_fa_gff_<type>.xlsx
+   #    with file:// or http(s) URLs, or place FASTA+GFF3 pairs manually in
+   #    Custom_genome_fa_gff/*/fa and gff/
    sed -i 's/ncbi_download: "true"/ncbi_download: "false"/' quickstart_config.yml
    sunshadeCisseeker run
 
@@ -204,65 +209,42 @@ Troubleshooting
    mirrors. If downloads keep failing, set ``ncbi_api_key`` in
    ``quickstart_config.yml`` (the single most effective fix — unauthenticated
    eutils access is limited to 3 requests/second) and rerun.
-4. **``retry ... lexical error: invalid character inside string`` /
-   ``Unable to retrieve history data``** — historic NCBI web_history server
-   failures; current releases no longer use web_history, and transient
-   network errors are retried with exponential backoff automatically.
-5. **Custom genomes not analyzed** — check that the FASTA/GFF3 basenames
-   match exactly under ``Custom_genome_fa_gff/<type>/``.
-6. **Ecology comparison empty** — check that the ``species`` values in
+4. **Custom genomes not analyzed** — check that the FASTA/GFF3 basenames
+   match exactly under ``Custom_genome_fa_gff/<type>/`` (step 04 pairs by
+   basename), or that the per-type download list rows carry both URLs.
+5. **Ecology comparison empty** — check that the ``species`` values in
    ``config/species_ecology_labels.xlsx`` match the id_map ``species`` values
    exactly, and that at least two ecology groups have ``min_group_n`` or more
    species.
-7. **Changing the motif library has no effect on ecology figures** — rerun
+6. **Changing the motif library has no effect on ecology figures** — rerun
    step 06 for each genome type and then the ecology steps 07–09.
-8. **Windows paths / Excel file locking (WSL)** — close the XLSX in Excel
+7. **Windows paths / Excel file locking (WSL)** — close the XLSX in Excel
    before a step rewrites it.
-9. **GUI: ``qt.glx: qglx_findConfig`` warnings on startup** — harmless; the
+8. **GUI: ``qt.glx: qglx_findConfig`` warnings on startup** — harmless; the
    interface does not use OpenGL and the launcher disables the GLX
-   integration by default (the same treatment as in psiFinder).
-   ``SUNSHADE_KEEP_GL=1`` re-enables it.
-10. **GUI: ``Fontconfig error: Cannot load default config file``** — the
-    bundle ships its own fonts and generates a fontconfig configuration for
-    the installed path at start-up. If it persists, run
-    ``SUNSHADE_DEBUG=1 sunshadeCisseeker gui``.
-11. **The interface still refuses to start** — the launcher prints the
+   integration by default. ``SUNSHADE_KEEP_GL=1`` re-enables it.
+9. **GUI: ``Fontconfig error: Cannot load default config file``** — the
+   bundle ships its own fonts and generates a fontconfig configuration for
+   the installed path at start-up. If it persists, run
+   ``SUNSHADE_DEBUG=1 sunshadeCisseeker gui``.
+10. **The interface still refuses to start** — the launcher prints the
     reason: no ``DISPLAY``/``WAYLAND_DISPLAY`` (headless — reconnect with
     ``ssh -Y`` or use ``sunshadeCisseeker run``); interface binary missing
     (rebuild with ``bash build_on_host.sh -s src -b .``); or ``could not
     connect to display`` / ``Authorization required`` (X11 forwarding not
     enabled — use ``ssh -Y``).
-12. **"Open results" shows a path dialog / xdg-open error spam** — on remote
+11. **"Open results" shows a path dialog / xdg-open error spam** — on remote
     servers without a file manager or browser the window cannot open folders
     by itself; it detects the remote display and shows the copyable path plus
     a "Try to open anyway" button.
-13. **The window freezes after clicking Run on a remote server** — the run
+12. **The window freezes after clicking Run on a remote server** — the run
     panels switch to the status-bar mode on forwarded displays
     (``SUNSHADE_LOG=full`` forces the live log). If it still freezes, the X
     tunnel itself is congested: use ``nohup sunshadeCisseeker run`` on the
     server, or switch to X2Go/TigerVNC/MobaXterm.
-14. **Re-installing wipes my results?** — no: ``install.sh`` preserves
-    ``result/``, ``log/``, custom genomes, the two configuration XLSX files
-    and ``quickstart_config.yml`` across re-installs.
-15. **Several pages started together all show "100% finished" while ``top``
-    still shows R processes running** — fixed in version 1.3.5. Older releases
-    keyed the per-run status files by the GUI process id, so simultaneous runs
-    (Nuclear + Chloroplast + Mitochondrial) overwrote each other's files and
-    every page displayed the first run's exit state. From 1.3.5 each started
-    run owns a separate file set
-    ``/tmp/sunshadecisseeker-gui/run-<scope>-<pid>-<time>-<seq>.{pid,status,out}``
-    (the run id is printed as the first line of each page's log), and the run
-    logs under ``log/`` are named per scope, so the pages, their logs and
-    their progress bars are fully independent. If you still see the symptom,
-    check the log line ``scope=...`` at the top of the page and compare it
-    with the R processes in ``top``.
-16. **A run fails at the very end with ``CHARSXPs are limited to 2^31-1
-    bytes`` / ``stri_join``** — fixed in version 1.3.6: very large result
-    tables (promoter details, id maps, site records) are now written as
-    bounded part files (``<name>.partNN.xlsx`` plus an index workbook at the
-    canonical path, see :doc:`Outputs`). Simply re-run the same scope: the
-    already-extracted promoters are skipped as up to date and only the table
-    writing is redone.
+13. **Re-installing wipes my results?** — no: ``install.sh`` preserves
+    ``result/``, ``log/``, ``Custom_genome_fa_gff/``, the two configuration
+    XLSX files and ``quickstart_config.yml`` across re-installs.
 
 Uninstall
 ---------

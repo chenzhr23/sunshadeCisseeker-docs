@@ -76,10 +76,12 @@ The three parameter/table editors open as popups from the **Tools** menu.
    :width: 1040
 
    **Tools → Run pipeline…** — edit ``promoter_len``, ``workers``, ``cores``,
-   ``min_group_n`` and the optional NCBI API key, tick the parts to run, pick
-   a scope (all / nuclear / chloroplast / mitochondrial / label_ecology /
-   ecology) and start or stop the run. The same values are stored in
-   ``quickstart_config.yml`` and are used by the command line identically.
+   ``min_group_n`` and the optional NCBI API key, tick the parts to run
+   (nuclear / chloroplast / mitochondrial / ecology comparison, NCBI download
+   steps, Custom genome download), pick a scope (all / nuclear / chloroplast
+   / mitochondrial / custom / label_ecology / ecology) and start or stop the
+   run. The same values are stored in ``quickstart_config.yml`` and are used
+   by the command line identically.
 
 .. figure:: ../_static/screenshots/08-ecology-labels.png
    :width: 1040
@@ -96,8 +98,9 @@ The three parameter/table editors open as popups from the **Tools** menu.
    ``config/cis_element_motif_library.xlsx``: every CRE searched by the
    universal scan (06) with its IUPAC ``motif_sequence`` and
    ``functional_group`` classification (hormone / light / stress / development
-   / core / …). Exact motifs use fixed-string counting, degenerate IUPAC
-   motifs are searched as regular expressions.
+   / core / …). On Linux the scan runs the bundled C++ Aho-Corasick backend
+   (``bin/cre_scan``); motifs are matched as literal fixed text, and an R
+   ``stringi`` fallback covers hosts without the binary.
 
 Other windows and hints
 -----------------------

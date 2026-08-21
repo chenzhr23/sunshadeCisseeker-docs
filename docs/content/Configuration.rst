@@ -38,7 +38,7 @@ Three user-editable files drive the whole analysis.
      - run NCBI steps 01–03; set ``"false"`` for custom-genome-only runs
    * - ``custom_download``
      - ``"true"``
-     - run the Custom genome download step (the ``config/custom_genome_download_list.xlsx`` URL list) before the per-genome steps; set ``"false"`` when you place custom files manually
+     - run the Custom genome download step (the per-type lists ``Custom_genome_fa_gff/<type>/Custom_genome_fa_gff_<type>.xlsx``, plus the optional global table) before the per-genome steps; set ``"false"`` when you place custom files manually
 
 ``config/species_ecology_labels.xlsx`` (manual annotation)
 ----------------------------------------------------------
@@ -105,7 +105,8 @@ The folder decides the genome type, so the file itself has no type column
 (existing lists with a plain ``Sheet1`` are read as-is). **Missing or empty
 files are replaced by a header-only template** (``README`` + ``download_list``
 sheets) on the first run, so nuclear / chloroplast / mitochondrial always
-have a fillable, correctly named list.
+have a fillable, correctly named list; the chloroplast and mitochondrial
+templates are also shipped in the bundle.
 
 The optional global table ``config/custom_genome_download_list.xlsx`` (sheet
 ``download_list``, with a ``genome_type`` column) is still supported; rows

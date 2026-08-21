@@ -62,11 +62,11 @@ R strings cannot exceed 2^31-1 bytes and openxlsx assembles a whole
 workbook's text in memory, so a single XLSX cannot be written as one file
 when the table holds either tens of millions of rows (nuclear promoter
 details / id maps / site records) or fewer rows that carry long per-row
-text. From version 1.3.6 the large tables — ``<type>_promoter_detail.xlsx``,
+text. The large tables — ``<type>_promoter_detail.xlsx``,
 ``all_species_<type>_id_map.xlsx`` and ``<type>_ciselement_sites.xlsx`` — are
-written automatically as **part files**, and from version 1.3.7 each part is
-also sized by an estimated per-part character budget (sampled over the
-table), so the row count is not the only limit:
+written automatically as **part files**, each part sized by row count and by
+an estimated per-part character budget (sampled over the table), so the row
+count is not the only limit:
 
 * up to 1,000,000 rows (and within the per-part character budget): one
   classic workbook, exactly as before;
@@ -77,11 +77,10 @@ table), so the row count is not the only limit:
   an earlier, larger run are removed automatically. Downstream steps (06, 07
   and the ecology comparison) read the parts back automatically.
 
-From version 1.3.8 the independent part files of the step-06 tables are
-written (and read back) concurrently — up to 8 parts at a time, capped for
-shared-server memory safety — which makes saving e.g. tens of millions of
-site records several times faster; the part contents themselves are
-unchanged.
+The independent part files of the step-06 tables are written (and read back)
+concurrently — up to 8 parts at a time, capped for shared-server memory
+safety — which makes saving e.g. tens of millions of site records several
+times faster; the part contents themselves are unchanged.
 
 The same bound applies inside multi-sheet workbooks: sheets that would
 exceed the 1,048,576-row Excel limit (e.g. ``Master_long`` in

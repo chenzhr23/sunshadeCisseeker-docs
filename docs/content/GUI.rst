@@ -96,8 +96,8 @@ Fonts and remote displays
 Running several pages at the same time
 --------------------------------------
 
-From version 1.3.5 every started run is fully independent, so the three
-genome pages (and the ecology pages) can be run **at the same time**:
+Every started run is fully independent, so the three genome pages (and the
+ecology pages) can be run **at the same time**:
 
 * Each page gets its own run id and its own bookkeeping files
   ``/tmp/sunshadecisseeker-gui/run-<scope>-<pid>-<time>-<seq>.pid`` /

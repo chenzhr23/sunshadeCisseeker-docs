@@ -1,11 +1,14 @@
 Analysis pipeline
 =================
 
-The pipeline runs ten strict steps: six per genome type (nuclear /
-chloroplast / mitochondrial) and four cross-genome steps (label ecology plus
-the ecology comparison).
+The pipeline runs eleven strict steps: one Custom genome download step, six
+steps per genome type (nuclear / chloroplast / mitochondrial) and four
+cross-genome steps (label ecology plus the ecology comparison).
 
 .. code-block:: text
+
+   custom genomes:
+     01 download Custom FASTA+GFF3 (per-type URL lists)
 
    per genome type:
      01 species metadata -> 02 download FASTA+GFF3 -> 03 retry failed
@@ -17,14 +20,34 @@ the ecology comparison).
 Each step reads the exact outputs of the previous one and writes a multi-sheet
 XLSX workbook (README sheet first) plus its own ``.log``.
 
+Step 00 — Custom genome download
+--------------------------------
+
+Before the per-genome steps, the Custom download step reads the per-type URL
+lists ``Custom_genome_fa_gff/<type>/Custom_genome_fa_gff_<type>.xlsx``
+(columns ``species | genome_download_url | annotation_download_url``; the
+folder decides the genome type; missing or empty files are replaced by
+header-only templates) plus the optional global table
+``config/custom_genome_download_list.xlsx``, and downloads every FASTA/GFF3
+pair into ``Custom_genome_fa_gff/<type>/{fa,gff}/`` with matching file stems
+(species name, spaces → underscores). Step 04 then pairs them automatically.
+Downloads are resumable (``.part``), retried with backoff, paced, and skipped
+when already complete; the summary is
+``result/custom_genome/01_custom_download/custom_download_summary.xlsx``. The
+``custom`` scope runs this step alone, and the ``custom_download`` switch in
+``quickstart_config.yml`` controls whether it runs automatically before the
+genome steps.
+
 Running scopes in parallel
 --------------------------
 
 The genome scopes and the ecology scope write to separate result directories
 and separate run logs, so they can be started in parallel — from several GUI
 pages at once (each page tracks only its own run, see :doc:`GUI`) or from
-several terminals with ``bash run_all.sh nuclear`` /
-``bash run_all.sh chloroplast`` / ``bash run_all.sh mitochondrial``. The only
+several terminals with ``sunshadeCisseeker run nuclear`` /
+``sunshadeCisseeker run chloroplast`` /
+``sunshadeCisseeker run mitochondrial`` (equivalently
+``bash run_all.sh <scope>``). The only
 shared resource is the NCBI rate limit (one IP address): parallel download
 phases simply see more 429 retries, which the pipeline absorbs automatically.
 For cleaner downloads, run the download-heavy scopes one after another or
@@ -126,10 +149,15 @@ Step 06 — universal CRE scan
 ----------------------------
 
 Searches every motif of ``config/cis_element_motif_library.xlsx`` in every
-promoter. Exact motifs use fixed-string counting and degenerate IUPAC motifs
-use regular expressions, both through the C-level ``stringi`` library,
-parallelised across cores with streaming batches, so arbitrarily many
-promoters can be scanned in bounded memory. Outputs:
+promoter. On Linux the scan runs the bundled **C++ Aho-Corasick backend**
+(``bin/cre_scan``): it builds a multi-pattern automaton from the whole motif
+set and reads the combined FASTA once, splitting the file across threads (up
+to 64, defaulting to the configured core count). The R ``stringi`` backend is
+kept as an automatic fallback when ``bin/cre_scan`` is absent or not
+executable; both backends produce identical tables (the ``scan_method`` note
+in the results workbook records which one ran). All motifs are matched as
+literal fixed text — degenerate IUPAC codes keep their literal behaviour —
+and occurrences are counted non-overlapping per promoter. Outputs:
 
 * ``<type>_ciselement_results.xlsx`` — ``Element_stats`` /
   ``Species_element_counts`` / ``Species_summary``;
