@@ -1,6 +1,19 @@
 Changelog
 =========
 
+1.3.14 — drop the unused NCBI_genome_fa_gff directory
+------------------------------------------------------
+
+* **Cleanup: the bundle no longer ships the ``NCBI_genome_fa_gff/``
+  directory.** No pipeline step ever reads it - NCBI genomes are downloaded
+  by steps 01–03 into ``result/<type>/02_download/`` and step 04 takes its
+  NCBI pairs from the step-02 task table - so the empty directory only
+  caused confusion (the manual even claimed steps 01–03 fill it, which was
+  wrong). The manual and bundle README/INSTALL have been corrected.
+* Re-installing still **preserves** an existing ``NCBI_genome_fa_gff/`` in
+  case an old installation holds manually placed files there; nothing is
+  deleted, the directory is simply no longer created or shipped.
+
 1.3.13 — per-genome-type Custom download lists
 ----------------------------------------------
 
