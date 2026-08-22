@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.3.24 — documentation refresh
+------------------------------
+
+* The bundled guides (``INSTALL.md``, the analysis manual and the workflow
+  reference) now describe the current behavior: the parallel step-01 URL
+  validation, the crash-proof GFF3 handling and stall detection in step 04,
+  the NCBI API key input on the genome pages, the never-lost live log, and
+  the printed log locations (panel log copy, master run log path on success
+  and failure).
+
 1.3.23 — updated Introduction workflow diagram
 -----------------------------------------------
 
