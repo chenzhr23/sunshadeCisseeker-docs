@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.3.20 — complete log updates on the genome pages
+--------------------------------------------------
+
+* **Fixed: the genome pages froze their log while another page was on
+  screen.** Log lines produced while a page was not visible were silently
+  dropped, so switching back showed stale progress. New lines are now
+  buffered (bounded) and flushed when the page is shown again, including
+  before the final "process finished" line; the status-bar mode refreshes on
+  the next show as well. The progress bar itself always kept updating.
+
 1.3.19 — NCBI API key field on the genome pages
 -----------------------------------------------
 
