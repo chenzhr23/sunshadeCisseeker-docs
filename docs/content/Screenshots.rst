@@ -13,9 +13,12 @@ matching pipeline scope and streams the full log live; **Run** starts it and
 position (e.g. "Step 4/6 — promoter extraction — 46%"), and every started run
 prints its run id as the first log line
 (``run started | id=... | scope=...``) — each page tracks only its own run, so
-several pages can run at the same time. The menu bar on top (File / Tools /
-Global / Help) holds the parameter editor, the two XLSX table editors and the
-remaining functions.
+several pages can run at the same time. The three genome pages additionally
+have an **"NCBI API key (optional)" input** next to Run/Stop (it writes the
+``ncbi_api_key`` entry of ``quickstart_config.yml``; the screenshots below
+show a slightly earlier build without that field). The menu bar on top (File /
+Tools / Global / Help) holds the parameter editor, the two XLSX table editors
+and the remaining functions.
 
 .. figure:: ../_static/screenshots/01-introduction.png
    :width: 1360

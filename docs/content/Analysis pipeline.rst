@@ -1,9 +1,11 @@
 Analysis pipeline
 =================
 
-The pipeline runs eleven strict steps: one Custom genome download step, six
-steps per genome type (nuclear / chloroplast / mitochondrial) and four
-cross-genome steps (label ecology plus the ecology comparison).
+The pipeline is built from eleven strict step roles — one Custom genome
+download step, six per-genome steps (run for each of nuclear / chloroplast /
+mitochondrial, i.e. steps 01–06 × 3) and four cross-genome steps (label
+ecology plus the ecology comparison) — for 23 step executions in the ``all``
+scope.
 
 .. code-block:: text
 
@@ -69,8 +71,12 @@ representative record** is chosen deterministically:
 5. accession as the final tie-breaker.
 
 The nuclear part additionally validates that the FASTA and GFF3 URLs really
-exist before selecting the representative pair. The download URLs carry the
-``api_key`` parameter automatically when ``ncbi_api_key`` is configured.
+exist before selecting the representative pair. Since 1.3.21 every candidate
+URL is checked once, up front, **in parallel** (the same fork-free PSOCK
+worker pool the download steps use, 32 URLs per batch), and both that
+validation pass and the selection loop report live progress — the step takes
+minutes instead of the hours a serial check needed. The download URLs carry
+the ``api_key`` parameter automatically when ``ncbi_api_key`` is configured.
 
 Step 02 — download FASTA + GFF3
 -------------------------------
@@ -128,7 +134,11 @@ Re-runs are incremental: a species whose promoter FASTA and detail table are
 newer than its inputs (and the requested ``promoter_len`` is unchanged, as
 recorded in the ``.promoter_len`` marker written at start-up) is skipped, so
 a re-run only processes new or changed genomes — even a run that was
-interrupted late resumes cheaply. The per-pair detail tables and the combined
+interrupted late resumes cheaply. Long parallel steps are additionally
+protected by **stall detection**: if no worker finishes for 40 minutes the
+step aborts with a clear message instead of hanging silently (and a crashed
+run never leaves orphaned workers behind), so the next re-run simply resumes
+from the completed pairs. The per-pair detail tables and the combined
 FASTA are assembled at the end by a streaming, bounded-memory combiner that
 tolerates unreadable files instead of aborting; a combined detail table with
 more than 1,000,000 rows is written as bounded part files (see

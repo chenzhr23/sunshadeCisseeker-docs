@@ -71,7 +71,10 @@ Fonts and remote displays
   ``SUNSHADE_ANIM=1`` forces them back on.
 * **Live log everywhere**: the run panels show the full live log on local
   and remote displays alike (the run itself is detached and the display is
-  polled once per second, so forwarded sessions stay responsive). The full
+  polled once per second, so forwarded sessions stay responsive). Log lines
+  produced while another page is on screen are **buffered, never dropped**,
+  and are flushed (in order) when the page is shown again, so switching
+  back always shows the complete history up to "process finished". The full
   output also flows into ``log/sunshadeCisseeker_*.log`` and each step's own
   ``.log`` file. For very constrained links a compact status bar (one status
   line per second) is available with

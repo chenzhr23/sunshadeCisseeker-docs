@@ -17,7 +17,7 @@ Three user-editable files drive the whole analysis.
      - max promoter length extracted upstream of each TSS (bp)
    * - ``workers``
      - ``"6"``
-     - parallel workers for download/extraction
+     - parallel workers for the download / extraction pools and the step-01 URL validation
    * - ``cores``
      - ``"8"``
      - cores for the motif scan
