@@ -128,7 +128,10 @@ The extraction engine is chosen per genome:
   results).
 * **GFF3 parsing** — ``data.table::fread`` (C-level parser, native ``.gz``
   support, stops at the ``##FASTA`` section) with an automatic fallback to
-  the pure-R parser.
+  the pure-R parser. Every GFF3 is first stream-checked for binary content
+  (a corrupt download once crashed the parser and, through the sequential
+  fallback, the whole run with a segfault); a corrupt file fails its pair
+  cleanly and is removed so step 02 re-downloads it on the next run.
 
 Re-runs are incremental: a species whose promoter FASTA and detail table are
 newer than its inputs (and the requested ``promoter_len`` is unchanged, as

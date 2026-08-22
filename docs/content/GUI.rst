@@ -73,7 +73,11 @@ Fonts and remote displays
   polled once per second, so forwarded sessions stay responsive). Log lines
   produced while another page is on screen are **buffered, never dropped**,
   and are flushed (in order) when the page is shown again, so switching
-  back always shows the complete history up to "process finished". The full
+  back always shows the complete history up to "process finished". At the
+  end of every run the panel prints where the logs live: a copy of the
+  panel log is kept under ``log/gui_<run-id>.log``, the master run log is
+  ``log/sunshadeCisseeker_<scope>_*.log``, and every step writes its own
+  ``.log`` under ``result/``. The full
   output also flows into ``log/sunshadeCisseeker_*.log`` and each step's own
   ``.log`` file. For very constrained links a compact status bar (one status
   line per second) is available with

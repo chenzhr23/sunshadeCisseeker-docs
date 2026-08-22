@@ -1,6 +1,28 @@
 Changelog
 =========
 
+1.3.22 — crash-proof GFF3 parsing and a clearer run record
+----------------------------------------------------------
+
+* **Fixed: step 04 could crash the whole run with a segfault (exit 139).**
+  A single corrupt GFF3 (binary NUL content that still passes the download
+  checks) made ``data.table::fread``'s C parser segfault: the worker crashed,
+  the pool's sequential fallback then read the same file and killed the main
+  R process. GFF3 files are now stream-checked for binary garbage before any
+  parser sees them, and the fast parse path reads a normalised
+  exactly-9-column awk stream instead of arbitrary lines. A corrupt file
+  fails its pair cleanly (clear message) and is **removed automatically** so
+  step 02 re-downloads it on the next run — the run itself always continues.
+* **Fixed: after a successful run the genome pages could leave the log panel
+  scrolled onto blank space** (the finished view looked empty until you
+  scrolled back up). The final scroll now runs after the layout has settled,
+  so the panel always ends on the last log line.
+* **The run record is now easy to find:** every finished run prints in the
+  panel itself the panel log path (a copy is kept under
+  ``log/gui_<run-id>.log``), the master run log path and the per-step log
+  location; the master log path is now printed even when a run ends
+  abnormally (previously only successful runs printed it).
+
 1.3.21 — fast, visible representative-assembly selection (step 01)
 ------------------------------------------------------------------
 
