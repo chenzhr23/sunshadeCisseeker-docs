@@ -1,6 +1,19 @@
 Changelog
 =========
 
+1.3.21 — fast, visible representative-assembly selection (step 01)
+------------------------------------------------------------------
+
+* **Fixed: Nuclear step 01 "[3/5] Selecting representative assemblies" looked
+  frozen at 0% and could run for hours.** The step validated every candidate
+  FASTA/GFF3 download URL one at a time (up to ~5000 HEAD requests, each
+  bounded by a 20-second timeout) and never updated its progress bar, so the
+  GUI showed 0% the entire time while the process slowly checked URLs. All
+  candidate URLs are now validated once, up front, in parallel (the same
+  fork-free PSOCK worker pool used by the download steps, 32 URLs per batch),
+  and both that pass and the selection loop now report progress. The step
+  takes minutes instead of hours and stays visibly alive throughout.
+
 1.3.20 — complete log updates on the genome pages
 --------------------------------------------------
 
