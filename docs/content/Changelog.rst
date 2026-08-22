@@ -336,4 +336,4 @@ Earlier versions
 Initial releases: the six-step per-genome pipeline (NCBI species metadata,
 FASTA+GFF3 download, promoter extraction, NCBI+Custom merge, universal CRE
 scan), the cross-genome ecology comparison (steps 06–09), the Qt 5.15
-psiFinder-style desktop interface, and the one-shot conda installer.
+desktop interface, and the one-shot conda installer.

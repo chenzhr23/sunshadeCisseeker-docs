@@ -1,12 +1,11 @@
 GUI
 ===
 
-The interface follows the **psiFinder framework and look**: the same flat tab
-widget with page-change animation, the same splash screen and the same
-menu-bar main window. It is a native Qt 5.15 C++ application; the archive
-ships the compiled binary together with its own Qt runtime
-(``lib/``, ``plugins/``, ``qt.conf``), so **no Qt or X11 package has to be
-installed** on the host.
+The interface is organised as a flat tab widget with page-change animation,
+a splash screen and a menu-bar main window. It is a native Qt 5.15 C++
+application; the archive ships the compiled binary together with its own Qt
+runtime (``lib/``, ``plugins/``, ``qt.conf``), so **no Qt or X11 package has
+to be installed** on the host.
 
 Start it with:
 

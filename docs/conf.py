@@ -1,8 +1,8 @@
 # sunshadeCisseeker documentation build configuration.
 #
-# The documentation follows the psiFinder style: Sphinx' built-in bizstyle
-# theme with the same custom.css override, content pages under content/, and
-# the "<page> — sunshadeCisseeker vX.Y.Z documentation" title pattern.
+# Sphinx' built-in bizstyle theme with the same custom.css override, content
+# pages under content/, and the
+# "<page> — sunshadeCisseeker vX.Y.Z documentation" title pattern.
 
 project = "sunshadeCisseeker"
 author = "sunshadeCisseeker developers"
@@ -23,13 +23,13 @@ html_theme = "bizstyle"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 
-# Sidebar layout exactly like psiFinder: one flat "Table of Contents" list of
-# the top-level pages (no local toc, no relations, no source link, no search
-# box), while the index body keeps the deep, fully expanded Contents tree.
+# Sidebar layout: one flat "Table of Contents" list of the top-level pages
+# (no local toc, no relations, no source link, no search box), while the
+# index body keeps the deep, fully expanded Contents tree.
 html_sidebars = {"**": ["globaltoc.html"]}
 html_theme_options = {
     "globaltoc_maxdepth": 1,
 }
 
-# The :red: text role used by the psiFinder docs.
+# The :red: text role used across the docs.
 rst_prolog = ".. role:: red\n"

@@ -10,9 +10,8 @@ sunshadeCisseeker quantifies and compares promoter **cis-regulatory elements
 **nuclear**, **chloroplast** and **mitochondrial** genomes. Genomes come from
 two merged sources: **NCBI** (located and downloaded automatically) and
 **Custom** (user-collected FASTA + GFF3). The software ships as a
-self-contained Linux bundle with a native Qt 5.15 desktop window (built in
-the same style as **psiFinder**) and a command-line launcher that runs the
-exact same R/bash pipeline.
+self-contained Linux bundle with a native Qt 5.15 desktop window and a
+command-line launcher that runs the exact same R/bash pipeline.
 
 Contents:
 
