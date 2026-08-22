@@ -41,8 +41,11 @@ There are exactly six sliding pages, in this order:
      - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first)
 
 Each analysis page shows the step description, the result directory hint and
-a live log panel. A screenshot of every page and popup, with explanations, is
-on the :doc:`Screenshots` page.
+a live log panel. The three genome pages additionally offer an **NCBI API key
+(optional)** input: the value is written to ``quickstart_config.yml`` when the
+field loses focus and before every run starts (same entry as the Run Pipeline
+window). A screenshot of every page and popup, with explanations, is on the
+:doc:`Screenshots` page.
 
 Menu bar
 --------

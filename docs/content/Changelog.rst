@@ -1,6 +1,17 @@
 Changelog
 =========
 
+1.3.19 — NCBI API key field on the genome pages
+-----------------------------------------------
+
+* **New: the Nuclear / Chloroplast / Mitochondrial genome pages each have an
+  "NCBI API key (optional)" input** next to the Run/Stop buttons. The key is
+  written to ``quickstart_config.yml`` when the field loses focus and before
+  every run starts (the Run Pipeline window keeps its own field; both edit
+  the same configuration entry). A free NCBI API key raises the request limit
+  from 3 to 10 requests/second and removes the HTTP 429 throttling on shared
+  IPs.
+
 1.3.18 — patient NCBI rate-limit handling in step 01
 ----------------------------------------------------
 
