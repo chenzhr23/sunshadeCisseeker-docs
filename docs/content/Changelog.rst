@@ -1,6 +1,22 @@
 Changelog
 =========
 
+1.3.17 — stall detection and crash cleanup for parallel steps
+--------------------------------------------------------------
+
+* **Fixed: step 04 could hang silently and then crash (exit 139) during long
+  runs.** The worker pool no longer blocks on one socket read: it polls all
+  workers, and step 04 aborts with a clear message after 40 minutes without
+  any finished job (``stall_timeout``) instead of freezing for an hour and
+  dying with a segfault when a worker was killed on a broken connection. A
+  torn worker socket is now handled as an R error and triggers the existing
+  sequential fallback. Re-running the scope resumes the step (finished pairs
+  are skipped), so an aborted run costs almost nothing.
+* **Crashed runs no longer leave orphaned workers behind.** ``run_all.sh``
+  now reaps the whole process tree whenever the run ends abnormally (a step
+  failed or crashed with a signal) and logs a clear warning, so a segfaulting
+  step can no longer pin result files.
+
 1.3.16 — clearer run records and pruned documentation
 -----------------------------------------------------
 
