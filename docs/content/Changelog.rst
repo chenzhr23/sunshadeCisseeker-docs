@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.3.23 — updated Introduction workflow diagram
+-----------------------------------------------
+
+* The Introduction page's workflow diagram now matches the current pipeline:
+  the **Custom genome download pre-step** (per-type URL lists) is shown
+  feeding the three genome types, step 05 no longer mentions ecology labels
+  (they are assigned by the standalone Label ecology step), and the
+  cross-genome row shows **label ecology → 07 merge → 08 differential
+  statistics → 09 figures**.
+
 1.3.22 — crash-proof GFF3 parsing and a clearer run record
 ----------------------------------------------------------
 
