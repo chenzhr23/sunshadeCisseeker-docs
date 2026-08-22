@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.3.18 — patient NCBI rate-limit handling in step 01
+----------------------------------------------------
+
+* **Fixed: step 01 could abort after five quick retries during an NCBI HTTP
+  429 storm** on a shared IP without an API key. The NCBI queries now retry
+  up to 10 times with much longer waits when the error is rate-limiting
+  (up to 2 minutes per attempt) and the final error message tells the user
+  to set ``ncbi_api_key`` (a free NCBI API key raises the limit from 3 to 10
+  requests/second and removes the throttling entirely).
+
 1.3.17 — stall detection and crash cleanup for parallel steps
 --------------------------------------------------------------
 
