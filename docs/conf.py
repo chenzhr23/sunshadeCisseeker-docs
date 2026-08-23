@@ -9,8 +9,8 @@ author = "sunshadeCisseeker developers"
 copyright = "2026, sunshadeCisseeker developers"
 
 # The short X.Y version and the full release version.
-version = "v1.3.26"
-release = "v1.3.26"
+version = "v1.3.27"
+release = "v1.3.27"
 
 extensions = [
     "sphinx.ext.autosectionlabel",

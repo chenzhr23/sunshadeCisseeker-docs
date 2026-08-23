@@ -1,6 +1,19 @@
 Changelog
 =========
 
+1.3.27 — per-species genome file sizes
+--------------------------------------
+
+* **New: every genome type now records the file size of each species' genome
+  files.** Step 04 adds ``fasta_bytes`` / ``gff3_bytes`` /
+  ``genome_total_bytes`` (on-disk sizes of the genome FASTA, the GFF3
+  annotation and their sum) plus human-readable ``fasta_size`` / ``gff3_size``
+  / ``total_size`` columns to the per-species pair summary, and the step's
+  summary workbook gains a dedicated **``File_sizes``** sheet (one row per
+  species, largest genomes first). The ``Run_info`` sheet also reports the
+  totals, and the final log line prints them (e.g. ``FASTA 1.20 TB + GFF3
+  45.61 GB``).
+
 1.3.26 — no more false stall aborts on giant genomes
 ----------------------------------------------------
 
