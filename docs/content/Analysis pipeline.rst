@@ -138,10 +138,22 @@ newer than its inputs (and the requested ``promoter_len`` is unchanged, as
 recorded in the ``.promoter_len`` marker written at start-up) is skipped, so
 a re-run only processes new or changed genomes — even a run that was
 interrupted late resumes cheaply. Long parallel steps are additionally
-protected by **stall detection**: if no worker finishes for 40 minutes the
-step aborts with a clear message instead of hanging silently (and a crashed
-run never leaves orphaned workers behind), so the next re-run simply resumes
-from the completed pairs. The per-pair detail tables and the combined
+protected by **CPU-confirmed stall detection**: when no pair has finished
+for 40 minutes the pool reports which species are still running and checks
+whether the worker processes (and their ``gzip``/``samtools``/``bedtools``
+children) are still consuming CPU. Pairs that keep computing — typically
+multi-GB genomes — are left to finish, with a progress warning every
+confirmation window; only a worker tree that has *also* stopped consuming
+CPU is treated as truly stuck and aborted, with the in-flight species named
+(a crashed run never leaves orphaned workers behind). The next re-run
+simply resumes from the completed pairs.
+
+Every pair's summary row also records the **on-disk genome file sizes**:
+``fasta_bytes`` / ``gff3_bytes`` / ``genome_total_bytes`` plus the
+human-readable ``fasta_size`` / ``gff3_size`` / ``total_size`` columns, and
+the summary workbook carries a dedicated **``File_sizes``** sheet with one
+row per species, largest genomes first (totals in ``Run_info``). The
+per-pair detail tables and the combined
 FASTA are assembled at the end by a streaming, bounded-memory combiner that
 tolerates unreadable files instead of aborting; a combined detail table with
 more than 1,000,000 rows is written as bounded part files (see

@@ -209,40 +209,48 @@ Troubleshooting
    mirrors. If downloads keep failing, set ``ncbi_api_key`` in
    ``quickstart_config.yml`` (the single most effective fix — unauthenticated
    eutils access is limited to 3 requests/second) and rerun.
-4. **Custom genomes not analyzed** — check that the FASTA/GFF3 basenames
+4. **Step 04 stopped with an error or the run aborted** — re-run the same
+   scope: finished pairs are skipped and the step resumes where it stopped.
+   Corrupt GFF3 files are detected before parsing, fail their pair cleanly
+   and are removed so step 02 re-downloads them on the next run; the
+   40-minute stall check is CPU-confirmed, so very large genomes are allowed
+   to run as long as they keep computing (a warning names the running
+   pairs), and only workers that also stop consuming CPU are treated as
+   stuck.
+5. **Custom genomes not analyzed** — check that the FASTA/GFF3 basenames
    match exactly under ``Custom_genome_fa_gff/<type>/`` (step 04 pairs by
    basename), or that the per-type download list rows carry both URLs.
-5. **Ecology comparison empty** — check that the ``species`` values in
+6. **Ecology comparison empty** — check that the ``species`` values in
    ``config/species_ecology_labels.xlsx`` match the id_map ``species`` values
    exactly, and that at least two ecology groups have ``min_group_n`` or more
    species.
-6. **Changing the motif library has no effect on ecology figures** — rerun
+7. **Changing the motif library has no effect on ecology figures** — rerun
    step 06 for each genome type and then the ecology steps 07–09.
-7. **Windows paths / Excel file locking (WSL)** — close the XLSX in Excel
+8. **Windows paths / Excel file locking (WSL)** — close the XLSX in Excel
    before a step rewrites it.
-8. **GUI: ``qt.glx: qglx_findConfig`` warnings on startup** — harmless; the
+9. **GUI: ``qt.glx: qglx_findConfig`` warnings on startup** — harmless; the
    interface does not use OpenGL and the launcher disables the GLX
    integration by default. ``SUNSHADE_KEEP_GL=1`` re-enables it.
-9. **GUI: ``Fontconfig error: Cannot load default config file``** — the
-   bundle ships its own fonts and generates a fontconfig configuration for
-   the installed path at start-up. If it persists, run
-   ``SUNSHADE_DEBUG=1 sunshadeCisseeker gui``.
-10. **The interface still refuses to start** — the launcher prints the
+10. **GUI: ``Fontconfig error: Cannot load default config file``** — the
+    bundle ships its own fonts and generates a fontconfig configuration for
+    the installed path at start-up. If it persists, run
+    ``SUNSHADE_DEBUG=1 sunshadeCisseeker gui``.
+11. **The interface still refuses to start** — the launcher prints the
     reason: no ``DISPLAY``/``WAYLAND_DISPLAY`` (headless — reconnect with
     ``ssh -Y`` or use ``sunshadeCisseeker run``); interface binary missing
     (rebuild with ``bash build_on_host.sh -s src -b .``); or ``could not
     connect to display`` / ``Authorization required`` (X11 forwarding not
     enabled — use ``ssh -Y``).
-11. **"Open results" shows a path dialog / xdg-open error spam** — on remote
+12. **"Open results" shows a path dialog / xdg-open error spam** — on remote
     servers without a file manager or browser the window cannot open folders
     by itself; it detects the remote display and shows the copyable path plus
     a "Try to open anyway" button.
-12. **The window freezes after clicking Run on a remote server** — the run
+13. **The window freezes after clicking Run on a remote server** — the run
     panels switch to the status-bar mode on forwarded displays
     (``SUNSHADE_LOG=full`` forces the live log). If it still freezes, the X
     tunnel itself is congested: use ``nohup sunshadeCisseeker run`` on the
     server, or switch to X2Go/TigerVNC/MobaXterm.
-13. **Re-installing wipes my results?** — no: ``install.sh`` preserves
+14. **Re-installing wipes my results?** — no: ``install.sh`` preserves
     ``result/``, ``log/``, ``Custom_genome_fa_gff/``, the two configuration
     XLSX files and ``quickstart_config.yml`` across re-installs.
 
