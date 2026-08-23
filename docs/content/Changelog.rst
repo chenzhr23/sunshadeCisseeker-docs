@@ -1,6 +1,15 @@
 Changelog
 =========
 
+1.3.25 — refreshed documentation screenshots
+--------------------------------------------
+
+* The Screenshots page now shows the current interface: every capture was
+  regenerated with the built-in offscreen screenshot mode at the same pixel
+  sizes as before. The new images include the live progress bar, the NCBI
+  API key input on the three genome pages, and the updated Introduction
+  workflow diagram.
+
 1.3.24 — documentation refresh
 ------------------------------
 
