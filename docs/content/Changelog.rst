@@ -1,6 +1,20 @@
 Changelog
 =========
 
+1.3.26 — no more false stall aborts on giant genomes
+----------------------------------------------------
+
+* **Fixed: step 04 could abort at the very end of a run ("no worker finished
+  for over 2400 s") even though the workers were fine.** Some pairs
+  legitimately take longer than the stall timeout (multi-GB FASTA
+  decompression plus ``samtools faidx`` plus ``bedtools`` extraction of tens
+  of thousands of genes). The stall check now confirms the hang first: it
+  only aborts when the worker processes **and their children** have also
+  stopped consuming CPU; workers that are still computing are reported (with
+  the names of the running pairs) and the run simply continues. Truly stuck
+  workers are still aborted, now with a list of the pairs that were in
+  flight.
+
 1.3.25 — refreshed documentation screenshots
 --------------------------------------------
 
