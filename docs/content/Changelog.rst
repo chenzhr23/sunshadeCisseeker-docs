@@ -1,6 +1,31 @@
 Changelog
 =========
 
+1.3.28 — ultra-large genome performance
+---------------------------------------
+
+* **Step 04 now processes ultra-large genomes (multi-GB FASTA, hundreds of
+  thousands of contigs) dramatically faster.** The hot paths were rewritten
+  with vectorized ``stringi`` C-level calls: FASTA length scanning and
+  interval extraction process whole chunks instead of one line per R loop
+  iteration, gene attribute parsing runs one regex pass per key instead of
+  one per gene, and 80-character FASTA wrapping no longer loops per output
+  line. The BED file for the bedtools path is written with
+  ``data.table::fwrite`` (seconds instead of minutes for millions of rows).
+* **Fixed: promoter sequences could be attached to the wrong gene header.**
+  The streaming extractor sorted its internal request order but returned the
+  sequences in that sorted order, so whenever the request order differed from
+  sorted order the sequence/header pairing in the output FASTA could shift.
+  Sequences are now returned in the original request order (verified
+  byte-for-byte against the genome substring), and chunk-boundary handling
+  was hardened (adjacent-line spans, a trailing FASTA header exactly at a
+  chunk edge).
+* The ``samtools`` index (``.fai``) next to a custom FASTA is now reused on
+  re-runs while it is still fresh (and regenerated automatically when the
+  FASTA changed), so indexing a huge genome happens only once.
+* A gzip-to-temp decompression failure now logs a clear warning and falls
+  back to the streaming extractor instead of failing silently.
+
 1.3.27 — per-species genome file sizes
 --------------------------------------
 
