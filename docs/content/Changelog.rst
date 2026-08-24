@@ -1,6 +1,22 @@
 Changelog
 =========
 
+1.3.29 — starter ecology labels: 草珊瑚 / 拟南芥 / 大豆
+------------------------------------------------------------
+
+* The shipped ``config/species_ecology_labels.xlsx`` now contains only the
+  three study species: **草珊瑚** (*Sarcandra glabra*, ``shade``), **拟南芥**
+  (*Arabidopsis thaliana*, ``facultative``) and **大豆** (*Glycine max*,
+  ``sun``); the ``note`` column is filled with ``人工标注`` (manually
+  annotated) instead of the old placeholder text. The Chinese names live in
+  the ``common_name`` column while ``species`` keeps the Latin pipeline key
+  (the label matcher compares sanitized names, so the key must stay Latin).
+  Note: an upgrade preserves an already-existing labels file on the server —
+  edit it through **Tools → Ecology labels…** or in Excel to match.
+* The GUI now bundles **Noto Sans CJK SC**, so Chinese text (the labels
+  table's common names and notes included) renders correctly even on hosts
+  without any system CJK fonts.
+
 1.3.28 — ultra-large genome performance
 ---------------------------------------
 

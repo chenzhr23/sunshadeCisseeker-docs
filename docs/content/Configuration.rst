@@ -70,6 +70,10 @@ One row per species; edit it in Excel/LibreOffice or through the GUI's
 
 Only species listed here enter the ecology comparison (steps 07–09);
 unlabelled species still appear in the general analysis (steps 01–06).
+The shipped starter rows are 草珊瑚 (*Sarcandra glabra*, ``shade``),
+拟南芥 (*Arabidopsis thaliana*, ``facultative``) and 大豆 (*Glycine max*,
+``sun``), all marked ``人工标注`` (manually annotated) in the ``note`` column
+— replace or extend them with your own annotations.
 
 ``config/cis_element_motif_library.xlsx`` (motif library)
 ----------------------------------------------------------
