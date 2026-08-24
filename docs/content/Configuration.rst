@@ -24,6 +24,9 @@ Three user-editable files drive the whole analysis.
    * - ``min_group_n``
      - ``"3"``
      - minimum species per ecology group for a statistical test
+   * - ``max_genome_gb``
+     - ``""``
+     - skip genomes whose FASTA file exceeds this on-disk size (GB); empty or ``"0"`` = no limit. An oversized genome is recorded as ``skipped`` in the step-04 pair summary and never blocks the run (e.g. ``"2"`` skips a 2.7 GB archive)
    * - ``ncbi_api_key``
      - ``""``
      - optional NCBI API key (10 req/s instead of 3; far fewer throttling failures)
@@ -68,17 +71,6 @@ The shipped starter rows are *Sarcandra glabra* (``shade``), *Arabidopsis
 thaliana* (``facultative``) and *Glycine max* (``sun``), all marked
 ``Manual annotation`` in the ``note`` column — replace or extend them with
 your own annotations.
-
-``config/species_exclude_list.xlsx`` (optional species exclusion)
------------------------------------------------------------------
-
-Step 04 skips any pair whose species key is listed here (sheet 1, column
-``species``; spaces → underscores, e.g. ``Tanacetum_coccineum``) and records
-it as ``skipped`` in the pair summary — for genomes that are too large or
-otherwise problematic for the machine. The file is optional: delete it (or
-clear all rows) to exclude nothing, and remove a row to process that species
-again. The shipped file pre-excludes ``Tanacetum_coccineum`` (oversized
-genome) as an example.
 
 ``config/cis_element_motif_library.xlsx`` (motif library)
 ----------------------------------------------------------

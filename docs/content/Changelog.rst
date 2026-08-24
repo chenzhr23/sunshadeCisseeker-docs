@@ -1,6 +1,20 @@
 Changelog
 =========
 
+1.3.32 — genome-size cap replaces the exclusion list
+----------------------------------------------------
+
+* **The species exclusion list is replaced by a configurable genome-size
+  cap.** The ``max_genome_gb`` key in ``quickstart_config.yml`` skips every
+  pair whose genome FASTA file exceeds that on-disk size (GB; empty or
+  ``"0"`` = no limit): oversized pairs are recorded as ``skipped`` in the
+  step-04 pair summary (message ``excluded by max_genome_gb …``) and the run
+  always completes — a single oversized genome can no longer stall or crash
+  it. The compared size is the FASTA file's on-disk size (the same
+  ``fasta_bytes`` shown in the summary's ``File_sizes`` sheet). Set the key
+  once (e.g. ``"2"``) instead of maintaining a species blacklist; lower or
+  clear it to process those genomes again.
+
 1.3.31 — species exclusion list for step 04
 -------------------------------------------
 
