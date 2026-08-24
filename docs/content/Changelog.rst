@@ -1,6 +1,19 @@
 Changelog
 =========
 
+1.3.30 — ecology labels: species / ecology / note only (English)
+------------------------------------------------------------------
+
+* ``config/species_ecology_labels.xlsx`` is simplified to three columns —
+  ``species``, ``ecology`` and ``note`` (``common_name`` and ``genome_source``
+  are no longer needed) — and all shipped text is English: the starter rows
+  are *Sarcandra glabra* (``shade``), *Arabidopsis thaliana*
+  (``facultative``) and *Glycine max* (``sun``), each noted ``Manual
+  annotation``. The label reader only ever used the two required columns, so
+  existing files with the old extra columns keep working unchanged. Note: an
+  upgrade preserves an already-existing labels file on the server — edit it
+  through **Tools → Ecology labels…** or in Excel to match.
+
 1.3.29 — starter ecology labels: 草珊瑚 / 拟南芥 / 大豆
 ------------------------------------------------------------
 

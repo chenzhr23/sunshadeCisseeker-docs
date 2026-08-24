@@ -55,25 +55,19 @@ One row per species; edit it in Excel/LibreOffice or through the GUI's
    * - ``species``
      - yes
      - species key matching the pipeline name exactly (spaces → underscores, e.g. ``Arabidopsis_thaliana``); copy from the ``species`` column of any ``result/<type>/05_ciselement_input/all_species_<type>_id_map.xlsx``
-   * - ``common_name``
-     - no
-     - common name (display only)
-   * - ``genome_source``
-     - no
-     - ``NCBI`` / ``Custom`` / ``Both`` (record only)
    * - ``ecology``
      - yes
      - ``sun`` (heliophyte) / ``facultative`` / ``shade`` (sciophyte)
    * - ``note``
      - no
-     - free-form note
+     - free-form note (e.g. ``Manual annotation``)
 
 Only species listed here enter the ecology comparison (steps 07–09);
 unlabelled species still appear in the general analysis (steps 01–06).
-The shipped starter rows are 草珊瑚 (*Sarcandra glabra*, ``shade``),
-拟南芥 (*Arabidopsis thaliana*, ``facultative``) and 大豆 (*Glycine max*,
-``sun``), all marked ``人工标注`` (manually annotated) in the ``note`` column
-— replace or extend them with your own annotations.
+The shipped starter rows are *Sarcandra glabra* (``shade``), *Arabidopsis
+thaliana* (``facultative``) and *Glycine max* (``sun``), all marked
+``Manual annotation`` in the ``note`` column — replace or extend them with
+your own annotations.
 
 ``config/cis_element_motif_library.xlsx`` (motif library)
 ----------------------------------------------------------
