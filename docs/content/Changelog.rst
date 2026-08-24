@@ -1,6 +1,18 @@
 Changelog
 =========
 
+1.3.33 — genome-size cap in the GUI
+-----------------------------------
+
+* **The genome-size upper limit is now a GUI setting.** The three genome pages
+  (Nuclear / Chloroplast / Mitochondrial) and the Run Pipeline window each
+  show a **Max genome size (GB)** input next to the other parameters; it is
+  pre-filled with the default ``10`` and saved to ``quickstart_config.yml``
+  when the field loses focus and before every run starts. Genomes whose FASTA
+  file exceeds the value (on-disk size, GB) are skipped by step 04 as
+  ``skipped`` and never block the run; clear the field (or set ``0``) for no
+  limit.
+
 1.3.32 — genome-size cap replaces the exclusion list
 ----------------------------------------------------
 

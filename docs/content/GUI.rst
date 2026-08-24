@@ -41,10 +41,12 @@ There are exactly six sliding pages, in this order:
 
 Each analysis page shows the step description, the result directory hint and
 a live log panel. The three genome pages additionally offer an **NCBI API key
-(optional)** input: the value is written to ``quickstart_config.yml`` when the
-field loses focus and before every run starts (same entry as the Run Pipeline
-window). A screenshot of every page and popup, with explanations, is on the
-:doc:`Screenshots` page.
+(optional)** input and a **Max genome size (GB)** input: both are written to
+``quickstart_config.yml`` when the field loses focus and before every run
+starts (same entries as the Run Pipeline window). The genome-size cap skips
+genomes whose FASTA file exceeds that on-disk size (GB); it ships pre-filled
+with ``10`` and can be cleared for no limit. A screenshot of every page and
+popup, with explanations, is on the :doc:`Screenshots` page.
 
 Menu bar
 --------

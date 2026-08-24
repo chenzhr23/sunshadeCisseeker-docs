@@ -25,8 +25,8 @@ Three user-editable files drive the whole analysis.
      - ``"3"``
      - minimum species per ecology group for a statistical test
    * - ``max_genome_gb``
-     - ``""``
-     - skip genomes whose FASTA file exceeds this on-disk size (GB); empty or ``"0"`` = no limit. An oversized genome is recorded as ``skipped`` in the step-04 pair summary and never blocks the run (e.g. ``"2"`` skips a 2.7 GB archive)
+     - ``"10"``
+     - skip genomes whose FASTA file exceeds this on-disk size (GB); empty or ``"0"`` = no limit. An oversized genome is recorded as ``skipped`` in the step-04 pair summary and never blocks the run. Editable in the GUI on the three genome pages and the Run Pipeline page (pre-filled with the default)
    * - ``ncbi_api_key``
      - ``""``
      - optional NCBI API key (10 req/s instead of 3; far fewer throttling failures)
