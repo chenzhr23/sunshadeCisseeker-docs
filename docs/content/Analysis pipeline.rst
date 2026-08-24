@@ -148,6 +148,15 @@ CPU is treated as truly stuck and aborted, with the in-flight species named
 (a crashed run never leaves orphaned workers behind). The next re-run
 simply resumes from the completed pairs.
 
+A configurable **genome-size cap** (``max_genome_gb`` in
+``quickstart_config.yml``, editable in the GUI on the three genome pages and
+the Run Pipeline window, default ``10``) skips any pair whose genome FASTA
+file exceeds that on-disk size (GB): the pair is recorded as ``skipped`` in
+the pair summary (message ``excluded by max_genome_gb …``) and never blocks
+the run — for genomes that are simply too large for the machine. Empty or
+``0`` = no limit; the compared size is the same ``fasta_bytes`` reported in
+the summary's ``File_sizes`` sheet.
+
 Every pair's summary row also records the **on-disk genome file sizes**:
 ``fasta_bytes`` / ``gff3_bytes`` / ``genome_total_bytes`` plus the
 human-readable ``fasta_size`` / ``gff3_size`` / ``total_size`` columns, and

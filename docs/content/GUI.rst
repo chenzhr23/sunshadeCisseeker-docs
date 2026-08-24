@@ -66,10 +66,9 @@ Fonts and remote displays
 
 * The whole interface is rendered in **Arial**. Hosts without Arial
   automatically get the bundled, metrically identical **Liberation Sans**
-  through the bundle's fontconfig alias (``lib/fonts/``). Chinese text — for
-  example the ecology label table's 草珊瑚/拟南芥/大豆 and ``人工标注`` notes
-  — renders through the bundled **Noto Sans CJK SC** font on hosts without
-  system CJK fonts.
+  through the bundle's fontconfig alias (``lib/fonts/``). Chinese text the
+  user enters into the config tables (species names, notes) renders through
+  the bundled **Noto Sans CJK SC** font on hosts without system CJK fonts.
 * On X-forwarded connections (``DISPLAY`` contains a host) the page-change
   animations are switched off automatically to keep the window responsive;
   ``SUNSHADE_ANIM=1`` forces them back on.

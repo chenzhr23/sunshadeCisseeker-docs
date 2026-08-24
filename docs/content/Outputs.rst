@@ -17,7 +17,7 @@ Per genome type
    * - ``result/<type>/02_download/``
      - downloaded FASTA/GFF3 files, ``<type>_download_tasks.xlsx``, ``<type>_download_summary.xlsx``
    * - ``result/<type>/04_promoter/``
-     - per-species promoter FASTA (``<species>__<accession>__<type>_promoter.fa``) + detail tables, combined FASTA, pair summary. The pair summary and the summary workbook (``File_sizes`` sheet) record each species' genome file sizes: ``fasta_bytes`` / ``gff3_bytes`` / ``genome_total_bytes`` (on-disk sizes, plus human-readable ``*_size`` columns), largest first; ``Run_info`` carries the totals.
+     - per-species promoter FASTA (``<species>__<accession>__<type>_promoter.fa``) + detail tables, combined FASTA, pair summary. The pair summary and the summary workbook (``File_sizes`` sheet) record each species' genome file sizes: ``fasta_bytes`` / ``gff3_bytes`` / ``genome_total_bytes`` (on-disk sizes, plus human-readable ``*_size`` columns), largest first; ``Run_info`` carries the totals (including ``excluded_pairs``). Pairs skipped by the genome-size cap carry ``status = skipped`` with the message ``excluded by max_genome_gb …``.
    * - ``result/<type>/05_ciselement_input/``
      - ``all_species_<type>_ciselement_input.fa`` and ``all_species_<type>_id_map.xlsx``
    * - ``result/<type>/06_ciselement/<type>_ciselement_results.xlsx``

@@ -14,8 +14,10 @@ position (e.g. "Step 4/6 — promoter extraction — 46%"), and every started ru
 prints its run id as the first log line
 (``run started | id=... | scope=...``) — each page tracks only its own run, so
 several pages can run at the same time. The three genome pages additionally
-have an **"NCBI API key (optional)" input** next to Run/Stop (it writes the
-``ncbi_api_key`` entry of ``quickstart_config.yml``). The menu bar on top
+have an **"NCBI API key (optional)" input** and a **"Max genome size (GB)"
+input** next to Run/Stop (both write the matching ``quickstart_config.yml``
+entries; the size cap skips genomes whose FASTA file exceeds that on-disk
+size, default ``10``, empty = no limit). The menu bar on top
 (File / Tools / Global / Help) holds the parameter editor, the two XLSX table
 editors and the remaining functions.
 
@@ -78,7 +80,9 @@ The three parameter/table editors open as popups from the **Tools** menu.
    :width: 1040
 
    **Tools → Run pipeline…** — edit ``promoter_len``, ``workers``, ``cores``,
-   ``min_group_n`` and the optional NCBI API key, tick the parts to run
+   ``min_group_n``, the **max genome size (GB)** cap (skip genomes whose
+   FASTA file exceeds that on-disk size; empty = no limit) and the optional
+   NCBI API key, tick the parts to run
    (nuclear / chloroplast / mitochondrial / ecology comparison, NCBI download
    steps, Custom genome download), pick a scope (all / nuclear / chloroplast
    / mitochondrial / custom / label_ecology / ecology) and start or stop the

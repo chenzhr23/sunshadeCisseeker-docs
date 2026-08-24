@@ -21,6 +21,10 @@ Highlights
 * **Fast promoter extraction** — ``bedtools getfasta`` + ``samtools faidx``
   for uncompressed linear genomes, a streaming R extractor for ``.gz`` files,
   and circular-aware R extraction for the organelle genomes.
+* **Optional genome-size cap** — ``max_genome_gb`` (GUI-editable on the three
+  genome pages and the Run Pipeline window) skips genomes whose FASTA file
+  exceeds the configured on-disk size, so one oversized genome can never
+  block a run.
 * **Normalized cross-species metric** — ``element_density`` (sites per 1000
   promoters) makes species with very different gene numbers comparable.
 * **Strict sequential steps** — every step reads the exact outputs of the

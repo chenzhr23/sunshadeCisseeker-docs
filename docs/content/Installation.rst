@@ -216,7 +216,10 @@ Troubleshooting
    40-minute stall check is CPU-confirmed, so very large genomes are allowed
    to run as long as they keep computing (a warning names the running
    pairs), and only workers that also stop consuming CPU are treated as
-   stuck.
+   stuck. For genomes that are simply too large for the machine, set
+   ``max_genome_gb`` in ``quickstart_config.yml`` (or the **Max genome size
+   (GB)** field in the GUI): step 04 records such pairs as ``skipped``
+   instead of processing them.
 5. **Custom genomes not analyzed** — check that the FASTA/GFF3 basenames
    match exactly under ``Custom_genome_fa_gff/<type>/`` (step 04 pairs by
    basename), or that the per-type download list rows carry both URLs.
