@@ -1,6 +1,20 @@
 Changelog
 =========
 
+1.3.31 — species exclusion list for step 04
+-------------------------------------------
+
+* **New: an optional species exclusion list bypasses problematic genomes.**
+  ``config/species_exclude_list.xlsx`` (sheet 1, column ``species``) lists
+  species keys that step 04 must skip: matching pairs are recorded in the
+  pair summary as ``skipped`` (message ``excluded by
+  config/species_exclude_list.xlsx``) instead of being processed, so a single
+  oversized/problematic genome can no longer stall or crash the whole run —
+  the run always finishes. The file is optional (missing/empty = nothing
+  excluded); remove a row to process that species again. The shipped file
+  pre-excludes ``Tanacetum_coccineum`` (oversized genome) as an example, and
+  the run log/summary report the excluded count.
+
 1.3.30 — ecology labels: species / ecology / note only (English)
 ------------------------------------------------------------------
 
