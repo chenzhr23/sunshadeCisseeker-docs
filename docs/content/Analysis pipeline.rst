@@ -150,10 +150,12 @@ simply resumes from the completed pairs.
 
 A configurable **genome-size cap** (``max_genome_gb`` in
 ``quickstart_config.yml``, editable in the GUI on the three genome pages and
-the Run Pipeline window, default ``10``) skips any pair whose genome FASTA
+the Run Pipeline window, default ``2``) skips any pair whose genome FASTA
 file exceeds that on-disk size (GB): the pair is recorded as ``skipped`` in
 the pair summary (message ``excluded by max_genome_gb …``) and never blocks
-the run — for genomes that are simply too large for the machine. Empty or
+the run — for genomes that are simply too large for the machine (the default
+``2`` skips oversized archives such as the ~2.7 GB *Tanacetum coccineum*
+genome). Empty or
 ``0`` = no limit; the compared size is the same ``fasta_bytes`` reported in
 the summary's ``File_sizes`` sheet.
 

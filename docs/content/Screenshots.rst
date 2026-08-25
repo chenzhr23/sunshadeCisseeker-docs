@@ -17,7 +17,7 @@ several pages can run at the same time. The three genome pages additionally
 have an **"NCBI API key (optional)" input** and a **"Max genome size (GB)"
 input** next to Run/Stop (both write the matching ``quickstart_config.yml``
 entries; the size cap skips genomes whose FASTA file exceeds that on-disk
-size, default ``10``, empty = no limit). The menu bar on top
+size, default ``2``, empty = no limit). The menu bar on top
 (File / Tools / Global / Help) holds the parameter editor, the two XLSX table
 editors and the remaining functions.
 

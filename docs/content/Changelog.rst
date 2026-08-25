@@ -1,6 +1,19 @@
 Changelog
 =========
 
+1.3.34 — default genome-size cap skips Tanacetum
+------------------------------------------------
+
+* **The default ``max_genome_gb`` is now ``2``** (was ``10``), so a fresh
+  install skips any genome whose FASTA file exceeds 2 GB on disk — in
+  particular the ~2.7 GB *Tanacetum coccineum* archive that previously
+  stalled step 04 for hours. The GUI fields (three genome pages + Run
+  Pipeline window) are pre-filled with the new default; raise, lower or clear
+  the value at any time (empty/``0`` = no limit). Note: an upgrade preserves
+  an already-existing ``quickstart_config.yml``, so on an existing
+  installation set the field to ``2`` (or the desired threshold) once in the
+  GUI.
+
 1.3.33 — genome-size cap in the GUI
 -----------------------------------
 
