@@ -1,6 +1,17 @@
 Changelog
 =========
 
+1.3.35 — fix: several excluded genomes crashed step 04's summary
+------------------------------------------------------------------
+
+* **Fixed: step 04 crashed right after the last pair when more than one
+  genome was excluded by the size cap** (``Error in if (!file.exists(path))
+  ... the condition has length > 1``). The summary builder passed the whole
+  vector of excluded FASTA paths to a single-path helper; ``file_bytes`` is
+  now vectorized, so any number of excluded pairs is recorded correctly. The
+  per-pair outputs are written before this point, so a crashed run loses
+  nothing — a re-run skips the finished pairs and only redoes the summary.
+
 1.3.34 — default genome-size cap skips Tanacetum
 ------------------------------------------------
 
