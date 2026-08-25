@@ -1,6 +1,57 @@
 Changelog
 =========
 
+1.3.36 — robustness sweep across the whole pipeline
+--------------------------------------------------------------------
+
+* A full audit of every step fixed the following issues:
+
+  * **Downloads now truly resume** — a failed attempt previously deleted the
+    partial ``.part`` file, so every retry restarted multi-GB genomes from
+    byte 0; partial data is now kept (only genuine NCBI error pages are
+    discarded) and ``resume_from`` actually resumes.
+  * **Step 03 retries work in parallel** — the retry workers were missing one
+    helper from the worker export list, so every parallel retry task failed
+    with "worker error"; the helper is now exported.
+  * **Compressed files are content-checked, not just integrity-checked** — a
+    validly-gzipped NCBI error page can no longer pass as a genome; the first
+    decompressed line must look like FASTA/GFF3, and a missing ``gzip`` binary
+    no longer forces needless re-downloads.
+  * **A gzip-decompression failure inside a worker now falls back to the
+    streaming extractor** (the warning was previously sent to a logger the
+    workers do not have, which aborted the pair); the fallback is recorded in
+    the pair's summary message instead.
+  * **bedtools output is re-aligned by record id** — a record skipped by
+    bedtools can no longer shift the sequence/header pairing.
+  * **The id map is built in bounded chunks** (no more full 17 M-row matrix in
+    memory), and the combined detail table merges with ``data.table`` for
+    lower peak memory.
+  * **Empty tables round-trip correctly** — the "no data" placeholder is no
+    longer read back as a bogus data row, and step 06 stops with a clear
+    message when the id map is empty instead of a misleading record-mismatch
+    error.
+  * **Ecology figures: row-wise element selection** (no more spurious
+    type × element combinations in the top-element panels), groups smaller
+    than ``min_group_n`` no longer enter the statistics, per-species counts
+    are used instead of row counts, NA densities can no longer crash the PCA,
+    and single-species inputs degrade to an explanatory empty panel instead
+    of aborting.
+  * **Motif library validation** — empty ``element`` / ``functional_group``
+    values are rejected, and an element mapped to several functional groups
+    warns and uses the first (previously its hits were silently duplicated).
+  * **install.sh can no longer destroy user data on a failed upgrade** — the
+    old tree is deleted only after the backup is verified, and a failed
+    restore keeps the backup instead of deleting it.
+  * **GUI polish** — clearing "Max genome size (GB)" now really persists
+    "no limit"; saving parameters keeps user-added config keys; run-pipeline
+    slot connections are created once; the launcher QProcess is reset between
+    runs; the quit-watchdog uses static storage; ``run_all.sh`` parses the
+    config robustly (CRLF, indented keys, comments) and defaults
+    ``max_genome_gb`` to ``2`` only when the key is absent; the stall
+    detector no longer aborts when worker PIDs are unavailable; the bounded
+    xlsx part files are actually written/read in parallel (``parallel::``
+    prefix was missing).
+
 1.3.35 — fix: several excluded genomes crashed step 04's summary
 ------------------------------------------------------------------
 
