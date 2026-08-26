@@ -1,10 +1,11 @@
+=================
 sunshadeCisseeker
 =================
 
 All-in-one solution for promoter cis-regulatory element comparison.
---------------------------------------------------------------------
+=======================================================================================================================================================================================
 
-.. image:: _images/sunshadeCisseeker.png
+.. image:: ./images/sunshadeCisseeker.png
    :align: center
 
 sunshadeCisseeker quantifies and compares promoter **cis-regulatory elements
@@ -16,11 +17,11 @@ two merged sources: **NCBI** (located and downloaded automatically) and
 self-contained Linux bundle with a native Qt 5.15 desktop window and a
 command-line launcher that runs the exact same R/bash pipeline.
 
-Contents:
-~~~~~~~~~
 
+Contents:
+---------
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
 
    content/Installation
    content/GUI
