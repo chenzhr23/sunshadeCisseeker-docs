@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.3.43 — fix: installer repairs a broken R installation automatically
+------------------------------------------------------------------------
+
+* If conda's metadata says the environment is complete but ``Rscript`` itself
+  is missing (a broken or partially-linked transaction, e.g. an interrupted
+  package update), a plain ``conda install`` reports "all requested packages
+  already installed" and leaves the environment unusable. The installer now
+  detects this state and **force-reinstalls r-base and the R packages**
+  instead, and the dependency self-check names the exact condition.
+
 1.3.42 — fix: installer resolves the conda environment through conda itself
 -------------------------------------------------------------------------------
 
