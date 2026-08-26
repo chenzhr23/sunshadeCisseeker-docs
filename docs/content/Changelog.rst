@@ -1,6 +1,69 @@
 Changelog
 =========
 
+1.3.39 — complete audit pass: nothing fails silently, logs tell the whole story
+----------------------------------------------------------------------------------
+
+* **The master run log now captures everything.** ``run_all.sh`` pipes every
+  step through ``tee -a`` into ``log/sunshadeCisseeker_<scope>_<timestamp>_<pid>.log``,
+  so the full stdout+stderr of each R step — including ``stop()`` errors such
+  as ``Error: ID map is empty (no promoters to scan)`` — is always on disk,
+  even when the GUI window or terminal is gone. A failed step also logs
+  ``ERROR: the step failed (exit N)`` with the reason above it.
+* **External tools report their own errors.** Step 04 captures the stderr of
+  gzip/samtools/bedtools and writes a trimmed snippet into the pair-summary
+  ``message`` column (e.g. ``bedtools getfasta failed (exit 1: Unrecognized
+  parameter ...); used the streaming extractor``), instead of discarding it.
+  Step 06 does the same for ``cre_scan``.
+* **Worker failures carry their real message.** Parallel workers now pass the
+  actual error text into the summary (``worker error: could not find function
+  ...``) instead of an opaque "worker error".
+* **Pair statuses reflect reality.** Step 04 counts the records actually
+  written to each per-pair FASTA and reports ``ok (N promoters written)`` /
+  ``ok (N of M requested ...)`` / ``no_promoters_written`` — a failed
+  extraction can never again be reported as "ok".
+* **Step 04 parallel path repaired** — the per-pair detail workbook writer was
+  missing from the worker export list (every parallel pair failed after doing
+  its extraction); the xlsx helpers are now exported.
+* **The first motif in the library is no longer silently dropped** in the R
+  fallback scan (a ``cut()`` boundary made motif row 1 land in an ``NA``
+  group that ``split()`` discarded).
+* **Nuclear step 01 URL pre-validation repaired** — batch results were
+  unnamed, so the validation cache was never filled and the step could abort;
+  results are now named by URL and looked up defensively.
+* **Downloads react to HTTP status codes again** — the regex only matched
+  ``error: NNN`` while curl reports ``HTTP error NNN.``, leaving the fatal-4xx
+  and 429 rate-limit branches dead code.
+* **Partial samtools indexes can no longer silently drop genes** — step 04
+  verifies every GFF contig is present in the ``.fai`` (missing contigs fall
+  back to the R length scan with a note).
+* **Ecology merge fixed** — ``Species_summary`` (one row per species × source)
+  is aggregated by species before joining, so species with both an NCBI and a
+  Custom assembly no longer double every row and inflate the statistics.
+* **Taxonomy fetch failures are logged** (with the error text) instead of
+  silently marking whole batches ``missing_or_failed``.
+* **Installer hardened further:** the bundle copy is error-checked, the backup
+  directory name carries the installer PID and rejects collisions, a prefix
+  inside the bundle directory (and vice versa) is refused up front, dangling
+  symlinks are backed up too, and the ``-s`` skip-deps path warns when
+  Rscript is missing.
+* **GUI:** an unwritable ``quickstart_config.yml`` now shows a warning and
+  aborts the launch (previously the run silently used stale parameters); a
+  possible null header item in the xlsx table export is guarded.
+* **Resume logic hardened:** skip checks require non-empty outputs; download
+  renames verify success; completeness checks no longer error on empty
+  decompressed content; part-file readers validate row counts against the
+  index.
+* **Process handling:** GUI runs make ``run_all.sh`` a session/group leader so
+  one group kill stops the whole tree (including R workers reparented after a
+  crash), the GUI Stop button forwards into that group, and the dead stdin
+  watchdog code was removed.
+* **Test coverage for the previously untested paths.** New end-to-end tests
+  force the bedtools path with gzipped genomes (the exact NCBI scenario), run
+  the whole ecology chain (label → merge → statistics → figures) with
+  under-sized groups, verify that R error text lands in the master log, and
+  exercise the installer's preserve/rollback paths.
+
 1.3.38 — fix: installer backup can no longer destroy user data
 --------------------------------------------------------------------
 

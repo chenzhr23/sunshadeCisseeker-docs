@@ -17,14 +17,15 @@ R packages
 ----------
 
 openxlsx, data.table, stringi, ggplot2, patchwork, scales, curl, xml2, dplyr,
-rentrez, magrittr — the XLSX outputs are written by openxlsx, the CRE scan
+rentrez, forcats, tidyr, magrittr — the XLSX outputs are written by openxlsx,
+the CRE scan
 runs the bundled C++ Aho-Corasick backend (``bin/cre_scan``) with an R
 ``stringi`` fallback, and all figures are made with ggplot2.
 
 Tools
 -----
 
-bedtools and samtools (optional accelerators for uncompressed linear
+bedtools and samtools (optional accelerators for linear
 genomes); gzip for download integrity checks; Liberation Sans (bundled,
 metric-compatible with Arial) for the interface font.
 

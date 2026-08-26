@@ -20,10 +20,10 @@ Requirements
      - WSL2 works as well
    * - R + R packages
      - installed by ``install.sh``
-     - openxlsx, data.table, stringi, ggplot2, patchwork, scales, curl, xml2, dplyr, rentrez, magrittr
+     - openxlsx, data.table, stringi, ggplot2, patchwork, scales, curl, xml2, dplyr, rentrez, forcats, tidyr, magrittr
    * - bedtools / samtools
      - installed by ``install.sh``
-     - optional accelerators for uncompressed linear genomes
+     - optional accelerators for linear genomes (gzipped FASTA is decompressed once, then indexed)
    * - gzip
      - installed by ``install.sh``
      - required for download integrity checks
@@ -75,8 +75,13 @@ What ``install.sh`` does:
    ``~/.local/opt/sunshadeCisseeker``, makes every script executable and
    creates the writable directories. Re-installing **preserves** your
    ``result/``, ``log/``, ``Custom_genome_fa_gff/`` (manual genomes and the
-   per-type download lists), the two configuration XLSX files and
-   ``quickstart_config.yml``.
+   per-type download lists), ``NCBI_genome_fa_gff/`` (legacy installs), the two
+   configuration XLSX files and ``quickstart_config.yml`` by first moving them
+   to a sibling backup directory ``<prefix>.bak.<timestamp>`` on the same
+   filesystem (atomic renames). The backup path is printed during the install;
+   delete that directory after you have verified the upgraded installation.
+   If any move fails, everything already moved is rolled back and nothing is
+   deleted.
 4. **Self-activating launcher** — registers ``~/.local/bin/sunshadeCisseeker``
    which activates the dependency environment itself, so
    ``sunshadeCisseeker gui`` / ``run`` / ``check`` work in any fresh terminal
@@ -254,8 +259,17 @@ Troubleshooting
     tunnel itself is congested: use ``nohup sunshadeCisseeker run`` on the
     server, or switch to X2Go/TigerVNC/MobaXterm.
 14. **Re-installing wipes my results?** — no: ``install.sh`` preserves
-    ``result/``, ``log/``, ``Custom_genome_fa_gff/``, the two configuration
-    XLSX files and ``quickstart_config.yml`` across re-installs.
+    ``result/``, ``log/``, ``Custom_genome_fa_gff/``, ``NCBI_genome_fa_gff/``
+    (legacy installs), the two configuration XLSX files and
+    ``quickstart_config.yml`` across re-installs, via a same-filesystem backup
+    directory ``<prefix>.bak.<timestamp>`` (its path is printed; delete it
+    after a verified upgrade).
+15. **Where are the logs?** — the master run log
+    ``log/sunshadeCisseeker_<scope>_<timestamp>_<pid>.log`` contains the
+    complete stdout+stderr of every step, including R errors; each step also
+    writes its own ``result/<genome_type>/<NN_step>/<NN>_<step>.log`` with its
+    progress lines, and step 04's pair summary (``message`` column) records
+    per-pair outcomes and external-tool errors. Start with the master log.
 
 Uninstall
 ---------

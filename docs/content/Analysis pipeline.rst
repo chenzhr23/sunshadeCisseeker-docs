@@ -124,8 +124,11 @@ The extraction engine is chosen per genome:
   temporary file (``gzip -dc``), indexed with ``samtools faidx`` (sequence
   lengths come straight from the index, no R pass over the genome) and
   extracted with ``bedtools``; the temp file is removed afterwards. Without
-  the tools, a streaming R extractor reads ``.gz`` directly (identical
-  results).
+  the tools — or when a bedtools call fails — a streaming R extractor reads
+  ``.gz`` directly (identical results; the fallback is recorded in the pair
+  summary ``message`` column). External-tool stderr (gzip/samtools/bedtools)
+  is captured and folded into that same ``message`` column, so a tool failure
+  is never silent.
 * **GFF3 parsing** — ``data.table::fread`` (C-level parser, native ``.gz``
   support, stops at the ``##FASTA`` section) with an automatic fallback to
   the pure-R parser. Every GFF3 is first stream-checked for binary content
@@ -137,7 +140,8 @@ Re-runs are incremental: a species whose promoter FASTA and detail table are
 newer than its inputs (and the requested ``promoter_len`` is unchanged, as
 recorded in the ``.promoter_len`` marker written at start-up) is skipped, so
 a re-run only processes new or changed genomes — even a run that was
-interrupted late resumes cheaply. Long parallel steps are additionally
+interrupted late resumes cheaply. Empty (0-byte) per-pair output files are
+treated as missing and re-extracted automatically. Long parallel steps are additionally
 protected by **CPU-confirmed stall detection**: when no pair has finished
 for 40 minutes the pool reports which species are still running and checks
 whether the worker processes (and their ``gzip``/``samtools``/``bedtools``

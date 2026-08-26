@@ -44,9 +44,12 @@ a live log panel. The three genome pages additionally offer an **NCBI API key
 (optional)** input and a **Max genome size (GB)** input: both are written to
 ``quickstart_config.yml`` when the field loses focus and before every run
 starts (same entries as the Run Pipeline window). The genome-size cap skips
-genomes whose FASTA file exceeds that on-disk size (GB); it ships pre-filled
+genomes whose FASTA file exceeds that on-disk size (GB). The field shows the
+value from ``quickstart_config.yml``; when the key is absent it pre-fills
 with ``2`` (skips oversized archives such as the ~2.7 GB *Tanacetum
-coccineum* genome) and can be cleared for no limit. A screenshot of every
+coccineum* genome). Clearing the field means no limit (the empty value
+persists), while a *missing* key defaults to ``2`` again on the next
+``run_all.sh`` launch. A screenshot of every
 page and popup, with explanations, is on the :doc:`Screenshots` page.
 
 Menu bar

@@ -17,7 +17,7 @@ Per genome type
    * - ``result/<type>/02_download/``
      - downloaded FASTA/GFF3 files, ``<type>_download_tasks.xlsx``, ``<type>_download_summary.xlsx``
    * - ``result/<type>/04_promoter/``
-     - per-species promoter FASTA (``<species>__<accession>__<type>_promoter.fa``) + detail tables, combined FASTA, pair summary. The pair summary and the summary workbook (``File_sizes`` sheet) record each species' genome file sizes: ``fasta_bytes`` / ``gff3_bytes`` / ``genome_total_bytes`` (on-disk sizes, plus human-readable ``*_size`` columns), largest first; ``Run_info`` carries the totals (including ``excluded_pairs``). Pairs skipped by the genome-size cap carry ``status = skipped`` with the message ``excluded by max_genome_gb …``.
+     - per-species promoter FASTA (``<species>__<accession>__<type>_promoter.fa``) + detail tables, combined FASTA, and three summary files: ``<type>_promoter_pair_summary.xlsx`` (one row per pair; the ``message`` column explains every per-pair outcome — ``ok (N promoters written)``, ``outputs up to date (skipped)``, ``missing input file``, ``corrupt GFF3 …``, ``bedtools getfasta failed …; used the streaming extractor``, ``excluded by max_genome_gb …``), ``<type>_promoter_run_info.xlsx`` (parameters and totals, including ``excluded_pairs``) and ``<type>_promoter_summary.xlsx`` (``Pair_summary`` / ``File_sizes`` / ``Run_info`` sheets). The ``File_sizes`` sheet of ``<type>_promoter_summary.xlsx`` records each species' genome file sizes (``fasta_bytes`` / ``gff3_bytes`` / ``genome_total_bytes`` plus human-readable ``*_size`` columns), largest first.
    * - ``result/<type>/05_ciselement_input/``
      - ``all_species_<type>_ciselement_input.fa`` and ``all_species_<type>_id_map.xlsx``
    * - ``result/<type>/06_ciselement/<type>_ciselement_results.xlsx``
@@ -90,6 +90,14 @@ exceed the 1,048,576-row Excel limit (e.g. ``Master_long`` in
 Logs
 ----
 
-* ``log/sunshadeCisseeker_*.log`` — the timestamped master run log;
-* each step also writes its own ``.log`` inside its result directory;
+* ``log/sunshadeCisseeker_<scope>_<timestamp>_<pid>.log`` — the timestamped
+  **master run log**. It holds the COMPLETE stdout+stderr of every pipeline
+  step (``run_all.sh`` mirrors each step into it), so R errors such as
+  ``Error: ID map is empty (no promoters to scan) …`` and external-tool
+  messages always appear here — start troubleshooting with this file.
+* each step also writes its own ``.log`` inside its result directory
+  (``result/<genome_type>/<NN_step>/<NN>_<step>.log``). These carry the
+  script's own progress lines (parameters, counts, warnings); stderr of
+  external tools (gzip/samtools/bedtools) is recorded in step 04's pair
+  summary ``message`` column instead.
 * every parameter is recorded in the ``run_info`` sheet/table of each step.

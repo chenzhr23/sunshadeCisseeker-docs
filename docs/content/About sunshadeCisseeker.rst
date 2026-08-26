@@ -4,7 +4,7 @@ About sunshadeCisseeker
 sunshadeCisseeker identifies, annotates and compares promoter
 cis-regulatory elements across sun / facultative / shade plants.
 
-The current release is **1.3.38**; see :doc:`Changelog` for what changed in
+The current release is **1.3.39**; see :doc:`Changelog` for what changed in
 each version.
 
 Highlights
@@ -19,8 +19,9 @@ Highlights
   one most-representative FASTA + GFF3 pair (RefSeq preferred, complete
   annotation preferred, longest, most recent).
 * **Fast promoter extraction** — ``bedtools getfasta`` + ``samtools faidx``
-  for uncompressed linear genomes, a streaming R extractor for ``.gz`` files,
-  and circular-aware R extraction for the organelle genomes.
+  for linear genomes (gzipped FASTA is decompressed once, then indexed), with
+  a built-in streaming R extractor as fallback, and circular-aware R
+  extraction for the organelle genomes.
 * **Optional genome-size cap** — ``max_genome_gb`` (GUI-editable on the three
   genome pages and the Run Pipeline window) skips genomes whose FASTA file
   exceeds the configured on-disk size, so one oversized genome can never
