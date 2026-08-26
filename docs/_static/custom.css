@@ -25,7 +25,7 @@ div.body {
 /* Images (the Introduction screenshot and every page screenshot) are shown
    slightly narrower than the full content column and stay centered. */
 div.body img {
-    width: 90%;
+    width: 60%;
     height: auto;
     max-width: none;
     display: block;
