@@ -1,6 +1,28 @@
 Changelog
 =========
 
+1.3.38 — fix: installer backup can no longer destroy user data
+--------------------------------------------------------------------
+
+* The installer used to back user data up into a ``mktemp`` directory (often
+  ``/tmp``, a different filesystem): moving ``result/`` and the genome
+  directories was a GB-scale cross-device copy, and if a later item then
+  failed to copy, the abort path **deleted the backup directory** — together
+  with the data already moved into it. The backup now lives **next to the
+  installation directory** (``<prefix>.bak.<timestamp>``) on the same
+  filesystem, so every move is an atomic rename: it cannot run out of space,
+  a failed item rolls everything back before anything is deleted, and the
+  backup is only removed after a fully successful restore. The backup
+  location is printed, and it can be deleted once the run is verified.
+* (v1.3.37) Step 04 bedtools extraction fixed: the FASTA path for
+  uncompressed genomes was replaced by ``NULL`` so ``bedtools getfasta`` got
+  no ``-fi`` value and silently wrote empty promoter FASTA files (step 05
+  then merged 0 promoters and step 06 stopped with "ID map is empty"). The
+  path is only swapped when a temp decompressed file exists, ``-name``
+  headers are parsed with a leading-integer regex, and a failed bedtools run
+  falls back to the built-in streaming extractor instead of writing an empty
+  file.
+
 1.3.37 — fix: bedtools promoter extraction silently produced empty output
 -----------------------------------------------------------------------------
 
