@@ -1,6 +1,18 @@
 Changelog
 =========
 
+1.3.44 — one command fixes a broken R environment; verified end-to-end
+------------------------------------------------------------------------
+
+* ``bash install.sh`` now handles the full broken-environment cycle on its
+  own: it detects a missing ``Rscript``, **force-reinstalls r-base and all R
+  packages automatically**, then hard-verifies the fix — if conda reports
+  success but ``Rscript`` is still missing (e.g. the filesystem dropped the
+  package links), the install fails with a disk/quota hint instead of
+  finishing with a pipeline that cannot start. No manual conda commands
+  needed. The repair path is covered by a new end-to-end test that clones a
+  working environment, deletes its ``Rscript``, and runs the installer.
+
 1.3.43 — fix: installer repairs a broken R installation automatically
 ------------------------------------------------------------------------
 
