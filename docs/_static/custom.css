@@ -22,12 +22,15 @@ div.body {
     width: auto;
 }
 
-/* Images (the Introduction screenshot and every page screenshot) stretch to
-   the full width of the content column. */
+/* Images (the Introduction screenshot and every page screenshot) are shown
+   slightly narrower than the full content column and stay centered. */
 div.body img {
-    width: 100%;
+    width: 90%;
     height: auto;
     max-width: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 div.figure {
