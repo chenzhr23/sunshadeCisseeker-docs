@@ -1,6 +1,23 @@
 Changelog
 =========
 
+1.3.40 — fix: installer no longer hangs on unreachable conda mirrors
+------------------------------------------------------------------------
+
+* When the target conda environment already satisfies every requirement
+  (R, all R packages, bedtools/samtools/gzip), the installer now **skips the
+  dependency step entirely** — re-installs on a fully provisioned machine
+  never touch the network and can no longer hang on unreachable mirrors.
+* If a network source is needed but both ``conda.anaconda.org`` and the TUNA
+  mirror are unreachable, the installer now fails fast (a quick 10-second
+  probe) with instructions to re-run with ``-s`` instead of letting conda
+  retry repodata downloads for minutes.
+* ``conda install/create`` runs are bounded with ``--repodata-timeout-secs``,
+  and the failure messages point to the ``-s`` escape hatch.
+* The installer's GUI self-test no longer rewrites
+  ``quickstart_config.yml`` (it writes a throwaway probe file instead), so an
+  upgrade can never replace your edited configuration with bundle defaults.
+
 1.3.39 — complete audit pass: nothing fails silently, logs tell the whole story
 ----------------------------------------------------------------------------------
 
