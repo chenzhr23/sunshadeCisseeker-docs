@@ -1,6 +1,29 @@
 Changelog
 =========
 
+1.3.37 — fix: bedtools promoter extraction silently produced empty output
+-----------------------------------------------------------------------------
+
+* Step 04 calls ``bedtools getfasta`` for plain (uncompressed) FASTA files.
+  A refactoring slip left ``idx_fa <- tmp_fa`` outside the gzip branch, so
+  the FASTA path was replaced by ``NULL`` for every non-gzipped genome:
+  the ``-fi`` argument vanished from the command line, bedtools failed with
+  "Unrecognized parameter", its error output was discarded, and the pair was
+  reported as "ok" while writing an **empty** promoter FASTA. Step 05 then
+  merged 0 promoters and step 06 stopped with "ID map is empty". The path is
+  now only swapped when a temp decompressed file actually exists.
+* ``bedtools getfasta -name`` output headers are parsed with a
+  leading-integer regex instead of assuming a bare ``>1`` header (bedtools
+  writes ``>1::chr1:0-4(+)``), so the re-alignment by record id works with
+  every bedtools version.
+* Fail-safe: if bedtools exits non-zero or returns no usable records, the
+  pair now falls back to the built-in streaming extractor (recorded in the
+  pair summary) instead of silently writing an empty FASTA.
+* Added a regression test that forces the bedtools code path — the previous
+  test environment had no bedtools on PATH, which is why the suite missed
+  this. Empty per-pair FASTA files left by v1.3.36 re-extract automatically
+  on the next run; no manual cleanup is needed.
+
 1.3.36 — robustness sweep across the whole pipeline
 --------------------------------------------------------------------
 
