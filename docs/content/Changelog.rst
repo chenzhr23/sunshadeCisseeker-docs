@@ -1,6 +1,23 @@
 Changelog
 =========
 
+1.3.41 — fix: installer conda-CLI compatibility + self-diagnosing dependency check
+-------------------------------------------------------------------------------------
+
+* The conda ``install``/``create`` calls no longer pass
+  ``--repodata-timeout-secs`` (rejected as an unrecognized argument by
+  conda 26.x, which aborted the repair before it even reached the network).
+  Unreachable sources are still bounded by the installer's own quick probes.
+* The dependency self-check now PRINTS exactly which R package is missing
+  (or that Rscript itself is missing) instead of failing silently.
+* bedtools/samtools are now treated as the optional accelerators they are:
+  when they are absent the installer skips the network step anyway (the
+  pipeline falls back to its built-in streaming extractor), with a note.
+* (v1.3.40) When the environment already satisfies every requirement the
+  installer skips the dependency step entirely; unreachable conda mirrors
+  fail fast with ``-s`` guidance; and the GUI self-test no longer rewrites
+  ``quickstart_config.yml``.
+
 1.3.40 — fix: installer no longer hangs on unreachable conda mirrors
 ------------------------------------------------------------------------
 
