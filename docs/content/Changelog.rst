@@ -1,6 +1,19 @@
 Changelog
 =========
 
+1.3.42 — fix: installer resolves the conda environment through conda itself
+-------------------------------------------------------------------------------
+
+* The dependency self-check and the post-install verification used to derive
+  the environment's path from the conda binary's directory — which breaks
+  when the environment lives in a non-default ``envs_dirs`` location
+  (``Rscript not found at .../miniconda3/envs/...``). The installer now asks
+  conda for the real ``R.home()`` (``conda run -n <env> Rscript``) and puts
+  the resolved bin directory first on PATH for every check, so both the
+  auto-skip decision and the live verification work regardless of where the
+  environment physically lives. When the environment cannot be resolved at
+  all, the installer prints the full ``conda env list`` for diagnosis.
+
 1.3.41 — fix: installer conda-CLI compatibility + self-diagnosing dependency check
 -------------------------------------------------------------------------------------
 
