@@ -5,3 +5,32 @@
     color: #cc0000;
     font-weight: bold;
 }
+
+/* ---- full-screen layout: the page fills the whole browser window ---- */
+
+/* No outer page margins: content spans edge to edge. */
+body {
+    margin: 0;
+}
+
+/* No width caps anywhere in the content column. */
+div.document,
+div.documentwrapper,
+div.bodywrapper,
+div.body {
+    max-width: none;
+    width: auto;
+}
+
+/* Images (the Introduction screenshot and every page screenshot) stretch to
+   the full width of the content column. */
+div.body img {
+    width: 100%;
+    height: auto;
+    max-width: none;
+}
+
+div.figure {
+    width: 100%;
+    text-align: center;
+}
