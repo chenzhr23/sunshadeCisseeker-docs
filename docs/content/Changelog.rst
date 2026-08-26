@@ -8,9 +8,12 @@ Changelog
   package loadable, not just that ``Rscript`` exists. When individual files
   have vanished from the environment (e.g. the ``sed`` that R's wrapper
   needs, after an NFS/quota incident) a reinstall of r-base alone does not
-  restore them — the installer now escalates to
-  ``conda install --force-reinstall --all`` (from the local package cache)
-  and only gives up with a disk/NFS hint if R is still broken after that.
+  restore them — the installer now escalates to a force-reinstall of every
+  package the environment contains (enumerated explicitly, from the local
+  package cache) and only gives up with a disk/NFS hint if R is still broken
+  after that.
+* The mirror-reachability probes are wrapped in ``timeout`` so a wedged
+  resolver can never hang the installer.
 * The repair e2e now covers both layers: a missing ``Rscript`` and a missing
   tool link (``sed``) with R present but unrunnable.
 
