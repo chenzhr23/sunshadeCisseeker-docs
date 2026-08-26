@@ -4,6 +4,9 @@ sunshadeCisseeker
 All-in-one solution for promoter cis-regulatory element comparison.
 --------------------------------------------------------------------
 
+.. image:: _images/sunshadeCisseeker.png
+   :align: center
+
 sunshadeCisseeker quantifies and compares promoter **cis-regulatory elements
 (CREs)** between three plant ecological groups — **sun (heliophyte)**,
 **facultative (sun-shade generalist)** and **shade (sciophyte)** — across the
@@ -13,17 +16,8 @@ two merged sources: **NCBI** (located and downloaded automatically) and
 self-contained Linux bundle with a native Qt 5.15 desktop window and a
 command-line launcher that runs the exact same R/bash pipeline.
 
-.. figure:: _static/screenshots/01-introduction.png
-   :width: 1000
-   :alt: sunshadeCisseeker main window right after launch, showing the Introduction page
-
-   The complete sunshadeCisseeker window right after launch — the
-   **Introduction** page with the workflow overview and the six sliding pages
-   (Nuclear / Chloroplast / Mitochondrial / Label ecology / Compare ecology).
-   A walkthrough of every page and popup is on the :doc:`content/Screenshots`
-   page.
-
 Contents:
+~~~~~~~~~
 
 .. toctree::
    :maxdepth: 4
