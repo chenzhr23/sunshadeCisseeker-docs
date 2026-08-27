@@ -37,3 +37,52 @@ div.figure {
     width: 100%;
     text-align: center;
 }
+
+/* ---- phone / small-screen layout: the navigation stays visible and the
+        touch targets are comfortable -------------------------------- */
+
+@media only screen and (max-width: 767px) {
+    /* keep the full Table of Contents above the content instead of hiding it */
+    div.sphinxsidebar {
+        display: block;
+        position: static;
+        float: none;
+        width: auto;
+        margin: 0;
+        padding: 0.4em 10px 0.2em 10px;
+    }
+
+    div.bodywrapper {
+        margin: 0;
+        width: auto;
+        border-left: none;
+    }
+
+    div.body {
+        padding: 0.3em 10px 10px 10px;
+    }
+
+    /* generous tap targets for the navigation links */
+    div.sphinxsidebar ul li {
+        margin: 0.15em 0;
+    }
+
+    div.sphinxsidebar ul li a {
+        display: block;
+        padding: 0.45em 0.3em;
+        font-size: 1.05em;
+    }
+
+    /* screenshots fill the narrower column */
+    div.body img {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.35em;
+    }
+
+    h2 {
+        font-size: 1.15em;
+    }
+}

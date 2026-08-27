@@ -23,12 +23,13 @@ html_theme = "bizstyle"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 
-# Sidebar layout: one flat "Table of Contents" list of the top-level pages
-# (no local toc, no relations, no source link, no search box), while the
-# index body keeps the deep, fully expanded Contents tree.
+# Sidebar layout: one "Table of Contents" list showing every page together
+# with its section headings (3 levels), so the navigation is complete on
+# every page; on phones the sidebar is kept visible above the content.
 html_sidebars = {"**": ["globaltoc.html"]}
 html_theme_options = {
-    "globaltoc_maxdepth": 1,
+    "globaltoc_maxdepth": 3,
+    "globaltoc_collapse": False,
 }
 
 # The :red: text role used across the docs.
