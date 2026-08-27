@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.3.47 — fix: installer verifies the old installation is really gone
+---------------------------------------------------------------------
+
+* On NFS, wiping the previous installation can partially fail: a running GUI
+  keeps ``lib/fonts`` open and killed workers leave unremovable ``.nfsXXXX``
+  files. The installer used to continue anyway, and ``cp -a`` then nested the
+  new bundle inside the half-removed directory (the installed tree was
+  broken — missing ``script/shell``, missing GUI binary). The installer now
+  **verifies the removal**: when anything survives it prints the surviving
+  entries, explains the likely cause (running GUI / ``.nfs*`` leftovers on
+  NFS), restores the preserved user data and stops instead of installing a
+  broken tree. Re-running after closing the GUI and deleting the ``.nfs*``
+  files completes normally. Covered by a new installer e2e that simulates an
+  undeletable directory.
+
 1.3.46 — new feature: Tools → Run local (single-species analysis)
 ------------------------------------------------------------------
 
