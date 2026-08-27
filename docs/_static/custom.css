@@ -6,102 +6,19 @@
     font-weight: bold;
 }
 
-/* ---- full-screen layout: the page fills the whole browser window ---- */
-
-/* No outer page margins: content spans edge to edge. */
-body {
-    margin: 0;
-}
-
-/* No width caps anywhere in the content column. */
-div.document,
-div.documentwrapper,
-div.bodywrapper,
-div.body {
-    max-width: none;
-    width: auto;
-}
-
-/* Images (the Introduction screenshot and every page screenshot) are shown
-   slightly narrower than the full content column and stay centered. */
+/* Screenshots (the Introduction image and every page screenshot) are shown
+   slightly narrower than the content column and stay centered. */
 div.body img {
     width: 60%;
     height: auto;
-    max-width: none;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-div.figure {
-    width: 100%;
-    text-align: center;
-}
-
-/* ---- sidebar: text must never stick out of the sidebar border ---- */
-
-div.sphinxsidebar {
-    width: 210px;
-    box-sizing: border-box;
-    overflow-wrap: anywhere;
-    word-wrap: break-word;
-}
-
-div.sphinxsidebar ul,
-div.sphinxsidebar ul li,
-div.sphinxsidebar ul li a,
-div.sphinxsidebar h3,
-div.sphinxsidebar h3 a {
-    overflow-wrap: anywhere;
-    word-wrap: break-word;
-    min-width: 0;
-}
-
-/* ---- phone / small-screen layout: the navigation stays visible and the
-        touch targets are comfortable -------------------------------- */
-
+/* On phones the screenshots fill the narrower column. */
 @media only screen and (max-width: 767px) {
-    /* keep the full Table of Contents above the content instead of hiding it */
-    div.sphinxsidebar {
-        display: block;
-        position: static;
-        float: none;
-        width: auto;
-        margin: 0;
-        padding: 0.4em 10px 0.2em 10px;
-    }
-
-    div.bodywrapper {
-        margin: 0;
-        width: auto;
-        border-left: none;
-    }
-
-    div.body {
-        padding: 0.3em 10px 10px 10px;
-    }
-
-    /* generous tap targets for the navigation links */
-    div.sphinxsidebar ul li {
-        margin: 0.15em 0;
-    }
-
-    div.sphinxsidebar ul li a {
-        display: block;
-        padding: 0.45em 0.3em;
-        font-size: 1.05em;
-    }
-
-    /* screenshots fill the narrower column */
     div.body img {
         width: 100%;
-    }
-
-    h1 {
-        font-size: 1.35em;
-    }
-
-    h2 {
-        font-size: 1.15em;
     }
 }
