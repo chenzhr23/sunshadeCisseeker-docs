@@ -59,11 +59,34 @@ Functionality lives in the menu bar only (no duplicated toolbar):
 
 * **File** — Save parameters, Open results folder, Quit.
 * **Tools** — ``Run pipeline...`` opens the full parameter/run window as a
-  popup; ``Ecology labels...`` and ``Motif library...`` open the two XLSX
+  popup; ``Run local...`` analyzes one local species (see below);
+  ``Ecology labels...`` and ``Motif library...`` open the two XLSX
   table editors as popups; ``Check environment`` opens the "Softwares
   checking and configuration" dialog.
 * **Global → Configuration** — the same checking/configuration dialog.
 * **Help** — About, About Qt.
+
+Run local (single-species analysis)
+-----------------------------------
+
+**Tools → Run local...** analyzes **one species on your disk** without
+touching NCBI or the download lists. Enter a species name, pick its genome
+**FASTA** and annotation **GFF3**, tick the genome type(s) to analyze
+(**nuclear / chloroplast / mitochondrial** — at least one must be ticked)
+and press **Run**:
+
+* The two files are copied into
+  ``Custom_genome_fa_gff/<type>/{fa,gff}/<species>.<ext>`` (the original
+  ``.fa/.fasta/.gz`` suffixes are kept, so gzipped inputs stay compressed).
+  They become part of the custom set and are reused by later normal runs.
+* For each ticked type the standard steps **04–06** run sequentially
+  (promoter extraction → merge → CRE scan) with the live log shown in the
+  dialog. NCBI and download steps are forced off and the **genome-size cap
+  is lifted** for the explicitly chosen file, whatever
+  ``quickstart_config.yml`` says — a huge local genome is analyzed, not
+  skipped.
+* Ticking several types runs them one after another; **Stop** interrupts
+  the current run and the queue.
 
 Fonts and remote displays
 -------------------------

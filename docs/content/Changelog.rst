@@ -1,6 +1,24 @@
 Changelog
 =========
 
+1.3.46 — new feature: Tools → Run local (single-species analysis)
+------------------------------------------------------------------
+
+* New **Tools → Run local...** dialog: enter a species name, pick a local
+  genome **FASTA** + annotation **GFF3**, tick the genome type(s) to analyze
+  (**nuclear / chloroplast / mitochondrial** — at least one must be ticked)
+  and press Run. The files are staged into
+  ``Custom_genome_fa_gff/<type>/{fa,gff}/<species>.<ext>`` and the standard
+  steps **04–06** run for each ticked type, sequentially, with the live log
+  shown in the dialog (Stop interrupts the run and the queue).
+* Local runs set ``SUNSHADE_RUN_LOCAL=1`` for ``run_all.sh``: NCBI and the
+  download steps are forced off and the **genome-size cap is lifted** for
+  the explicitly chosen file, regardless of ``quickstart_config.yml`` — a
+  large local genome is analyzed instead of silently skipped. The staged
+  species becomes part of the custom set and is reused by later runs.
+* New end-to-end test covers the whole flow (staging → 04–06 → results)
+  including the size-cap lift.
+
 1.3.45 — fix: installer heals environments that dropped individual files
 --------------------------------------------------------------------------
 
