@@ -38,6 +38,25 @@ div.figure {
     text-align: center;
 }
 
+/* ---- sidebar: text must never stick out of the sidebar border ---- */
+
+div.sphinxsidebar {
+    width: 210px;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
+}
+
+div.sphinxsidebar ul,
+div.sphinxsidebar ul li,
+div.sphinxsidebar ul li a,
+div.sphinxsidebar h3,
+div.sphinxsidebar h3 a {
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
+    min-width: 0;
+}
+
 /* ---- phone / small-screen layout: the navigation stays visible and the
         touch targets are comfortable -------------------------------- */
 
