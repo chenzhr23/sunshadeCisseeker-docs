@@ -30,6 +30,5 @@ Contents:
    content/Ecology comparison
    content/Configuration
    content/Outputs
-   content/Changelog
    content/Credits
    content/About sunshadeCisseeker
