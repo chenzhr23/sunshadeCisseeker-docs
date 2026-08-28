@@ -60,9 +60,10 @@ Functionality lives in the menu bar only (no duplicated toolbar):
 * **File** — Save parameters, Open results folder, Quit.
 * **Tools** — ``Run pipeline...`` opens the full parameter/run window as a
   popup; ``Run local...`` analyzes one local species (see below);
-  ``Ecology labels...`` and ``Motif library...`` open the two XLSX
-  table editors as popups; ``Check environment`` opens the "Softwares
-  checking and configuration" dialog.
+  ``Custom genome lists...`` opens the editor for the per-type custom
+  download lists (see below); ``Ecology labels...`` and ``Motif library...``
+  open the two XLSX table editors as popups; ``Check environment`` opens the
+  "Softwares checking and configuration" dialog.
 * **Global → Configuration** — the same checking/configuration dialog.
 * **Help** — About, About Qt.
 
@@ -96,6 +97,21 @@ mitochondrial** — at least one must be ticked) and press **Run**:
   not affected by the local species.
 * Ticking several types runs them one after another; **Stop** interrupts
   the current run and the queue.
+
+Custom genome lists
+-------------------
+
+**Tools → Custom genome lists...** edits the per-type custom download lists
+(``Custom_genome_fa_gff/<type>/Custom_genome_fa_gff_<type>.xlsx``,
+``download_list`` sheet). A genome-type selector at the top switches between
+the nuclear / chloroplast / mitochondrial lists; the table columns are
+``species``, ``taxid`` (optional NCBI taxonomy id used by the species
+de-duplication, see :doc:`Analysis pipeline`), ``genome_download_url`` and
+``annotation_download_url``. **Save to file** writes the edited table back
+while preserving the workbook's README sheet; **Reload from file** discards
+unsaved edits. If a list does not exist yet, run the Custom genome download
+step once — it creates the header-only template that this editor then fills
+in.
 
 Fonts and remote displays
 -------------------------

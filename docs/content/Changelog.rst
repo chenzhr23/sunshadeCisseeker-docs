@@ -1,6 +1,18 @@
 Changelog
 =========
 
+1.3.51 — GUI editor for the custom genome download lists
+---------------------------------------------------------
+
+* New **Tools → Custom genome lists...** table editor for the three per-type
+  custom download lists (``Custom_genome_fa_gff/<type>/Custom_genome_fa_gff_<type>.xlsx``,
+  ``download_list`` sheet): edit ``species`` / ``taxid`` / the two URL columns
+  per genome type (a selector switches nuclear / chloroplast /
+  mitochondrial), add or remove rows, and save back — the workbook's README
+  sheet is preserved. The XLSX helper now supports loading a named sheet and
+  saving a single sheet in place (``--keep``); both are covered by a new
+  round-trip test.
+
 1.3.50 — new feature: species de-duplication (NCBI preferred over Custom)
 ---------------------------------------------------------------------------
 
