@@ -1,6 +1,17 @@
 Changelog
 =========
 
+1.3.54 — shipped custom download lists carry the new header
+-------------------------------------------------------------
+
+* The per-type custom download lists bundled in the archive
+  (``Custom_genome_fa_gff/<type>/Custom_genome_fa_gff_<type>.xlsx``) are
+  upgraded to the new header ``species | taxid | genome_download_url |
+  annotation_download_url`` (the ``taxid`` cells start empty and are filled
+  in automatically by the step-01 lookup). Upgrading an existing install
+  keeps the on-disk lists untouched — run the Custom download step once to
+  add the column there.
+
 1.3.53 — automatic NCBI taxid lookup for custom species
 --------------------------------------------------------
 
