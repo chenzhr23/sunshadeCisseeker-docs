@@ -1,6 +1,24 @@
 Changelog
 =========
 
+1.3.56 — server-scale hardening: bounded C++ merge + C++ xlsx writer
+----------------------------------------------------------------------
+
+* Step 05's C++ merge writes the id map as **bounded part files** (500,000
+  rows each, plus a manifest) instead of one giant TSV: the R side reads the
+  parts one at a time, so the 10M+ record id maps of a server-scale run no
+  longer blow up memory (the previous single ``fread`` fell back to the slow
+  R merge on the 24.8M-promoter dataset).
+* New C++ tool **``bin/xlsx_fast``**: a minimal spec-conformant XLSX writer
+  (streamed worksheet XML + zlib zip) used automatically by every big table
+  write (04 detail, 05 id map, 06 sites, pair summaries) with openxlsx as
+  the fallback. Cell values and column types are identical to openxlsx
+  (verified cell-by-cell, including NA-vs-empty-string and boolean
+  columns); on the benchmark it writes 200,000 rows in 0.7 s — the 6M-row
+  chloroplast sites table that took ~70 minutes now takes a few minutes,
+  and the same applies to the 24.3M-row nuclear detail table.
+  ``SUNSHADE_NO_CXX=1`` disables both new tools.
+
 1.3.55 — documentation update: screenshots of the new Tools dialogs
 ---------------------------------------------------------------------
 
