@@ -102,8 +102,12 @@ One download list per genome type, at the standard location
   the tax id of an NCBI genome of the same genome type, the NCBI genome is
   **preferred**: step 04 discards the custom pair (pair summary status
   ``skipped``, message ``custom genome discarded, NCBI preferred``) and no
-  downstream analysis runs on it. Leave empty when unknown — step 04 then
-  falls back to matching by the sanitized species name;
+  downstream analysis runs on it. **The custom download step fills this
+  column in automatically** by looking the species name up on NCBI Taxonomy
+  (rentrez; only an unambiguous single hit is written back — zero or
+  multiple hits leave the cell empty, a ``.bak`` of the list is kept, and a
+  failure to reach NCBI just logs a warning). Leave a cell empty to fall
+  back to matching by the sanitized species name;
 * ``genome_download_url`` — direct FASTA URL (``.fa/.fna/.fasta[.gz]``);
 * ``annotation_download_url`` — direct GFF3 URL (``.gff/.gff3[.gz]``);
   http/https/file are accepted.

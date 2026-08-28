@@ -1,6 +1,18 @@
 Changelog
 =========
 
+1.3.53 — automatic NCBI taxid lookup for custom species
+--------------------------------------------------------
+
+* The Custom genome download step (01) now fills the ``taxid`` column of the
+  per-type download lists **automatically**: species names with an empty
+  taxid are looked up on NCBI Taxonomy through rentrez, and only an
+  unambiguous single hit is written back (zero or multiple hits stay empty
+  and fall back to name-based de-duplication; a ``.bak`` of each list is
+  kept, the README sheet is preserved, and NCBI being unreachable only logs
+  a warning). ``SUNSHADE_TAXID_MOCK_FILE`` provides an offline name→taxid
+  table (used by the new end-to-end test).
+
 1.3.52 — menu-label consistency (dialog-opening items carry an ellipsis)
 -------------------------------------------------------------------------
 
