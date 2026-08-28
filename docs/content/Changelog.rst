@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.3.52 — menu-label consistency (dialog-opening items carry an ellipsis)
+-------------------------------------------------------------------------
+
+* ``Check environment`` and ``Global → Configuration`` open dialog windows,
+  so they now follow the standard menu convention and read
+  ``Check environment...`` / ``Configuration...`` — every Tools/Global item
+  that opens a window for further input carries the ``...`` ellipsis.
+
 1.3.51 — GUI editor for the custom genome download lists
 ---------------------------------------------------------
 
