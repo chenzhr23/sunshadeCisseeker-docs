@@ -115,6 +115,14 @@ bodies are never included.
 
 The extraction engine is chosen per genome:
 
+* **C++ engine (``bin/promoter_extract``, default on Linux)** — ONE process
+  per pair reads the GFF3 and the FASTA (plain or gzipped) directly and does
+  the interval mathematics, reverse complementing and 80-column wrapping in
+  C++; it replaces the gzip/samtools/bedtools spawns and the R per-gene loop
+  for both the linear and the circular genomes. Its output is **byte-identical
+  to the paths below** (verified against both on linear, gzipped and circular
+  fixtures). When the binary is missing, a call fails, or
+  ``SUNSHADE_NO_CXX=1`` is set, the pipeline transparently falls back:
 * **Chloroplast / mitochondrial (circular)** — constant-time interval
   extraction per gene (the same blocker-interval mathematics as the linear
   path), so a full organelle run takes minutes instead of hours; the output
@@ -181,9 +189,13 @@ Merges NCBI and Custom promoters (no ecology labels here), gives every
 promoter a short unique ID (``N/C/M`` + 9 digits) and writes the ID map
 (``all_species_<type>_id_map.xlsx``) with species, source, gene, strand and
 coordinates. Ecology labels are attached separately by the Label ecology
-step. The combined FASTA is written through a large buffer, so merging
-hundreds of thousands of promoters stays fast. The merge is skipped when its
-outputs are already newer than every input and the script itself.
+step. On Linux the merge runs the bundled **C++ engine**
+(``bin/promoter_merge``): one pass renumbers and merges every per-pair FASTA
+and emits the id-map and per-file tables (byte-identical to the R path,
+which remains the automatic fallback). The combined FASTA is written through
+a large buffer, so merging hundreds of thousands of promoters stays fast.
+The merge is skipped when its outputs are already newer than every input and
+the script itself.
 
 Step 06 — universal CRE scan
 ----------------------------

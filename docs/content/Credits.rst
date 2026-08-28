@@ -26,7 +26,10 @@ Tools
 -----
 
 bedtools and samtools (optional accelerators for linear
-genomes); gzip for download integrity checks; Liberation Sans (bundled,
+genomes); the bundled C++ engines ``bin/cre_scan`` (Aho-Corasick
+cis-element scan), ``bin/promoter_extract`` (step 04 promoter extraction)
+and ``bin/promoter_merge`` (step 05 merge) with automatic R fallbacks;
+gzip for download integrity checks; Liberation Sans (bundled,
 metric-compatible with Arial) for the interface font.
 
 Data
