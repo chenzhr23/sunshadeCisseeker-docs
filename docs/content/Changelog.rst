@@ -1,6 +1,25 @@
 Changelog
 =========
 
+1.3.48 — Run local becomes a truly isolated single-species analysis
+--------------------------------------------------------------------
+
+* ``Tools → Run local...`` now stages the two files into
+  ``result/local/<species>/input/`` and writes every 04–06 output under
+  ``result/local/<species>/<type>_genome/NN_step/`` — the **same file names
+  and column layouts** as a normal run, so the tables merge row by row with
+  other results. The shared ``result/<type>`` trees, the NCBI task lists and
+  ``Custom_genome_fa_gff`` are **never read or modified**: only the chosen
+  species is analyzed, other species are not re-extracted, and later normal
+  runs are unaffected. Re-running the same species starts from a clean
+  workspace.
+* Steps 04–06 honor the new ``SUNSHADE_LOCAL_SPECIES/FA/GFF/OUT``
+  environment contract (single-pair input + redirected output root), driven
+  by the same ``SUNSHADE_RUN_LOCAL=1`` flag as before.
+* New e2e verifies the isolation: exactly one pair processed, outputs in
+  the local tree, shared result and custom directories untouched, size cap
+  lifted.
+
 1.3.47 — fix: installer verifies the old installation is really gone
 ---------------------------------------------------------------------
 

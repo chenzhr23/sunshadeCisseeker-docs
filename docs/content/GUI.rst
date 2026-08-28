@@ -69,22 +69,31 @@ Functionality lives in the menu bar only (no duplicated toolbar):
 Run local (single-species analysis)
 -----------------------------------
 
-**Tools → Run local...** analyzes **one species on your disk** without
-touching NCBI or the download lists. Enter a species name, pick its genome
-**FASTA** and annotation **GFF3**, tick the genome type(s) to analyze
-(**nuclear / chloroplast / mitochondrial** — at least one must be ticked)
-and press **Run**:
+**Tools → Run local...** analyzes **one species on your disk** in an
+**isolated workspace** — nothing else is read, and nothing outside is
+written. Enter a species name, pick its genome **FASTA** and annotation
+**GFF3**, tick the genome type(s) to analyze (**nuclear / chloroplast /
+mitochondrial** — at least one must be ticked) and press **Run**:
 
-* The two files are copied into
-  ``Custom_genome_fa_gff/<type>/{fa,gff}/<species>.<ext>`` (the original
-  ``.fa/.fasta/.gz`` suffixes are kept, so gzipped inputs stay compressed).
-  They become part of the custom set and are reused by later normal runs.
+* The two files are snapshot-copied into
+  ``result/local/<species>/input/`` (the original ``.fa/.fasta/.gz``
+  suffixes are kept, so gzipped inputs stay compressed). Re-running the
+  same species starts from a clean workspace.
 * For each ticked type the standard steps **04–06** run sequentially
   (promoter extraction → merge → CRE scan) with the live log shown in the
   dialog. NCBI and download steps are forced off and the **genome-size cap
   is lifted** for the explicitly chosen file, whatever
-  ``quickstart_config.yml`` says — a huge local genome is analyzed, not
-  skipped.
+  ``quickstart_config.yml`` says.
+* **Outputs land under** ``result/local/<species>/<type>_genome/NN_step/``
+  with the **same file names and column layouts as a normal run** — for
+  example ``04_promoter/nuclear_promoter_pair_summary.xlsx``,
+  ``05_ciselement_input/all_species_nuclear_id_map.xlsx``,
+  ``06_ciselement/nuclear_ciselement_results.xlsx`` — so the tables can be
+  merged with results from other runs row by row.
+* The shared ``result/<type>`` trees, the NCBI task lists and the
+  ``Custom_genome_fa_gff`` set are **never read or modified**: other
+  species are neither re-analyzed nor included, and later normal runs are
+  not affected by the local species.
 * Ticking several types runs them one after another; **Stop** interrupts
   the current run and the queue.
 
