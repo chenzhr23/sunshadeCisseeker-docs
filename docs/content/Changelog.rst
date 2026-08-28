@@ -1,6 +1,15 @@
 Changelog
 =========
 
+1.3.55 — documentation update: screenshots of the new Tools dialogs
+---------------------------------------------------------------------
+
+* The headless screenshot capture now also renders the **Run local** dialog
+  and the **Custom genome lists** editor, and the Screenshots page documents
+  both (``10-run-local.png``, ``11-custom-genome-lists.png``), together with
+  the updated menu-bar description (Run local, Custom genome lists,
+  ellipsized dialog entries).
+
 1.3.54 — shipped custom download lists carry the new header
 -------------------------------------------------------------
 
