@@ -113,6 +113,18 @@ is the 5' end on the ``+`` strand or the 3' end on the ``-`` strand. Up to
 clipped at the nearest upstream gene and at the sequence boundary so gene
 bodies are never included.
 
+**Species de-duplication (NCBI preferred).** Before extraction, every
+Custom pair is checked against the NCBI pairs of the same genome type: when
+the two sides carry the same NCBI **tax id** (the optional ``taxid`` column
+of the custom download list, and the ``tax_id`` recorded in the download
+tasks), or — when no tax id is available — the same sanitized species name,
+the **NCBI genome is kept and the custom pair is discarded**: it is not
+extracted, not merged and not scanned, and the pair summary records it as
+``skipped`` with the message ``custom genome discarded, NCBI preferred``
+(the matching rule — tax id or name — is named in the message, and the
+``deduplicated_pairs`` count appears in the run info). The custom files
+themselves are left untouched on disk.
+
 The extraction engine is chosen per genome:
 
 * **C++ engine (``bin/promoter_extract``, default on Linux)** — ONE process

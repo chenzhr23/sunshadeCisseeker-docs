@@ -98,6 +98,12 @@ One download list per genome type, at the standard location
 
 * ``species`` — species name; the downloaded file stem (spaces → underscores)
   and the species key for ecology labelling;
+* ``taxid`` — **optional** NCBI taxonomy id of the species. When it matches
+  the tax id of an NCBI genome of the same genome type, the NCBI genome is
+  **preferred**: step 04 discards the custom pair (pair summary status
+  ``skipped``, message ``custom genome discarded, NCBI preferred``) and no
+  downstream analysis runs on it. Leave empty when unknown — step 04 then
+  falls back to matching by the sanitized species name;
 * ``genome_download_url`` — direct FASTA URL (``.fa/.fna/.fasta[.gz]``);
 * ``annotation_download_url`` — direct GFF3 URL (``.gff/.gff3[.gz]``);
   http/https/file are accepted.

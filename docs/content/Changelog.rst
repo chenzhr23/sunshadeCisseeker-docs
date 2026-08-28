@@ -1,6 +1,21 @@
 Changelog
 =========
 
+1.3.50 — new feature: species de-duplication (NCBI preferred over Custom)
+---------------------------------------------------------------------------
+
+* When a Custom genome (a species the user provided a download link for) is
+  the **same species** as an NCBI genome of the same genome type, the NCBI
+  genome is now **preferred and the custom pair is discarded**: it is not
+  extracted, merged or scanned. The decision is made in step 04 by the
+  **NCBI tax id** when both sides carry one (steps 02 now record ``tax_id``
+  in the download tasks; the custom download list gained an optional
+  ``taxid`` column) and otherwise falls back to matching the sanitized
+  species name — the rule used is named in the pair-summary ``message``
+  (``custom genome discarded, NCBI preferred``, status ``skipped``), the
+  matching pairs are logged, and the run info records
+  ``deduplicated_pairs``. Custom files stay on disk untouched.
+
 1.3.49 — C++ promoter engines: ~2x faster steps 04–06, byte-identical outputs
 ------------------------------------------------------------------------------
 
