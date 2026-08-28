@@ -1,6 +1,30 @@
 Changelog
 =========
 
+1.3.49 — C++ promoter engines: ~2x faster steps 04–06, byte-identical outputs
+------------------------------------------------------------------------------
+
+* Two new C++ accelerators replace the two biggest R hotspots of the
+  per-genome pipeline (profiled on a 60-species / 120,000-promoter benchmark;
+  on the server's 17.5-million-promoter dataset the saving is proportionally
+  larger):
+  - **``bin/promoter_extract``** — one process per pair replaces the
+    gzip/samtools/bedtools spawns, the R GFF3 parse and the per-gene interval
+    loop of step 04 (plain and gzipped FASTA, linear and circular genomes).
+  - **``bin/promoter_merge``** — one pass renumbers and merges every per-pair
+    FASTA and emits the id-map/per-file tables of step 05 (the previous
+    biggest bottleneck: ~49 s → ~5 s in the benchmark, ~10×).
+* Both tools produce **byte-identical outputs** to the R implementations
+  (verified against the bedtools path AND the pure-R streaming path for
+  linear, gzipped and circular fixtures, including the id map and detail
+  tables). When a tool is missing or fails, the pipeline transparently falls
+  back to the previous R path (``SUNSHADE_NO_CXX=1`` disables both
+  accelerators entirely).
+* Benchmark (WSL2, 60 species × 4 Mb × 2000 genes, 243 MB FASTA, 4 workers):
+  steps 04–06 total **97.4 s → 47.6 s (2.05×)** with identical results;
+  step 06 remains scan-bound on the C++ Aho-Corasick backend + the XLSX
+  packaging.
+
 1.3.48 — Run local becomes a truly isolated single-species analysis
 --------------------------------------------------------------------
 
