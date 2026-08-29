@@ -1,6 +1,31 @@
 Changelog
 =========
 
+1.3.57 — robustness: gene-name sanitizing + self-healing step 04
+----------------------------------------------------------------
+
+* A GFF3 attribute value carrying raw **tab or newline characters** (for
+  example ``Name=trnK-UUU <TAB> trnK`` in a custom annotation) used to be
+  written verbatim into the per-pair detail table and the promoter FASTA
+  headers. ``data.table::fread`` then stopped early on such a row and
+  silently dropped every following row — the merged detail/id-map tables
+  lost hundreds of thousands of records and step 06 aborted with a
+  ``cre_scan record count mismatch``. The C++ tools (``promoter_extract``,
+  ``promoter_merge``) and the R fallbacks now collapse every run of
+  tabs/newlines inside gene names, gene IDs and the original FASTA header to
+  a single space and strip the surrounding spaces, identically in both
+  implementations (byte-parity is preserved).
+* Step 04 now **validates cached outputs before skipping** a pair: the
+  per-pair FASTA headers must be free of raw tabs and the detail workbook
+  must be readable and hold at least as many rows as the FASTA has records.
+  Pairs whose cached outputs fail either check are re-extracted
+  automatically (reported as ``cached ... (pair regenerated)`` in the pair
+  summary), so upgrading an existing install heals the affected files on the
+  next run without any manual cleanup.
+* The step 04 C++ fast path proves the per-pair detail TSV row structure
+  before parsing it, and the step 06 mismatch error now explains the cause
+  and the remedy instead of just printing the counts.
+
 1.3.56 — server-scale hardening: bounded C++ merge + C++ xlsx writer
 ----------------------------------------------------------------------
 

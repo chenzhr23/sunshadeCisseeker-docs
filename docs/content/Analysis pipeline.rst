@@ -155,13 +155,25 @@ The extraction engine is chosen per genome:
   (a corrupt download once crashed the parser and, through the sequential
   fallback, the whole run with a segfault); a corrupt file fails its pair
   cleanly and is removed so step 02 re-downloads it on the next run.
+* **Attribute sanitizing** — gene names and gene IDs taken from the GFF3
+  attributes have every run of raw tab/newline characters collapsed to a
+  single space and the surrounding spaces stripped (identically in the C++
+  engines and the R fallbacks). A raw tab inside a gene name would otherwise
+  split the per-pair detail rows and the FASTA headers, make ``fread`` stop
+  early on them and silently drop every following row, and finally abort
+  step 06 with a ``cre_scan record count mismatch``.
 
 Re-runs are incremental: a species whose promoter FASTA and detail table are
 newer than its inputs (and the requested ``promoter_len`` is unchanged, as
 recorded in the ``.promoter_len`` marker written at start-up) is skipped, so
 a re-run only processes new or changed genomes — even a run that was
-interrupted late resumes cheaply. Empty (0-byte) per-pair output files are
-treated as missing and re-extracted automatically. Long parallel steps are additionally
+interrupted late resumes cheaply. Before a pair is skipped, its cached
+outputs pass a C++ integrity check (FASTA headers free of raw tabs, and the
+detail workbook readable with at least as many rows as the FASTA has
+records); a pair that fails the check is re-extracted and the pair summary
+says ``cached … (pair regenerated)``, so outputs written by an older,
+buggy release heal themselves on the next run. Empty (0-byte) per-pair
+output files are treated as missing and re-extracted automatically. Long parallel steps are additionally
 protected by **CPU-confirmed stall detection**: when no pair has finished
 for 40 minutes the pool reports which species are still running and checks
 whether the worker processes (and their ``gzip``/``samtools``/``bedtools``
