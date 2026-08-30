@@ -1,6 +1,18 @@
 Changelog
 =========
 
+1.3.60 — installer: R-free fast self test
+------------------------------------------
+
+* The installer's step 3/3 now runs the new **``--selftest-fast``** mode of
+  the interface: it never starts R, so the probe finishes in seconds
+  regardless of how slow ``Rscript`` / ``openxlsx`` start on the host (the
+  config round-trips remain verified in step 2/3, which now checks both
+  workbooks in ONE ``Rscript`` process instead of two). ``timeout 120``
+  still bounds the probe.
+* The full ``--selftest`` mode (with the R round-trips, used by tests and
+  development) is unchanged.
+
 1.3.59 — installer self test: bounded and non-destructive
 ----------------------------------------------------------
 
