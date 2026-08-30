@@ -46,8 +46,11 @@ Three user-editable files drive the whole analysis.
 ``config/species_ecology_labels.xlsx`` (manual annotation)
 ----------------------------------------------------------
 
-One row per species; edit it in Excel/LibreOffice or through the GUI's
-**Tools → Ecology labels...** popup.
+One sheet per genome type — ``nuclear_genome`` / ``chloroplast_genome`` /
+``mitochondrial_genome`` — each with one row per species; edit the sheets in
+Excel/LibreOffice or through the GUI's **Tools → Ecology labels...** popup
+(pick the sheet in the combo box, ``Reload``, edit, ``Save`` — the other
+sheets are preserved).
 
 .. list-table::
    :header-rows: 1
@@ -65,12 +68,14 @@ One row per species; edit it in Excel/LibreOffice or through the GUI's
      - no
      - free-form note (e.g. ``Manual annotation``)
 
-Only species listed here enter the ecology comparison (steps 07–09);
-unlabelled species still appear in the general analysis (steps 01–06).
-The shipped starter rows are *Sarcandra glabra* (``shade``), *Arabidopsis
-thaliana* (``facultative``) and *Glycine max* (``sun``), all marked
-``Manual annotation`` in the ``note`` column — replace or extend them with
-your own annotations.
+Each genome type is labeled from its own sheet, so a species may carry
+different labels in different compartments (or stay unlabeled in one).
+Older single-sheet files (one sheet with the same three columns) still work
+and apply to every genome type. The GUI's **Label ecology** page offers
+checkboxes for the three genome types: unchecked types are skipped by the
+labeling step. Only species listed here enter the ecology comparison (steps
+07–09); unlabelled species still appear in the general analysis (steps
+01–06).
 
 ``config/cis_element_motif_library.xlsx`` (motif library)
 ----------------------------------------------------------

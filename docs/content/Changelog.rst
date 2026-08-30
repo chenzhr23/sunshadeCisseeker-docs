@@ -1,6 +1,26 @@
 Changelog
 =========
 
+1.3.58 — per-genome-type ecology labels + Label ecology checkboxes
+------------------------------------------------------------------
+
+* ``config/species_ecology_labels.xlsx`` now uses **one sheet per genome
+  type** — ``nuclear_genome`` / ``chloroplast_genome`` /
+  ``mitochondrial_genome`` (columns unchanged: ``species | ecology |
+  note``) — so each compartment carries its own label table and a species
+  may be labeled differently (or stay unlabeled) per compartment. Older
+  single-sheet files keep working and apply to every type.
+* The **Label ecology** GUI page offers three **genome-type checkboxes**
+  (Nuclear / Chloroplast / Mitochondrial, all checked by default): the
+  labeling step only processes the checked types
+  (``run_all.sh label_ecology --label-types=<comma list>``; the command
+  line accepts the same flag), and its output and run info record exactly
+  the analyzed types.
+* The **Tools → Ecology labels…** editor matches the new layout: a
+  **Genome type sheet** combo selects the sheet to edit, ``Save`` preserves
+  every other sheet, and older single-sheet files load their first sheet
+  automatically.
+
 1.3.57 — robustness: gene-name sanitizing + self-healing step 04
 ----------------------------------------------------------------
 

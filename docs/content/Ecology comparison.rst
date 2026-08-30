@@ -10,13 +10,20 @@ Label ecology (step 06)
 -----------------------
 
 A standalone step between the per-genome pipelines and the comparison: it
-reads ``config/species_ecology_labels.xlsx`` and the three 05 id maps, and
-writes ``species_ecology_assignment.xlsx`` (``Assignment`` /
-``Group_counts`` / ``Unlabeled`` sheets) under
+reads ``config/species_ecology_labels.xlsx`` — one sheet per genome type
+(``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome``;
+older single-sheet files apply to every type) — and the 05 id maps of the
+selected genome types, and writes ``species_ecology_assignment.xlsx``
+(``Assignment`` / ``Group_counts`` / ``Unlabeled`` sheets) under
 ``result/ecology_compare/06_label_ecology/``. This assignment is the single
 source of ecology labels for steps 07–09, so label changes only require
 re-running this step and then 07–09. Unlabelled species are listed in the
 ``Unlabeled`` sheet and never enter the statistics.
+
+The **Label ecology** GUI page offers checkboxes for the three genome types:
+unchecked types are skipped (the run calls
+``run_all.sh label_ecology --label-types=<comma list>``; the command line
+accepts the same flag).
 
 Step 07 — merge
 ---------------

@@ -35,7 +35,7 @@ There are exactly six sliding pages, in this order:
    * - **Mitochondrial genome**
      - runs the mitochondrial part (steps 01-06)
    * - **Label ecology**
-     - assigns the sun/facultative/shade labels to the three merged datasets (cross-genome step 06)
+     - assigns the sun/facultative/shade labels to the merged datasets (cross-genome step 06), one label sheet per genome type; checkboxes select the types to label
    * - **Compare ecology**
      - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first)
 
@@ -49,7 +49,9 @@ value from ``quickstart_config.yml``; when the key is absent it pre-fills
 with ``2`` (skips oversized archives such as the ~2.7 GB *Tanacetum
 coccineum* genome). Clearing the field means no limit (the empty value
 persists), while a *missing* key defaults to ``2`` again on the next
-``run_all.sh`` launch. A screenshot of every
+``run_all.sh`` launch. The **Label ecology** page additionally offers the
+three genome-type checkboxes (all checked by default) that become the
+``--label-types`` flag of the label run. A screenshot of every
 page and popup, with explanations, is on the :doc:`Screenshots` page.
 
 Menu bar

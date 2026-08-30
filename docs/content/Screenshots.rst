@@ -56,12 +56,15 @@ editors and the remaining functions.
 
    The **Label ecology** page (cross-genome step 06): assigns the
    ``sun`` / ``facultative`` / ``shade`` labels from
-   ``config/species_ecology_labels.xlsx`` to the merged NCBI+custom datasets
-   of all three genome types and writes
+   ``config/species_ecology_labels.xlsx`` (one sheet per genome type:
+   ``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome``)
+   to the merged NCBI+custom datasets and writes
    ``result/ecology_compare/06_label_ecology/species_ecology_assignment.xlsx``
    (``Assignment`` / ``Group_counts`` / ``Unlabeled`` sheets) — the single
-   label source for the comparison. Run it after the genome pages and before
-   Compare ecology; re-run only this page after editing the label table.
+   label source for the comparison. The three **genome-type checkboxes**
+   select which types get labeled (unchecked types are skipped). Run it
+   after the genome pages and before Compare ecology; re-run only this page
+   after editing the label table.
 
 .. figure:: ../_static/screenshots/06-compare-ecology.png
    :width: 1360
@@ -94,9 +97,12 @@ The three parameter/table editors open as popups from the **Tools** menu.
    :width: 1040
 
    **Tools → Ecology labels…** — the table editor for
-   ``config/species_ecology_labels.xlsx``: add or remove species, assign each
-   species its ``sun`` / ``facultative`` / ``shade`` label, reload or save.
-   Changes take effect after re-running the Label ecology page.
+   ``config/species_ecology_labels.xlsx``: the **Genome type sheet** combo
+   picks the sheet to edit (``nuclear_genome`` / ``chloroplast_genome`` /
+   ``mitochondrial_genome``); add or remove species, assign each species its
+   ``sun`` / ``facultative`` / ``shade`` label, reload or save (saving
+   preserves every other sheet; older single-sheet files load their first
+   sheet). Changes take effect after re-running the Label ecology page.
 
 .. figure:: ../_static/screenshots/09-motif-library.png
    :width: 1040
