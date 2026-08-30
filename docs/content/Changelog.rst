@@ -1,6 +1,17 @@
 Changelog
 =========
 
+1.3.61 — editor dialogs: constant-time table population
+---------------------------------------------------------
+
+* The **Ecology labels / Motif library / Custom genome lists** editors used
+  ``ResizeToContents`` column sizing and repainted on every inserted cell:
+  with the 681-species label sheet (multi-KB annotation cells) opening the
+  dialog froze the interface for minutes on slower hosts. The tables now use
+  fixed default column widths (manually resizable, last column stretched)
+  and the rows are inserted in one batch with widget updates suspended, so
+  population is constant-time regardless of the table size.
+
 1.3.60 — installer: R-free fast self test
 ------------------------------------------
 
