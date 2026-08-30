@@ -1,6 +1,20 @@
 Changelog
 =========
 
+1.3.59 — installer self test: bounded and non-destructive
+----------------------------------------------------------
+
+* The installer's **3/3 GUI self test (offscreen)** is now wrapped in a
+  hard ``timeout 240`` and pins ``SUNSHADE_RSCRIPT`` to the R interpreter the
+  dependency check just verified, so a stalled probe can no longer hang
+  ``install.sh`` (a slow network filesystem could previously keep it busy
+  indefinitely on the large per-genome-type label table).
+* The Ecology labels and Motif library self tests now round-trip their
+  **save through a temp copy** (local temp dir, ``--keep`` semantics): the
+  real config workbooks are never rewritten by the installer — the previous
+  plain save would have dropped the chloroplast/mitochondrial label sheets
+  of a three-sheet ``species_ecology_labels.xlsx``.
+
 1.3.58 — per-genome-type ecology labels + Label ecology checkboxes
 ------------------------------------------------------------------
 
