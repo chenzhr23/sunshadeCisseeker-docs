@@ -69,11 +69,13 @@ editors and the remaining functions.
 .. figure:: ../_static/screenshots/06-compare-ecology.png
    :width: 1360
 
-   The **Compare ecology** page runs steps 07–09: merge the three datasets
-   into the ecology master table (07), differential statistics —
+   The **Compare ecology** page runs steps 07–09: merge the selected genome
+   datasets into the ecology master table (07), differential statistics —
    Kruskal-Wallis plus pairwise Wilcoxon with Benjamini-Hochberg correction
-   (08) — and the publication figures (09). It requires the Label ecology page
-   to have run first. Results land under ``result/ecology_compare/``.
+   (08) — and the publication figures (09). The three genome-type checkboxes
+   match the Label ecology page: unchecked types are left out of the merge.
+   It requires the Label ecology page to have run first. Results land under
+   ``result/ecology_compare/``.
 
 Menu-bar popup windows
 ----------------------

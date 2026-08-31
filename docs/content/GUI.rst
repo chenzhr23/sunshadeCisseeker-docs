@@ -37,7 +37,7 @@ There are exactly six sliding pages, in this order:
    * - **Label ecology**
      - assigns the sun/facultative/shade labels to the merged datasets (cross-genome step 06), one label sheet per genome type; checkboxes select the types to label
    * - **Compare ecology**
-     - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first)
+     - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first); checkboxes select the genome types to merge
 
 Each analysis page shows the step description, the result directory hint and
 a live log panel. The three genome pages additionally offer an **NCBI API key
@@ -49,9 +49,11 @@ value from ``quickstart_config.yml``; when the key is absent it pre-fills
 with ``2`` (skips oversized archives such as the ~2.7 GB *Tanacetum
 coccineum* genome). Clearing the field means no limit (the empty value
 persists), while a *missing* key defaults to ``2`` again on the next
-``run_all.sh`` launch. The **Label ecology** page additionally offers the
-three genome-type checkboxes (all checked by default) that become the
-``--label-types`` flag of the label run. A screenshot of every
+``run_all.sh`` launch. The **Label ecology** and **Compare ecology** pages
+additionally offer the three genome-type checkboxes (all checked by
+default): they become the ``--label-types`` / ``--ecology-types`` flags of
+the respective runs, so both steps analyze exactly the selected genome
+types. A screenshot of every
 page and popup, with explanations, is on the :doc:`Screenshots` page.
 
 Menu bar

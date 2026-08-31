@@ -28,7 +28,12 @@ accepts the same flag).
 Step 07 — merge
 ---------------
 
-1. For each of the three genome types, merge the per-species element counts
+The **Compare ecology** GUI page offers the same genome-type checkboxes as
+Label ecology (``run_all.sh ecology --ecology-types=<comma list>``): only
+the checked types are merged, and steps 08–09 follow the types present in
+the master table, so the comparison always matches the labeling selection.
+
+1. For each selected genome type, merge the per-species element counts
    (``Species_element_counts``) with the per-species **total promoter
    number** (from the 05 id map).
 2. Compute the normalised metric used everywhere downstream:

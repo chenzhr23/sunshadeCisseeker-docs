@@ -1,6 +1,15 @@
 Changelog
 =========
 
+1.3.63 — Compare ecology: genome-type checkboxes
+--------------------------------------------------
+
+* The **Compare ecology** page now offers the same three genome-type
+  checkboxes as the Label ecology page: only the checked types enter the
+  07 merge (``run_all.sh ecology --ecology-types=<comma list>``), and steps
+  08/09 follow the types present in the master table, so the comparison
+  stays consistent with the Label ecology selection.
+
 1.3.62 — editor dialogs: Rscript resolution off the GUI thread
 ----------------------------------------------------------------
 
