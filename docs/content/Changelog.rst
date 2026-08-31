@@ -1,6 +1,37 @@
 Changelog
 =========
 
+1.5.0 — ratio-bin ecology analysis absorbed from the chromosome pipeline
+--------------------------------------------------------------------------
+
+* Compare ecology step 08 now runs the **Box 4 / G-box ratio-bin analysis**
+  (absorbed from the chromosome-level Box4/Gbox sun-shade study): every
+  species gets a 9-level ratio bin (``0``, ``0-0.5``, ``0.5-1``, ``1-2``,
+  ``2-5``, ``5-10``, ``10-15``, ``>15``, ``NA``) plus a ratio status
+  (finite / G-box=0 / both zero). The sun/facultative/shade difference is
+  tested at the distribution level (chi-square over the bins, all groups
+  and sun-vs-shade), per bin (Fisher bin-vs-rest with BH correction,
+  percentages, odds ratios, sun/shade concentration), plus a Spearman
+  trend test and a consolidated relationship-tests table. New sheets:
+  ``Box4_Gbox_bin_by_group`` / ``Box4_Gbox_bin_tests`` /
+  ``Box4_Gbox_bin_enrichment`` / ``Box4_Gbox_concentrated_bins`` /
+  ``Box4_Gbox_relationship_tests`` and the publication-grade
+  ``Publication_ratio_bins`` table.
+* Optional **taxonomic strata**: drop ``config/species_taxonomy.xlsx``
+  (columns ``species`` / ``order`` / ``family``) next to the other configs
+  and step 08 additionally runs within-order and within-family Wilcoxon
+  tests and fixed-effect linear models (log10 ratio ~ light habitat +
+  order/family) so the light signal can be checked against taxonomic
+  structure (``Box4_Gbox_stratified_tests`` /
+  ``Box4_Gbox_fixed_effect_models``).
+* Step 09's ``box4_gbox_ratio.pdf`` is now a portrait A4 multi-panel
+  figure: (a) ratio distributions with statistics, (b) Box 4 vs G-box
+  count balance, (c) ratio-bin composition, (d) sun-vs-shade bin
+  enrichment with Fisher BH stars, (e) concentrated bins, (f) raw bin
+  count difference, and (g/h) order- and family-stratified tests when the
+  taxonomy config exists. The main figure's ratio panel gained violin
+  plots.
+
 1.4.1 — ecology-label quality control for the shipped label config
 --------------------------------------------------------------------
 

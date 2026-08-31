@@ -147,12 +147,26 @@ follow a logical analytical progression (v1.4.0):
    two elements, showing which of them drives the ratio, with per-element
    Kruskal-Wallis P values annotated.
 
-``box4_gbox_ratio.pdf`` is a focused two-panel portrait A4 figure (panels
-c + d) dedicated to the light-response hypothesis. Panels share one
-colourblind-safe palette (sun orange, facultative blue, shade green), Arial
-typography, and the asterisk thresholds are restated in each figure caption.
-Count/density/ratio axes use a pseudo-log scale (linear below 1) so zero
-values stay visible.
+``box4_gbox_ratio.pdf`` is a focused portrait A4 figure (v1.5.0) with the
+ratio distributions, the Box 4 / G-box count balance, the ratio-bin
+composition, the sun-vs-shade bin enrichment (Fisher tests with BH stars),
+the concentrated bins and the raw bin count difference — plus order- and
+family-stratified tests when ``config/species_taxonomy.xlsx`` exists.
+
+Ratio-bin analysis (v1.5.0)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Step 08 additionally bins every species' Box 4 / G-box ratio into nine
+bins (``0``, ``0-0.5``, ``0.5-1``, ``1-2``, ``2-5``, ``5-10``, ``10-15``,
+``>15`` and ``NA``; a species with G-box = 0 but Box 4 > 0 lands in
+``>15``) and tests the sun/facultative/shade difference at the
+*distribution* level: chi-square contingency tests (all groups and
+sun-vs-shade), per-bin Fisher bin-vs-rest tests with BH correction,
+percentages, odds ratios and sun/shade concentration ranking, plus a
+Spearman trend test. Drop ``config/species_taxonomy.xlsx`` (``species`` /
+``order`` / ``family`` columns) next to the other configs to also get
+within-order / within-family Wilcoxon tests and fixed-effect linear models
+adjusting for taxonomic structure.
 
 Interpreting the results
 ------------------------

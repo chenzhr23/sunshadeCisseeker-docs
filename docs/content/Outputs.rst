@@ -40,13 +40,13 @@ Ecology comparison outputs
    * - ``result/ecology_compare/07_merge/ecology_master_dataset.xlsx``
      - ``Master_long`` / ``Species_summary`` / ``Element_species`` / ``Group_species_n``
    * - ``result/ecology_compare/08_statistics/ecology_differential_results.xlsx``
-     - ``Kruskal_Wallis`` / ``Pairwise_Wilcoxon`` / ``Group_summary`` plus the Box 4 / G-box ratio analysis (``Box4_Gbox_species`` / ``Box4_Gbox_kruskal`` / ``Box4_Gbox_tests`` / ``Box4_Gbox_groups``) and, since v1.4.0, five publication-ready supplementary tables (``Publication_Kruskal`` / ``Publication_Pairwise`` / ``Publication_Groups`` / ``Publication_ratio_kruskal`` / ``Publication_ratio``) with descriptive column names, significance ordering and star notation
+     - ``Kruskal_Wallis`` / ``Pairwise_Wilcoxon`` / ``Group_summary`` plus the Box 4 / G-box ratio analysis (``Box4_Gbox_species`` / ``Box4_Gbox_kruskal`` / ``Box4_Gbox_tests`` / ``Box4_Gbox_groups``), the v1.5.0 ratio-bin analysis (``Box4_Gbox_bin_by_group`` / ``Box4_Gbox_bin_tests`` / ``Box4_Gbox_bin_enrichment`` / ``Box4_Gbox_concentrated_bins`` / ``Box4_Gbox_relationship_tests`` / ``Box4_Gbox_stratified_tests`` / ``Box4_Gbox_fixed_effect_models``) and the publication-ready supplementary tables (``Publication_*``)
    * - ``result/ecology_compare/08_statistics/ecology_differential_volcano.pdf``
      - volcano of pairwise tests + top significant element boxplots
    * - ``result/ecology_compare/09_figures/ecology_figures.pdf``
      - single portrait A4 figure, panels (a) global differential landscape, (b) top differential elements with pairwise q-value brackets, (c) Box 4 / G-box ratio test, (d) Box 4 / G-box count decomposition
    * - ``result/ecology_compare/09_figures/box4_gbox_ratio.pdf``
-     - focused portrait A4 figure for the light-response hypothesis (ratio panels + count decomposition)
+     - portrait A4 multi-panel figure for the light-response hypothesis (ratio distributions, count balance, ratio-bin composition/enrichment, concentrated bins, raw bin count difference, optional order/family-stratified tests)
 
 Core metric
 -----------
