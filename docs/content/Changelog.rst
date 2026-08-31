@@ -1,6 +1,40 @@
 Changelog
 =========
 
+1.4.0 — Local genome merging + publication-grade Compare ecology outputs
+--------------------------------------------------------------------------
+
+* **Local genome checkbox**: the Label ecology and Compare ecology pages
+  gain a *Local genome* checkbox. When checked, the species staged by
+  **Tools → Run local** (``result/local/<species>/``) join the ecology
+  pipeline as the pseudo genome type ``local_genome``: step 06 labels them
+  (from an optional ``local_genome`` sheet in
+  ``config/species_ecology_labels.xlsx``), step 07 merges their 05/06
+  outputs into the master table, and steps 08/09 treat them like any other
+  genome type. Off by default; flag-less runs keep the classic three-type
+  behaviour.
+* **Publication-grade statistics tables (step 08)**: the results workbook
+  gains five export-ready sheets for a paper's supplementary tables -
+  ``Publication_Kruskal``, ``Publication_Pairwise``, ``Publication_Groups``,
+  ``Publication_ratio_kruskal`` and ``Publication_ratio`` - with descriptive
+  column names, rows ordered by significance, rounded numerics, and
+  star-notation significance (``*``/``**``/``***``/``n.s.``). The canonical
+  sheets keep their full-precision machine-readable columns and additionally
+  carry ``q_value``, ``significance`` and formatted ``*_text`` p-value
+  columns.
+* **Publication-grade figure (step 09)**: ``ecology_figures.pdf`` is now a
+  single portrait A4 figure with four panels in a logical analytical
+  progression - (a) global differential landscape (volcano), (b) top
+  differential elements with pairwise BH q-value brackets and per-element
+  Kruskal-Wallis P annotations drawn on the panels, (c) the Box 4 / G-box
+  ratio test, and (d) the Box 4 / G-box count decomposition showing which
+  element drives the ratio. ``box4_gbox_ratio.pdf`` is a focused two-panel
+  portrait A4 figure for the light-response hypothesis. Colourblind-safe
+  palette, Arial typography, asterisk thresholds noted in the captions.
+* The Compare-ecology end-to-end suite now asserts the publication sheets,
+  the A4 page geometry, and a new ``e2e_local_ecology_1400`` suite covers
+  the Run-local → Label ecology → Compare ecology chain.
+
 1.3.69 — Box 4 / G-box ratio loop no longer clobbers the KW tables
 --------------------------------------------------------------------
 

@@ -57,13 +57,15 @@ editors and the remaining functions.
    The **Label ecology** page (cross-genome step 06): assigns the
    ``sun`` / ``facultative`` / ``shade`` labels from
    ``config/species_ecology_labels.xlsx`` (one sheet per genome type:
-   ``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome``)
-   to the merged NCBI+custom datasets and writes
+   ``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome``
+   and, since v1.4.0, an optional ``local_genome`` sheet for the Run-local
+   species) to the merged NCBI+custom datasets and writes
    ``result/ecology_compare/06_label_ecology/species_ecology_assignment.xlsx``
    (``Assignment`` / ``Group_counts`` / ``Unlabeled`` sheets) — the single
-   label source for the comparison. The three **genome-type checkboxes**
-   select which types get labeled (only **Nuclear genome** starts checked;
-   unchecked types are skipped). Run it
+   label source for the comparison. The **genome-type checkboxes** select
+   which types get labeled (only **Nuclear genome** starts checked;
+   unchecked types are skipped); **Local genome** additionally labels the
+   species staged by Tools → Run local. Run it
    after the genome pages and before Compare ecology; re-run only this page
    after editing the label table.
 
@@ -73,9 +75,10 @@ editors and the remaining functions.
    The **Compare ecology** page runs steps 07–09: merge the selected genome
    datasets into the ecology master table (07), differential statistics —
    Kruskal-Wallis plus pairwise Wilcoxon with Benjamini-Hochberg correction
-   (08) — and the publication figures (09). The three genome-type checkboxes
+   (08) — and the publication figures (09). The genome-type checkboxes
    match the Label ecology page (only **Nuclear genome** starts checked):
-   unchecked types are left out of the merge.
+   unchecked types are left out of the merge, and **Local genome** merges
+   the Tools → Run local species as one extra group.
    It requires the Label ecology page to have run first. Results land under
    ``result/ecology_compare/``.
 

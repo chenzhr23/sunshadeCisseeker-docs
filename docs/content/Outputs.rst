@@ -40,13 +40,13 @@ Ecology comparison outputs
    * - ``result/ecology_compare/07_merge/ecology_master_dataset.xlsx``
      - ``Master_long`` / ``Species_summary`` / ``Element_species`` / ``Group_species_n``
    * - ``result/ecology_compare/08_statistics/ecology_differential_results.xlsx``
-     - ``Kruskal_Wallis`` / ``Pairwise_Wilcoxon`` / ``Group_summary`` plus the Box 4 / G-box ratio analysis: ``Box4_Gbox_species`` (per-species Box 4 and G-box counts and their ratio), ``Box4_Gbox_kruskal``, ``Box4_Gbox_tests`` (pairwise Wilcoxon + BH) and ``Box4_Gbox_groups``
+     - ``Kruskal_Wallis`` / ``Pairwise_Wilcoxon`` / ``Group_summary`` plus the Box 4 / G-box ratio analysis (``Box4_Gbox_species`` / ``Box4_Gbox_kruskal`` / ``Box4_Gbox_tests`` / ``Box4_Gbox_groups``) and, since v1.4.0, five publication-ready supplementary tables (``Publication_Kruskal`` / ``Publication_Pairwise`` / ``Publication_Groups`` / ``Publication_ratio_kruskal`` / ``Publication_ratio``) with descriptive column names, significance ordering and star notation
    * - ``result/ecology_compare/08_statistics/ecology_differential_volcano.pdf``
      - volcano of pairwise tests + top significant element boxplots
    * - ``result/ecology_compare/09_figures/ecology_figures.pdf``
-     - PCA + heatmap + functional-group composition + key elements
+     - single portrait A4 figure, panels (a) global differential landscape, (b) top differential elements with pairwise q-value brackets, (c) Box 4 / G-box ratio test, (d) Box 4 / G-box count decomposition
    * - ``result/ecology_compare/09_figures/box4_gbox_ratio.pdf``
-     - Box 4 / G-box count ratio per ecology group and genome type (boxplots, log10 scale)
+     - focused portrait A4 figure for the light-response hypothesis (ratio panels + count decomposition)
 
 Core metric
 -----------

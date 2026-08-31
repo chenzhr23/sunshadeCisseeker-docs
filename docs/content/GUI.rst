@@ -35,9 +35,9 @@ There are exactly six sliding pages, in this order:
    * - **Mitochondrial genome**
      - runs the mitochondrial part (steps 01-06)
    * - **Label ecology**
-     - assigns the sun/facultative/shade labels to the merged datasets (cross-genome step 06), one label sheet per genome type; checkboxes select the types to label
+     - assigns the sun/facultative/shade labels to the merged datasets (cross-genome step 06), one label sheet per genome type; checkboxes (incl. Local genome) select the types to label
    * - **Compare ecology**
-     - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first); checkboxes select the genome types to merge
+     - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first); checkboxes (incl. Local genome) select the genome types to merge
 
 Each analysis page shows the step description, the result directory hint and
 a live log panel. The three genome pages additionally offer an **NCBI API key
@@ -50,10 +50,13 @@ with ``2`` (skips oversized archives such as the ~2.7 GB *Tanacetum
 coccineum* genome). Clearing the field means no limit (the empty value
 persists), while a *missing* key defaults to ``2`` again on the next
 ``run_all.sh`` launch. The **Label ecology** and **Compare ecology** pages
-additionally offer the three genome-type checkboxes (only **Nuclear genome**
-starts checked): they become the ``--label-types`` / ``--ecology-types``
-flags of the respective runs, so both steps analyze exactly the selected
-genome types. A screenshot of every
+additionally offer genome-type checkboxes (only **Nuclear genome** starts
+checked): they become the ``--label-types`` / ``--ecology-types`` flags of
+the respective runs, so both steps analyze exactly the selected genome
+types. Since v1.4.0 a fourth checkbox, **Local genome**, merges the species
+staged by *Tools → Run local* (``result/local/<species>/``) into the
+labeling and the comparison as the pseudo type ``local_genome`` (label them
+via a ``local_genome`` sheet in the label workbook). A screenshot of every
 page and popup, with explanations, is on the :doc:`Screenshots` page.
 
 Menu bar

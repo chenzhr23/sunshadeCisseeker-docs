@@ -11,7 +11,8 @@ Label ecology (step 06)
 
 A standalone step between the per-genome pipelines and the comparison: it
 reads ``config/species_ecology_labels.xlsx`` — one sheet per genome type
-(``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome``;
+(``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome`` and,
+since v1.4.0, an optional ``local_genome`` sheet for the Run-local species;
 older single-sheet files apply to every type) — and the 05 id maps of the
 selected genome types, and writes ``species_ecology_assignment.xlsx``
 (``Assignment`` / ``Group_counts`` / ``Unlabeled`` sheets) under
@@ -20,18 +21,26 @@ source of ecology labels for steps 07–09, so label changes only require
 re-running this step and then 07–09. Unlabelled species are listed in the
 ``Unlabeled`` sheet and never enter the statistics.
 
-The **Label ecology** GUI page offers checkboxes for the three genome types:
-unchecked types are skipped (the run calls
+The **Label ecology** GUI page offers checkboxes for the three genome types
+plus **Local genome** (v1.4.0): unchecked types are skipped (the run calls
 ``run_all.sh label_ecology --label-types=<comma list>``; the command line
-accepts the same flag).
+accepts the same flag). *Local genome* labels the species staged by
+**Tools → Run local** (``result/local/<species>/``) as the pseudo genome
+type ``local_genome``; give it labels by adding a ``local_genome`` sheet to
+the label workbook. Without the flag, only the three physical types are
+labeled.
 
 Step 07 — merge
 ---------------
 
 The **Compare ecology** GUI page offers the same genome-type checkboxes as
-Label ecology (``run_all.sh ecology --ecology-types=<comma list>``): only
-the checked types are merged, and steps 08–09 follow the types present in
-the master table, so the comparison always matches the labeling selection.
+Label ecology, including **Local genome** (``run_all.sh ecology
+--ecology-types=<comma list>``): only the checked types are merged, and
+steps 08–09 follow the types present in the master table, so the comparison
+always matches the labeling selection. *Local genome* merges the isolated
+Run-local outputs under ``result/local/<species>/`` into the master table as
+``local_genome`` rows — every staged species joins the comparison alongside
+the NCBI/custom types.
 
 1. For each selected genome type, merge the per-species element counts
    (``Species_element_counts``) with the per-species **total promoter
@@ -67,6 +76,27 @@ tables in ``ecology_differential_results.xlsx``, plus
 ``ecology_differential_volcano.pdf`` (volcano of pairwise tests + boxplots of
 the top significant elements).
 
+Publication-ready tables (v1.4.0)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The same workbook additionally carries five export-ready sheets for a
+paper's supplementary tables, with descriptive column names, rows ordered
+by significance, rounded numerics and star-notation significance
+(``*`` q < 0.05, ``**`` q < 0.01, ``***`` q < 0.001, ``n.s.``):
+
+* ``Publication_Kruskal`` — Element, Functional group, Genome type,
+  Kruskal-Wallis chi-squared, df, group/species counts, P value,
+  BH-adjusted q, Significance;
+* ``Publication_Pairwise`` — per group pair: medians of both groups,
+  log2 fold change, Wilcoxon W, P value, BH-adjusted q, Significance;
+* ``Publication_Groups`` — per-group medians/means and species counts;
+* ``Publication_ratio_kruskal`` / ``Publication_ratio`` — the same layout
+  for the Box 4 / G-box ratio tests.
+
+The canonical sheets keep their full-precision machine-readable columns and
+additionally carry ``q_value``, ``significance`` and formatted ``p_value_text``
+/ ``q_value_text`` columns.
+
 Box 4 / G-box ratio analysis (light-response hypothesis)
 ---------------------------------------------------------
 
@@ -100,18 +130,29 @@ direction and strength of the trend can be read directly from
 Step 09 — publication figures
 -----------------------------
 
-A four-panel figure (``ecology_figures.pdf``):
+``ecology_figures.pdf`` is a single **portrait A4 figure** whose panels
+follow a logical analytical progression (v1.4.0):
 
-1. **PCA** of species × (compartment × element density) profiles
-   (``log1p``-transformed, scaled) — do the three ecology groups separate
-   along PC1/PC2?
-2. **Heatmap** of the 40 most variable elements, species rows ordered by
-   hierarchical clustering, values z-scored.
-3. **Functional-group composition** — stacked fractions of element density
-   per ecology group, using the ``functional_group`` column of the motif
-   library (hormone / light / stress / development / core / ...).
-4. **Key elements** — boxplots of the six elements with the smallest
-   Kruskal-Wallis p-values.
+1. **(a) Global differential landscape** — a volcano plot of every pairwise
+   test (log2 fold change vs ``-log10`` BH-adjusted q) with the significant
+   tests highlighted and the significant/total count annotated.
+2. **(b) Top differential elements** — boxplots of the up-to-six most
+   significant elements (ordered by BH-adjusted q), with the pairwise
+   Wilcoxon **q-value brackets and asterisks drawn on the panels** and the
+   per-element Kruskal-Wallis P in each panel title.
+3. **(c) Box 4 / G-box ratio test** — the per-species ratio per ecology
+   group, with the ratio statistics (Kruskal-Wallis P, pairwise q brackets)
+   drawn on the panel.
+4. **(d) Box 4 / G-box count decomposition** — the per-species counts of the
+   two elements, showing which of them drives the ratio, with per-element
+   Kruskal-Wallis P values annotated.
+
+``box4_gbox_ratio.pdf`` is a focused two-panel portrait A4 figure (panels
+c + d) dedicated to the light-response hypothesis. Panels share one
+colourblind-safe palette (sun orange, facultative blue, shade green), Arial
+typography, and the asterisk thresholds are restated in each figure caption.
+Count/density/ratio axes use a pseudo-log scale (linear below 1) so zero
+values stay visible.
 
 Interpreting the results
 ------------------------
@@ -119,7 +160,10 @@ Interpreting the results
 * ``Kruskal_Wallis`` — a small BH-adjusted p means the three ecology groups
   differ in that element's density.
 * ``Pairwise_Wilcoxon`` — per group pair: ``median1``/``median2``,
-  ``log2FC``, ``p_value``, ``bh_padj``, ``significant`` (BH < 0.05).
+  ``log2FC``, ``p_value``, ``bh_padj``/``q_value``, ``significant``
+  (BH < 0.05) and the ``significance`` star column.
+* The ``Publication_*`` sheets are the copy-paste-ready versions of those
+  tables for a manuscript's supplementary tables.
 * Raise ``min_group_n`` for stricter comparisons (fewer, more robust tests).
 * ``element_density`` is a per-1000-promoter rate: values are comparable
   across species and compartments.
