@@ -164,7 +164,9 @@ writes a second, reference-aligned workbook
 ``result/ecology_compare/08_statistics/box4_gbox_sunshade_results.xlsx``
 with the same sheet layout as ``chromosome_promoter_Box4_Gbox_sunshade
 _results.xlsx`` (one extra leading ``genome_type`` column, and species
-matched by name instead of NCBI ``tax_id``):
+matched by name against the per-type ``01_species_info`` NCBI taxonomy
+instead of NCBI ``tax_id`` — ``config/species_taxonomy.xlsx`` optionally
+overrides per species):
 
 * ``Species_annotated`` — per genome type × species: Box 4 / G-box counts,
   gene counts, ratio, log10 ratio, ratio status, ratio bin, total, the
@@ -180,8 +182,9 @@ matched by name instead of NCBI ``tax_id``):
   correlation and the ratio-bin chi-square test, plus the fixed-effect
   model rows;
 * ``Order_stratified_tests`` / ``Family_stratified_tests`` /
-  ``Genus_stratified_tests`` — within-rank Wilcoxon tests (needs
-  ``config/species_taxonomy.xlsx``);
+  ``Genus_stratified_tests`` — within-rank Wilcoxon tests (taxonomy comes
+  automatically from each type's ``01_species_info`` workbook; the optional
+  ``config/species_taxonomy.xlsx`` overrides per species);
 * ``Fixed_effect_models`` — ``log10(ratio) ~ sunshade + order/family/genus``
   linear models adjusting for taxonomic structure;
 * ``Family_summary`` / ``Genus_summary`` — order/family- and genus-level
@@ -203,11 +206,13 @@ bins (``0``, ``0-0.5``, ``0.5-1``, ``1-2``, ``2-5``, ``5-10``, ``10-15``,
 *distribution* level: chi-square contingency tests (all groups and
 sun-vs-shade), per-bin Fisher bin-vs-rest tests with BH correction,
 percentages, odds ratios and sun/shade concentration ranking, plus a
-Spearman trend test. Drop ``config/species_taxonomy.xlsx`` (``species`` /
-``order`` / ``family`` / ``genus`` columns; optional ``kingdom`` /
-``phylum`` / ``tax_class``) next to the other configs to also get
-within-order / within-family / **within-genus** Wilcoxon tests and
-fixed-effect linear models adjusting for taxonomic structure.
+Spearman trend test. The taxonomic strata for the within-order /
+within-family / **within-genus** Wilcoxon tests and the fixed-effect linear
+models come automatically from each genome type's ``01_species_info``
+workbook (``species_summary`` sheet); an optional
+``config/species_taxonomy.xlsx`` (``species`` / ``order`` / ``family`` /
+``genus`` columns; optional ``kingdom`` / ``phylum`` / ``tax_class``)
+overrides or supplements them per species.
 
 Interpreting the results
 ------------------------

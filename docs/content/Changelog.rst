@@ -1,6 +1,25 @@
 Changelog
 =========
 
+1.9.0 — order/family/genus taxonomy is read automatically from step 01
+-------------------------------------------------------------------------
+
+* The taxonomic strata of the reference-aligned Box 4/G-box comparison no
+  longer need a config file: Compare ecology reads the NCBI taxonomy
+  (kingdom / phylum / class / order / family / genus) automatically from
+  each genome type's own step-01 workbook
+  (``result/<type>/01_species_info/<short>_info.xlsx``,
+  ``species_summary`` sheet). ``config/species_taxonomy.xlsx`` is now an
+  optional **override/supplement**: its rows win over the 01_species_info
+  rows for the same species, and it remains the only source for species
+  step 01 never saw (Run-local or manually placed custom genomes). The
+  workbook's ``Input_audit`` sheet records both row counts
+  (``taxonomy_config_rows`` / ``taxonomy_ncbi_01_rows``).
+* The ecology end-to-end suite now stages per-type 01_species_info
+  workbooks, proves the automatic strata still run (order/family/genus
+  tested + fixed-effect models fit) and proves the config override wins
+  for a single species.
+
 1.8.0 — Compare ecology mirrors the chromosome Box 4/G-box × sun/shade pipeline
 -------------------------------------------------------------------------------
 
