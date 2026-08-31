@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.3.67 — Box 4 / G-box notes fix + revision marker
+----------------------------------------------------
+
+* Step 08's run-info block is rebuilt so its ``field``/``value`` vectors are
+  length-checked before the data.frame is created (the pre-fix build aborted
+  at the very end with ``arguments imply differing number of rows: 9, 8``).
+* Step 08 now logs its engine revision (``08 engine revision: box4gbox-v3``)
+  as the first line, so a stale pre-fix copy still installed on a server is
+  immediately recognizable in the step log.
+
 1.3.66 — Box 4 / G-box ratio analysis in Compare ecology
 ----------------------------------------------------------
 
