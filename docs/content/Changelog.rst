@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.3.68 — Box 4 / G-box notes: mismatch-proof construction
+------------------------------------------------------------
+
+* Step 08's run-info table is now assembled row by row (one scalar per
+  one-row data.frame, then ``rbind``), so the ``field``/``value`` row-count
+  mismatch some hosts produced can no longer occur, and every scalar is
+  logged (``notes debug: …``) for instant diagnosis.
+
 1.3.67 — Box 4 / G-box notes fix + revision marker
 ----------------------------------------------------
 
