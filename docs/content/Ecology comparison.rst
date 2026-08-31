@@ -35,7 +35,8 @@ the master table, so the comparison always matches the labeling selection.
 
 1. For each selected genome type, merge the per-species element counts
    (``Species_element_counts``) with the per-species **total promoter
-   number** (from the 05 id map).
+   number** (from the step-05 summary workbook's ``Per_species`` sheet —
+   fast even for tens of millions of promoters).
 2. Compute the normalised metric used everywhere downstream:
 
    ``element_density = count / total_promoters × 1000``

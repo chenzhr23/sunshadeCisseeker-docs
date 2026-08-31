@@ -1,6 +1,17 @@
 Changelog
 =========
 
+1.3.65 — Compare ecology: fast 07 merge
+----------------------------------------
+
+* Step 07 no longer re-reads the multi-million-row 05 id map workbooks
+  (openxlsx on a 24.9M-row map stalled the merge for hours on server-scale
+  runs): the per-species promoter totals now come from the step-05 summary
+  workbook's small ``Per_species`` sheet (identical values, derived from the
+  same id map), with the id map re-read only as a fallback when the sheet is
+  absent. The two 06 result sheets are read in one workbook parse instead of
+  two.
+
 1.3.64 — genome-type checkboxes: Nuclear preselected
 ------------------------------------------------------
 
