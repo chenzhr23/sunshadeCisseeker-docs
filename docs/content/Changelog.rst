@@ -1,6 +1,31 @@
 Changelog
 =========
 
+1.7.0 — Run-local species merge into the genome type they were run under
+--------------------------------------------------------------------------
+
+* The ``local_genome`` pseudo-type is gone. **Tools → Run local** now runs
+  ONE physical genome type (nuclear / chloroplast / mitochondrial): the
+  choice is exclusive (ticking one unticks the others), and a species that
+  already has Run-local outputs is **locked** to the type it was run under,
+  so re-runs and the ecology steps can never split one species across
+  types. Steps 06/07 merge each staged species into that type — Label
+  ecology reads its labels from the type's own sheet of
+  ``config/species_ecology_labels.xlsx``, and Compare ecology merges its
+  05/06 outputs into the type's rows (counts and promoter totals scale
+  together, so the ``element_density`` metric is unchanged). A genome type
+  that only has Run-local species (no shared 05/06 outputs) is handled end
+  to end by both steps.
+* ``Sarcandra glabra`` moved back from the ``local_genome`` sheet to the
+  ``nuclear_genome`` sheet of the shipped label config (it was run under
+  the nuclear type); the ``local_genome`` sheet no longer exists.
+* The Label ecology / Compare ecology pages dropped the *Local genome*
+  checkbox and keep the three physical genome-type checkboxes; the Run
+  local dialog, the page descriptions and this documentation were updated.
+  The ``e2e_local_ecology_1400`` suite now stages the local species under
+  the nuclear type and asserts the nuclear merge (including the
+  local-only-type path).
+
 1.6.1 — Introduction workflow diagram and screenshots refreshed
 -----------------------------------------------------------------
 

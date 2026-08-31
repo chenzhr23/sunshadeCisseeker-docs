@@ -4,7 +4,7 @@ About sunshadeCisseeker
 sunshadeCisseeker identifies, annotates and compares promoter
 cis-regulatory elements across sun / shade plants.
 
-The current release is **1.6.1**.
+The current release is **1.7.0**.
 
 Highlights
 ----------

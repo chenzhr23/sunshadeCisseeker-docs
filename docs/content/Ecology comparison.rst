@@ -11,8 +11,7 @@ Label ecology (step 06)
 
 A standalone step between the per-genome pipelines and the comparison: it
 reads ``config/species_ecology_labels.xlsx`` — one sheet per genome type
-(``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome`` and,
-since v1.4.0, an optional ``local_genome`` sheet for the Run-local species;
+(``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome``;
 older single-sheet files apply to every type) — and the 05 id maps of the
 selected genome types, and writes ``species_ecology_assignment.xlsx``
 (``Assignment`` / ``Group_counts`` / ``Unlabeled`` sheets) under
@@ -21,26 +20,29 @@ source of ecology labels for steps 07–09, so label changes only require
 re-running this step and then 07–09. Unlabelled species are listed in the
 ``Unlabeled`` sheet and never enter the statistics.
 
-The **Label ecology** GUI page offers checkboxes for the three genome types
-plus **Local genome** (v1.4.0): unchecked types are skipped (the run calls
+The **Label ecology** GUI page offers checkboxes for the three genome types:
+unchecked types are skipped (the run calls
 ``run_all.sh label_ecology --label-types=<comma list>``; the command line
-accepts the same flag). *Local genome* labels the species staged by
-**Tools → Run local** (``result/local/<species>/``) as the pseudo genome
-type ``local_genome``; give it labels by adding a ``local_genome`` sheet to
-the label workbook. Without the flag, only the three physical types are
-labeled.
+accepts the same flag). Since v1.7.0 a species staged by **Tools → Run
+local** (``result/local/<species>/<genome_type>/``) is labeled as part of
+the genome type it was run under — its labels come from that type's sheet,
+and a genome type whose only species are Run-local (no shared 05 output) is
+still labeled. There is no ``local_genome`` sheet or pseudo-type.
 
 Step 07 — merge
 ---------------
 
 The **Compare ecology** GUI page offers the same genome-type checkboxes as
-Label ecology, including **Local genome** (``run_all.sh ecology
---ecology-types=<comma list>``): only the checked types are merged, and
-steps 08–09 follow the types present in the master table, so the comparison
-always matches the labeling selection. *Local genome* merges the isolated
-Run-local outputs under ``result/local/<species>/`` into the master table as
-``local_genome`` rows — every staged species joins the comparison alongside
-the NCBI/custom types.
+Label ecology (``run_all.sh ecology --ecology-types=<comma list>``): only
+the checked types are merged, and steps 08–09 follow the types present in
+the master table, so the comparison always matches the labeling selection.
+Since v1.7.0 the isolated Run-local outputs under
+``result/local/<species>/<genome_type>/`` are merged **into the genome type
+they were run under**: a species present in both the shared set and the
+local set is summed per element (counts and promoter totals scale together,
+so the density metric is unchanged), and a genome type whose only outputs
+are Run-local is still merged. Every staged species therefore joins the
+comparison inside its physical type instead of a separate group.
 
 1. For each selected genome type, merge the per-species element counts
    (``Species_element_counts``) with the per-species **total promoter

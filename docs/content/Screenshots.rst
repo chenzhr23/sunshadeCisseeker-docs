@@ -57,17 +57,16 @@ editors and the remaining functions.
    The **Label ecology** page (cross-genome step 06): assigns the
    ``sun`` / ``shade`` labels from
    ``config/species_ecology_labels.xlsx`` (one sheet per genome type:
-   ``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome``
-   and, since v1.4.0, an optional ``local_genome`` sheet for the Run-local
-   species) to the merged NCBI+custom datasets and writes
+   ``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome``)
+   to the merged NCBI+custom datasets and writes
    ``result/ecology_compare/06_label_ecology/species_ecology_assignment.xlsx``
    (``Assignment`` / ``Group_counts`` / ``Unlabeled`` sheets) — the single
    label source for the comparison. The **genome-type checkboxes** select
    which types get labeled (only **Nuclear genome** starts checked;
-   unchecked types are skipped); **Local genome** additionally labels the
-   species staged by Tools → Run local. Run it
-   after the genome pages and before Compare ecology; re-run only this page
-   after editing the label table.
+   unchecked types are skipped); species staged by Tools → Run local are
+   labeled as part of the genome type they were run under (same sheet).
+   Run it after the genome pages and before Compare ecology; re-run only
+   this page after editing the label table.
 
 .. figure:: ../_static/screenshots/06-compare-ecology.png
    :width: 1360
@@ -77,8 +76,8 @@ editors and the remaining functions.
    Kruskal-Wallis plus pairwise Wilcoxon with Benjamini-Hochberg correction
    (08) — and the publication figures (09). The genome-type checkboxes
    match the Label ecology page (only **Nuclear genome** starts checked):
-   unchecked types are left out of the merge, and **Local genome** merges
-   the Tools → Run local species as one extra group.
+   unchecked types are left out of the merge, and the Tools → Run local
+   species join the genome type they were run under.
    It requires the Label ecology page to have run first. Results land under
    ``result/ecology_compare/``.
 
@@ -126,14 +125,17 @@ The three parameter/table editors open as popups from the **Tools** menu.
    :width: 1040
 
    **Tools → Run local…** — analyze ONE species from a local FASTA + GFF3 in
-   an isolated workspace: enter the species name, pick the two files, tick
-   the genome type(s) (nuclear / chloroplast / mitochondrial) and press Run.
+   an isolated workspace: enter the species name, pick the two files, choose
+   ONE genome type (nuclear / chloroplast / mitochondrial — the choice is
+   exclusive, and a species with existing Run-local results is locked to the
+   type it was run under) and press Run.
    The files are snapshot-copied to ``result/local/<species>/input/`` and
-   every 04–06 output lands under ``result/local/<species>/<type>_genome/``
+   every 04–06 output lands under
+   ``result/local/<species>/<genome_type>/`` (e.g. ``nuclear_genome/``)
    with the standard file names and column layouts (the shared
    ``result/<type>`` trees, the NCBI task lists and the custom set are never
-   touched); ticked types run one after another and Stop interrupts the
-   queue.
+   touched); Label ecology / Compare ecology then merge the species into
+   that physical genome type.
 
 .. figure:: ../_static/screenshots/11-custom-genome-lists.png
    :width: 1040

@@ -35,9 +35,9 @@ There are exactly six sliding pages, in this order:
    * - **Mitochondrial genome**
      - runs the mitochondrial part (steps 01-06)
    * - **Label ecology**
-     - assigns the sun/shade labels to the merged datasets (cross-genome step 06), one label sheet per genome type; checkboxes (incl. Local genome) select the types to label
+     - assigns the sun/shade labels to the merged datasets (cross-genome step 06), one label sheet per genome type; checkboxes select the types to label
    * - **Compare ecology**
-     - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first); checkboxes (incl. Local genome) select the genome types to merge
+     - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first); checkboxes select the genome types to merge
 
 Each analysis page shows the step description, the result directory hint and
 a live log panel. The three genome pages additionally offer an **NCBI API key
@@ -53,11 +53,11 @@ persists), while a *missing* key defaults to ``2`` again on the next
 additionally offer genome-type checkboxes (only **Nuclear genome** starts
 checked): they become the ``--label-types`` / ``--ecology-types`` flags of
 the respective runs, so both steps analyze exactly the selected genome
-types. Since v1.4.0 a fourth checkbox, **Local genome**, merges the species
-staged by *Tools → Run local* (``result/local/<species>/``) into the
-labeling and the comparison as the pseudo type ``local_genome`` (label them
-via a ``local_genome`` sheet in the label workbook). A screenshot of every
-page and popup, with explanations, is on the :doc:`Screenshots` page.
+types. The three checkboxes are the three physical types only: a species
+analyzed by *Tools → Run local* joins the genome type it was run under
+(see below), so there is no separate pseudo-type to select. A screenshot
+of every page and popup, with explanations, is on the :doc:`Screenshots`
+page.
 
 Menu bar
 --------
@@ -80,20 +80,22 @@ Run local (single-species analysis)
 **Tools → Run local...** analyzes **one species on your disk** in an
 **isolated workspace** — nothing else is read, and nothing outside is
 written. Enter a species name, pick its genome **FASTA** and annotation
-**GFF3**, tick the genome type(s) to analyze (**nuclear / chloroplast /
-mitochondrial** — at least one must be ticked) and press **Run**:
+**GFF3**, choose **one** genome type (**nuclear / chloroplast /
+mitochondrial** — Nuclear genome is preselected; the choice is exclusive,
+ticking one unticks the others) and press **Run**:
 
 * The two files are snapshot-copied into
   ``result/local/<species>/input/`` (the original ``.fa/.fasta/.gz``
   suffixes are kept, so gzipped inputs stay compressed). Re-running the
   same species starts from a clean workspace.
-* For each ticked type the standard steps **04–06** run sequentially
+* The chosen type runs the standard steps **04–06** sequentially
   (promoter extraction → merge → CRE scan) with the live log shown in the
   dialog. NCBI and download steps are forced off and the **genome-size cap
   is lifted** for the explicitly chosen file, whatever
   ``quickstart_config.yml`` says.
-* **Outputs land under** ``result/local/<species>/<type>_genome/NN_step/``
-  with the **same file names and column layouts as a normal run** — for
+* **Outputs land under** ``result/local/<species>/<genome_type>/NN_step/``
+  (e.g. ``result/local/<species>/nuclear_genome/...``) with the **same file
+  names and column layouts as a normal run** — for
   example ``04_promoter/nuclear_promoter_pair_summary.xlsx``,
   ``05_ciselement_input/all_species_nuclear_id_map.xlsx``,
   ``06_ciselement/nuclear_ciselement_results.xlsx`` — so the tables can be
@@ -102,8 +104,17 @@ mitochondrial** — at least one must be ticked) and press **Run**:
   ``Custom_genome_fa_gff`` set are **never read or modified**: other
   species are neither re-analyzed nor included, and later normal runs are
   not affected by the local species.
-* Ticking several types runs them one after another; **Stop** interrupts
-  the current run and the queue.
+* If the species already has Run-local results (a
+  ``result/local/<species>/<genome_type>/06_ciselement`` folder exists),
+  the dialog **locks the type choice to that genome type** and says so:
+  re-running updates the same type, and Label ecology / Compare ecology
+  keep merging the species into that type. To switch a species to another
+  genome type, delete its folder under ``result/local/<species>/`` first.
+* **Label ecology / Compare ecology** (since v1.7.0) merge the staged
+  species into the genome type it was run under — label it on that type's
+  sheet of ``config/species_ecology_labels.xlsx``, and its 05/06 outputs
+  join that type's comparison rows automatically. There is no separate
+  pseudo-type to tick anywhere.
 
 Custom genome lists
 -------------------
