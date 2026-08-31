@@ -47,6 +47,12 @@ Ecology comparison outputs
      - single portrait A4 figure, panels (a) global differential landscape, (b) top differential elements with pairwise q-value brackets, (c) Box 4 / G-box ratio test, (d) Box 4 / G-box count decomposition
    * - ``result/ecology_compare/09_figures/box4_gbox_ratio.pdf``
      - portrait A4 multi-panel figure for the light-response hypothesis (ratio distributions, count balance, ratio-bin composition/enrichment, concentrated bins, raw bin count difference, optional order/family-stratified tests)
+   * - ``result/ecology_compare/08_statistics/box4_gbox_sunshade_results.xlsx`` (v1.8.0)
+     - reference-aligned Box 4/G-box × sun/shade workbook (same layout as the in-house chromosome pipeline's ``chromosome_promoter_Box4_Gbox_sunshade_results.xlsx``, one ``genome_type`` column added): ``Species_annotated`` / ``Label_summary`` / ``Ratio_bin_by_label`` / ``Ratio_bin_enrichment`` / ``Concentrated_ratio_bins`` / ``Relationship_tests`` / ``Order_stratified_tests`` / ``Family_stratified_tests`` / ``Genus_stratified_tests`` / ``Fixed_effect_models`` / ``Family_summary`` / ``Genus_summary`` / ``Input_audit``
+   * - ``result/ecology_compare/08_statistics/box4_gbox_sunshade_species_annotated.tsv`` (v1.8.0)
+     - the annotated species table (Box 4 / G-box counts, ratio, ratio bin + sun/shade label + taxonomy ranks) as a flat TSV
+   * - ``result/ecology_compare/09_figures/box4_gbox_sunshade_relationship.pdf`` (v1.8.0)
+     - one page per genome type on the chromosome pipeline's 9.2 × 15.2 in canvas: panels (a) ratio violin/box/jitter, (b) motif count balance, (c) ratio-bin composition, (d) annotation coverage, (e) raw bin count difference, (f) raw labeled counts, (g) bin enrichment percentages, (h) concentrated bins, and (i/j/k) order- / family- / genus-stratified tests
 
 Core metric
 -----------

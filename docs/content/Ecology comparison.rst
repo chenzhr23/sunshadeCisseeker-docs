@@ -155,6 +155,44 @@ composition, the sun-vs-shade bin enrichment (Fisher tests with BH stars),
 the concentrated bins and the raw bin count difference — plus order- and
 family-stratified tests when ``config/species_taxonomy.xlsx`` exists.
 
+Reference-aligned Box 4/G-box × sun/shade outputs (v1.8.0)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To make the comparison directly comparable with the in-house chromosome
+pipeline (``08_chromosome_promoter_Box4_Gbox_sunshade.r``), step 08 also
+writes a second, reference-aligned workbook
+``result/ecology_compare/08_statistics/box4_gbox_sunshade_results.xlsx``
+with the same sheet layout as ``chromosome_promoter_Box4_Gbox_sunshade
+_results.xlsx`` (one extra leading ``genome_type`` column, and species
+matched by name instead of NCBI ``tax_id``):
+
+* ``Species_annotated`` — per genome type × species: Box 4 / G-box counts,
+  gene counts, ratio, log10 ratio, ratio status, ratio bin, total, the
+  sun/shade label and the taxonomy ranks (``kingdom`` / ``phylum`` /
+  ``tax_class`` when provided, ``order`` / ``family`` / ``genus``);
+* ``Label_summary`` — per label: species counts plus ratio summary
+  statistics (median / mean / Q25 / Q75 / median log10 / total counts);
+* ``Ratio_bin_by_label`` / ``Ratio_bin_enrichment`` /
+  ``Concentrated_ratio_bins`` — the distribution-level composition, the
+  per-bin Fisher bin-vs-rest tests with BH adjustment, and the ranked
+  concentrated bins;
+* ``Relationship_tests`` — sun-vs-shade Wilcoxon, the binary-label Spearman
+  correlation and the ratio-bin chi-square test, plus the fixed-effect
+  model rows;
+* ``Order_stratified_tests`` / ``Family_stratified_tests`` /
+  ``Genus_stratified_tests`` — within-rank Wilcoxon tests (needs
+  ``config/species_taxonomy.xlsx``);
+* ``Fixed_effect_models`` — ``log10(ratio) ~ sunshade + order/family/genus``
+  linear models adjusting for taxonomic structure;
+* ``Family_summary`` / ``Genus_summary`` — order/family- and genus-level
+  label coverage and ratio summaries;
+* ``Input_audit`` — inputs, join-quality counts and headline p-values.
+
+The matching ``box4_gbox_sunshade_species_annotated.tsv`` and the
+``box4_gbox_sunshade_relationship.pdf`` figure (one 9.2 × 15.2 in page per
+genome type; panels a–h mirror the chromosome figure and panels i/j/k show
+the order- / family- / genus-stratified tested strata) complete the set.
+
 Ratio-bin analysis (v1.5.0)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -166,9 +204,10 @@ bins (``0``, ``0-0.5``, ``0.5-1``, ``1-2``, ``2-5``, ``5-10``, ``10-15``,
 sun-vs-shade), per-bin Fisher bin-vs-rest tests with BH correction,
 percentages, odds ratios and sun/shade concentration ranking, plus a
 Spearman trend test. Drop ``config/species_taxonomy.xlsx`` (``species`` /
-``order`` / ``family`` columns) next to the other configs to also get
-within-order / within-family Wilcoxon tests and fixed-effect linear models
-adjusting for taxonomic structure.
+``order`` / ``family`` / ``genus`` columns; optional ``kingdom`` /
+``phylum`` / ``tax_class``) next to the other configs to also get
+within-order / within-family / **within-genus** Wilcoxon tests and
+fixed-effect linear models adjusting for taxonomic structure.
 
 Interpreting the results
 ------------------------

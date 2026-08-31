@@ -77,6 +77,47 @@ labeling step. Only species listed here enter the ecology comparison (steps
 07–09); unlabelled species still appear in the general analysis (steps
 01–06).
 
+``config/species_taxonomy.xlsx`` (optional; taxonomic strata, v1.8.0)
+----------------------------------------------------------------------
+
+Drop this file next to the other configs to make the Compare ecology
+Box 4/G-box analysis additionally test the sun/shade signal **within
+taxonomic strata** and with **fixed-effect models** — the reference-aligned
+``box4_gbox_sunshade_results.xlsx`` sheets ``Order_stratified_tests`` /
+``Family_stratified_tests`` / ``Genus_stratified_tests`` /
+``Fixed_effect_models`` / ``Family_summary`` / ``Genus_summary`` and the
+``box4_gbox_sunshade_relationship.pdf`` panels i/j/k. Without the file those
+analyses are skipped.
+
+.. list-table::
+   :header-rows: 1
+
+   * - Column
+     - Required
+     - Description
+   * - ``species``
+     - yes
+     - species key matching the pipeline name exactly (spaces → underscores)
+   * - ``order``
+     - yes
+     - taxonomic order, e.g. ``Malpighiales``
+   * - ``family``
+     - yes
+     - taxonomic family, e.g. ``Euphorbiaceae``
+   * - ``genus``
+     - yes
+     - taxonomic genus, e.g. ``Hevea``
+   * - ``kingdom`` / ``phylum`` / ``tax_class``
+     - no
+     - higher ranks; reported in ``Species_annotated`` when present
+
+Species are matched by name (the chromosome pipeline matches by NCBI
+``tax_id``); a species missing from the table is marked ``unmatched`` and
+stays out of the strata tests. Within-stratum Wilcoxon tests need ≥ 2 sun
+AND ≥ 2 shade species in a stratum; fixed-effect models need ≥ 6 labeled
+species with at least two strata — everything else is listed as
+``insufficient_sun_or_shade`` / ``not_enough_data`` rather than dropped.
+
 ``config/cis_element_motif_library.xlsx`` (motif library)
 ----------------------------------------------------------
 

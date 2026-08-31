@@ -1,6 +1,41 @@
 Changelog
 =========
 
+1.8.0 — Compare ecology mirrors the chromosome Box 4/G-box × sun/shade pipeline
+-------------------------------------------------------------------------------
+
+* Compare ecology now also produces a **reference-aligned output set** that
+  follows the in-house chromosome pipeline
+  (``08_chromosome_promoter_Box4_Gbox_sunshade.r`` /
+  ``chromosome_promoter_Box4_Gbox_sunshade``) sheet for sheet and panel for
+  panel: ``result/ecology_compare/08_statistics/box4_gbox_sunshade_results.xlsx``
+  (``README`` / ``Species_annotated`` / ``Label_summary`` /
+  ``Ratio_bin_by_label`` / ``Ratio_bin_enrichment`` /
+  ``Concentrated_ratio_bins`` / ``Relationship_tests`` /
+  ``Order_stratified_tests`` / ``Family_stratified_tests`` /
+  ``Genus_stratified_tests`` / ``Fixed_effect_models`` / ``Family_summary`` /
+  ``Genus_summary`` / ``Input_audit``) plus the
+  ``box4_gbox_sunshade_species_annotated.tsv`` and the
+  ``box4_gbox_sunshade_relationship.pdf`` figure (panels a–j of the
+  chromosome figure on its 9.2 × 15.2 in canvas, one page per genome type).
+  Each sheet carries one extra leading ``genome_type`` column; species are
+  matched to the taxonomy by name instead of NCBI ``tax_id`` (the
+  chromosome pipeline's assembly/taxid columns do not exist in this
+  pipeline and are documented in the README sheet).
+* **order / family / genus comparisons**: ``config/species_taxonomy.xlsx``
+  now takes a ``genus`` column (``kingdom`` / ``phylum`` / ``tax_class``
+  optional) next to ``species`` / ``order`` / ``family``. Step 08 runs
+  within-order, within-family and **within-genus** Wilcoxon tests and
+  fixed-effect linear models (``log10 ratio ~ sunshade + rank``) for all
+  three ranks, and writes order/family- and genus-level summaries; the
+  relationship figure gains the genus-stratified panel (k). All outputs are
+  per genome type.
+* The Compare ecology GUI page description, the config README and this
+  documentation were updated; the ecology end-to-end suite now asserts the
+  reference-aligned workbook sheets, the annotated TSV, the three-rank
+  stratified tests, the fixed-effect models and the relationship PDF page
+  geometry.
+
 1.7.0 — Run-local species merge into the genome type they were run under
 --------------------------------------------------------------------------
 
