@@ -63,7 +63,7 @@ sheets are preserved).
      - species key matching the pipeline name exactly (spaces → underscores, e.g. ``Arabidopsis_thaliana``); copy from the ``species`` column of any ``result/<type>/05_ciselement_input/all_species_<type>_id_map.xlsx``
    * - ``ecology``
      - yes
-     - ``sun`` (heliophyte) / ``facultative`` / ``shade`` (sciophyte)
+     - ``sun`` (heliophyte) / ``shade`` (sciophyte)
    * - ``note``
      - no
      - free-form note (e.g. ``Manual annotation``)

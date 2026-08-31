@@ -244,6 +244,6 @@ and occurrences are counted non-overlapping per promoter. Outputs:
 Steps 06–09 — label ecology and ecology comparison
 --------------------------------------------------
 
-Step 06 (Label ecology) attaches the ``sun`` / ``facultative`` / ``shade``
+Step 06 (Label ecology) attaches the ``sun`` / ``shade``
 labels to the merged datasets and steps 07–09 run the comparison.
 See :doc:`Ecology comparison` for the full business logic.

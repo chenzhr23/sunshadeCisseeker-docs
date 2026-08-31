@@ -2,9 +2,9 @@ About sunshadeCisseeker
 =======================
 
 sunshadeCisseeker identifies, annotates and compares promoter
-cis-regulatory elements across sun / facultative / shade plants.
+cis-regulatory elements across sun / shade plants.
 
-The current release is **1.5.0**.
+The current release is **1.6.0**.
 
 Highlights
 ----------
@@ -12,7 +12,7 @@ Highlights
 * **Universal CRE identification** — a user-editable IUPAC motif library
   (``config/cis_element_motif_library.xlsx``), not limited to PlantCARE.
 * **Manual ecology annotation** — ``config/species_ecology_labels.xlsx``
-  drives the sun / facultative / shade grouping; the software never infers
+  drives the sun / shade grouping; the software never infers
   the groups itself.
 * **One representative genome per species** — each species downloads exactly
   one most-representative FASTA + GFF3 pair (RefSeq preferred, complete

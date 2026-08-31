@@ -35,7 +35,7 @@ There are exactly six sliding pages, in this order:
    * - **Mitochondrial genome**
      - runs the mitochondrial part (steps 01-06)
    * - **Label ecology**
-     - assigns the sun/facultative/shade labels to the merged datasets (cross-genome step 06), one label sheet per genome type; checkboxes (incl. Local genome) select the types to label
+     - assigns the sun/shade labels to the merged datasets (cross-genome step 06), one label sheet per genome type; checkboxes (incl. Local genome) select the types to label
    * - **Compare ecology**
      - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first); checkboxes (incl. Local genome) select the genome types to merge
 

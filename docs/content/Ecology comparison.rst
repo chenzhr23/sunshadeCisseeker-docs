@@ -2,7 +2,7 @@ Ecology comparison
 ==================
 
 The ecology comparison answers one question: **do the promoter
-cis-regulatory elements of sun, facultative and shade plants differ
+cis-regulatory elements of sun and shade plants differ
 systematically?** The ecological assignment is a **manual annotation** from
 ``config/species_ecology_labels.xlsx``; the software never infers the groups.
 
@@ -52,7 +52,7 @@ the NCBI/custom types.
 
    (sites per 1000 promoters), so species with very different gene numbers
    and the three compartments are directly comparable.
-3. Join the ``sun`` / ``facultative`` / ``shade`` label from the Label
+3. Join the ``sun`` / ``shade`` label from the Label
    ecology assignment (by genome type + species).
 4. Write the long-format ``Master_long`` table plus three auxiliary tables to
    ``ecology_master_dataset.xlsx``.
@@ -64,9 +64,9 @@ For every "genome type × element" combination:
 
 * **Filtering** — at least two ecology groups, each with ≥ ``min_group_n``
   species (default 3), must be present; otherwise the test is skipped.
-* **Kruskal-Wallis** test across the three groups (overall difference).
-* **Pairwise Wilcoxon** rank-sum tests (sun vs facultative, facultative vs
-  shade, sun vs shade) with the same group-size filter, plus
+* **Kruskal-Wallis** test across the two groups (overall difference).
+* **Pairwise Wilcoxon** rank-sum test (sun vs shade) with the same
+  group-size filter, plus
   ``log2FC = log2(median1 / median2)``.
 * **Benjamini-Hochberg (BH)** correction of all p-values;
   ``bh_padj < 0.05`` is marked significant.
@@ -159,7 +159,7 @@ Ratio-bin analysis (v1.5.0)
 Step 08 additionally bins every species' Box 4 / G-box ratio into nine
 bins (``0``, ``0-0.5``, ``0.5-1``, ``1-2``, ``2-5``, ``5-10``, ``10-15``,
 ``>15`` and ``NA``; a species with G-box = 0 but Box 4 > 0 lands in
-``>15``) and tests the sun/facultative/shade difference at the
+``>15``) and tests the sun/shade difference at the
 *distribution* level: chi-square contingency tests (all groups and
 sun-vs-shade), per-bin Fisher bin-vs-rest tests with BH correction,
 percentages, odds ratios and sun/shade concentration ranking, plus a

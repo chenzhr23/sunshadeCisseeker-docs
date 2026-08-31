@@ -1,6 +1,20 @@
 Changelog
 =========
 
+1.6.0 — ecology grouping collapses to sun / shade
+--------------------------------------------------
+
+* The three-level ``sun / facultative / shade`` grouping collapses to a
+  two-level **sun / shade** design: the ``facultative`` category is gone.
+  Every ``facultative`` entry in the shipped
+  ``config/species_ecology_labels.xlsx`` was converted to ``sun`` (479 sun /
+  52 shade / 149 unlabeled in the nuclear sheet), and the label reader maps
+  any legacy ``facultative`` value found in older config files to ``sun``
+  automatically (with a warning), so old files keep working. All steps
+  (06–09), the GUI texts, the manuals and this documentation now speak of
+  sun and shade only; the statistics therefore compare two groups
+  (Kruskal-Wallis across sun vs shade, one pairwise Wilcoxon test).
+
 1.5.0 — ratio-bin ecology analysis absorbed from the chromosome pipeline
 --------------------------------------------------------------------------
 

@@ -55,7 +55,7 @@ editors and the remaining functions.
    :width: 1360
 
    The **Label ecology** page (cross-genome step 06): assigns the
-   ``sun`` / ``facultative`` / ``shade`` labels from
+   ``sun`` / ``shade`` labels from
    ``config/species_ecology_labels.xlsx`` (one sheet per genome type:
    ``nuclear_genome`` / ``chloroplast_genome`` / ``mitochondrial_genome``
    and, since v1.4.0, an optional ``local_genome`` sheet for the Run-local
@@ -107,7 +107,7 @@ The three parameter/table editors open as popups from the **Tools** menu.
    ``config/species_ecology_labels.xlsx``: the **Genome type sheet** combo
    picks the sheet to edit (``nuclear_genome`` / ``chloroplast_genome`` /
    ``mitochondrial_genome``); add or remove species, assign each species its
-   ``sun`` / ``facultative`` / ``shade`` label, reload or save (saving
+   ``sun`` / ``shade`` label, reload or save (saving
    preserves every other sheet; older single-sheet files load their first
    sheet). Changes take effect after re-running the Label ecology page.
 
