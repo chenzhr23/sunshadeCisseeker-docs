@@ -1,6 +1,23 @@
 Changelog
 =========
 
+1.4.1 — ecology-label quality control for the shipped label config
+--------------------------------------------------------------------
+
+* ``config/species_ecology_labels.xlsx`` went through a manual quality
+  review for the Box 4 / G-box ecology comparison. 50 additional species
+  whose annotation could seriously bias the sun/facultative/shade test were
+  unlabelled: artificial hybrids (``x`` entries), cultivated varieties /
+  cultivar groups / ornamentals and domesticated crops without a wild
+  ecotype, the remaining parasitic plants (``Striga asiatica``,
+  ``Phtheirospermum japonicum``), one undetermined species, and five
+  species whose annotation contradicts their documented wild habitat. The
+  workbook keeps a ``qc_excluded`` sheet listing every removed label with
+  its reason, so the decisions stay auditable and reversible. Unlabelled
+  species simply stay out of the statistics (same contract as before).
+* ``Sarcandra glabra`` moved from the nuclear sheet to the new
+  ``local_genome`` sheet (it was analyzed via Tools → Run local).
+
 1.4.0 — Local genome merging + publication-grade Compare ecology outputs
 --------------------------------------------------------------------------
 
