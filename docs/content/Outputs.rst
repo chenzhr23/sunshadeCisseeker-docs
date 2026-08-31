@@ -40,11 +40,13 @@ Ecology comparison outputs
    * - ``result/ecology_compare/07_merge/ecology_master_dataset.xlsx``
      - ``Master_long`` / ``Species_summary`` / ``Element_species`` / ``Group_species_n``
    * - ``result/ecology_compare/08_statistics/ecology_differential_results.xlsx``
-     - ``Kruskal_Wallis`` / ``Pairwise_Wilcoxon`` / ``Group_summary``
+     - ``Kruskal_Wallis`` / ``Pairwise_Wilcoxon`` / ``Group_summary`` plus the Box 4 / G-box ratio analysis: ``Box4_Gbox_species`` (per-species Box 4 and G-box counts and their ratio), ``Box4_Gbox_kruskal``, ``Box4_Gbox_tests`` (pairwise Wilcoxon + BH) and ``Box4_Gbox_groups``
    * - ``result/ecology_compare/08_statistics/ecology_differential_volcano.pdf``
      - volcano of pairwise tests + top significant element boxplots
    * - ``result/ecology_compare/09_figures/ecology_figures.pdf``
      - PCA + heatmap + functional-group composition + key elements
+   * - ``result/ecology_compare/09_figures/box4_gbox_ratio.pdf``
+     - Box 4 / G-box count ratio per ecology group and genome type (boxplots, log10 scale)
 
 Core metric
 -----------

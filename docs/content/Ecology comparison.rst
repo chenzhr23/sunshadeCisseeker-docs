@@ -67,6 +67,36 @@ tables in ``ecology_differential_results.xlsx``, plus
 ``ecology_differential_volcano.pdf`` (volcano of pairwise tests + boxplots of
 the top significant elements).
 
+Box 4 / G-box ratio analysis (light-response hypothesis)
+---------------------------------------------------------
+
+To test whether **sun plants carry high Box 4 counts and low G-box counts**
+while **shade plants show the opposite**, step 08 additionally computes, for
+every labeled species, the ratio of the two Light-group elements of the motif
+library (``Box 4`` motif ``ATTAAT`` and the ``G-box`` family of motifs):
+
+``box4_gbox_ratio = Box 4 count / G-box count``
+
+The same pipeline as the density tests — group-size filter,
+Kruskal-Wallis, pairwise Wilcoxon with BH correction — is then run on the
+ratio per genome type. Species without any G-box hit get an NA ratio and are
+excluded from the tests (but remain visible in the per-species table).
+
+* ``Box4_Gbox_species`` — per-species Box 4 count, G-box count, ratio and
+  log2 ratio (per genome type);
+* ``Box4_Gbox_kruskal`` — Kruskal-Wallis of the ratio across the ecology
+  groups per genome type;
+* ``Box4_Gbox_tests`` — pairwise Wilcoxon with BH correction and
+  ``log2FC = log2(median1 / median2)``;
+* ``Box4_Gbox_groups`` — per-group median/mean ratio and species counts;
+* ``box4_gbox_ratio.pdf`` (step 09) — boxplots of the ratio per ecology
+  group and genome type on a log10 scale.
+
+A sun group median ratio clearly above the shade group median (significant
+``bh_padj`` in the ``sun vs shade`` row) supports the hypothesis; the
+direction and strength of the trend can be read directly from
+``Box4_Gbox_groups``.
+
 Step 09 — publication figures
 -----------------------------
 

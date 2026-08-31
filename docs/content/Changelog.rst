@@ -1,6 +1,22 @@
 Changelog
 =========
 
+1.3.66 — Box 4 / G-box ratio analysis in Compare ecology
+----------------------------------------------------------
+
+* Compare ecology now computes and visualizes the **Box 4 count / G-box
+  count ratio** per species (both elements come from the motif library's
+  Light group), answering the light-response hypothesis directly — sun
+  plants are expected to carry high Box 4 / low G-box counts and shade
+  plants the opposite. Step 08 runs the same Kruskal-Wallis + pairwise
+  Wilcoxon + Benjamini-Hochberg pipeline on the ratio per genome type and
+  writes four new sheets (``Box4_Gbox_species`` / ``Box4_Gbox_kruskal`` /
+  ``Box4_Gbox_tests`` / ``Box4_Gbox_groups``) into
+  ``ecology_differential_results.xlsx``; step 09 draws
+  ``box4_gbox_ratio.pdf`` (boxplots of the ratio per ecology group and
+  genome type, log10 scale). A species without any G-box hit has an NA
+  ratio and is excluded from the tests.
+
 1.3.65 — Compare ecology: fast 07 merge
 ----------------------------------------
 
