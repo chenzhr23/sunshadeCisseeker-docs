@@ -1,6 +1,20 @@
 Changelog
 =========
 
+1.3.62 — editor dialogs: Rscript resolution off the GUI thread
+----------------------------------------------------------------
+
+* Opening the first editor dialog used to resolve ``Rscript`` through
+  ``QStandardPaths`` — a full PATH scan on the GUI thread that can block
+  for minutes on hosts whose PATH crosses slow or stalled network
+  filesystems (the reported freeze when opening Ecology labels / Custom
+  genome lists). The launcher now pins ``SUNSHADE_RSCRIPT`` (a bash hash
+  lookup) and the interface resolves it via that variable, then common
+  absolute locations, before ever scanning the PATH.
+* The editor popup windows now open with a fixed sensible size so the huge
+  implicit layout hints of large tables can no longer stall window mapping
+  on X-forwarded sessions.
+
 1.3.61 — editor dialogs: constant-time table population
 ---------------------------------------------------------
 
