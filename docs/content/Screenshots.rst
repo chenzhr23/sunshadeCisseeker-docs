@@ -62,7 +62,8 @@ editors and the remaining functions.
    ``result/ecology_compare/06_label_ecology/species_ecology_assignment.xlsx``
    (``Assignment`` / ``Group_counts`` / ``Unlabeled`` sheets) — the single
    label source for the comparison. The three **genome-type checkboxes**
-   select which types get labeled (unchecked types are skipped). Run it
+   select which types get labeled (only **Nuclear genome** starts checked;
+   unchecked types are skipped). Run it
    after the genome pages and before Compare ecology; re-run only this page
    after editing the label table.
 
@@ -73,7 +74,8 @@ editors and the remaining functions.
    datasets into the ecology master table (07), differential statistics —
    Kruskal-Wallis plus pairwise Wilcoxon with Benjamini-Hochberg correction
    (08) — and the publication figures (09). The three genome-type checkboxes
-   match the Label ecology page: unchecked types are left out of the merge.
+   match the Label ecology page (only **Nuclear genome** starts checked):
+   unchecked types are left out of the merge.
    It requires the Label ecology page to have run first. Results land under
    ``result/ecology_compare/``.
 

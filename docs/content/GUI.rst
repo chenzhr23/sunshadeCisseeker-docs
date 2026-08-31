@@ -50,10 +50,10 @@ with ``2`` (skips oversized archives such as the ~2.7 GB *Tanacetum
 coccineum* genome). Clearing the field means no limit (the empty value
 persists), while a *missing* key defaults to ``2`` again on the next
 ``run_all.sh`` launch. The **Label ecology** and **Compare ecology** pages
-additionally offer the three genome-type checkboxes (all checked by
-default): they become the ``--label-types`` / ``--ecology-types`` flags of
-the respective runs, so both steps analyze exactly the selected genome
-types. A screenshot of every
+additionally offer the three genome-type checkboxes (only **Nuclear genome**
+starts checked): they become the ``--label-types`` / ``--ecology-types``
+flags of the respective runs, so both steps analyze exactly the selected
+genome types. A screenshot of every
 page and popup, with explanations, is on the :doc:`Screenshots` page.
 
 Menu bar

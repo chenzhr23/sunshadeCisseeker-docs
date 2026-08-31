@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.3.64 — genome-type checkboxes: Nuclear preselected
+------------------------------------------------------
+
+* On the Label ecology and Compare ecology pages only the **Nuclear genome**
+  checkbox starts checked (the other two start unchecked): the nuclear
+  label sheet is the one normally populated, and the organelle types are
+  ticked explicitly when their sheets carry labels.
+
 1.3.63 — Compare ecology: genome-type checkboxes
 --------------------------------------------------
 
