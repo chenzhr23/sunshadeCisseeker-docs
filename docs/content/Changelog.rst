@@ -1,6 +1,23 @@
 Changelog
 =========
 
+1.3.69 — Box 4 / G-box ratio loop no longer clobbers the KW tables
+--------------------------------------------------------------------
+
+* Root cause of the step-08 ``1, 0`` / ``9, 8`` row-count aborts found and
+  fixed: the Box 4 / G-box ratio loop reused the names ``kw``/``gs`` for its
+  own Kruskal-Wallis test (an ``htest`` object, i.e. a list — ``nrow()``
+  returns ``NULL`` there) and group summary, overwriting the density tables.
+  The ratio loop now uses local names (``kw_r``/``gs_r``) and step 08
+  verifies its tables with ``stopifnot`` before writing the run notes, so
+  any future regression fails loudly instead of as a row-count mismatch.
+  The ``Group_summary`` sheet could have been silently replaced with the
+  ratio group table on affected runs; that is fixed as well.
+* The Compare-ecology end-to-end test now drives the full ratio branch with
+  nine nuclear species (3 sun / 3 facultative / 3 shade with distinct
+  Box 4 / G-box ratios) and asserts the KW/pairwise sheets, the density
+  ``Group_summary`` columns and the run-notes block.
+
 1.3.68 — Box 4 / G-box notes: mismatch-proof construction
 ------------------------------------------------------------
 
