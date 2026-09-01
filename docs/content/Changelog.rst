@@ -29,11 +29,28 @@ Changelog
   bars, (e) Box 4 vs G-box count scatter, (f) delta-AICc model comparison.
   The tree panel is now drawn with pure vector ggplot2 geometry (the
   earlier display-list grabbing left it empty on headless servers), and a
-  dedicated full-page vector figure ``phylogenetic_tree_figure.pdf``
-  (8.27 × 16.54 in) shows the ladderized tree with species tip labels and
-  order clade names. The ecology end-to-end suite asserts the tree is
-  actually drawn (vector paths, no ``unavailable`` placeholder) and the
-  tree figure geometry.
+  dedicated full-page vector figure ``phylogenetic_tree_figure.pdf`` shows
+  the ladderized tree per genome type with species tip labels, order
+  clade bars with vertical order names and a per-species
+  log10(Box 4 / G-box) heat strip. The page height is computed from the
+  tip count and the label size, so adjacent tip labels and order names
+  can never overlap (trees above 600 display tips are deterministically
+  subsampled for the figure). Axis ticks, percent labels and stratum
+  subtitles across the other figures were thinned to remove all remaining
+  text collisions. The ecology end-to-end suite asserts the tree is
+  actually drawn (vector paths, no ``unavailable`` placeholder), the tree
+  figure geometry, and that neither phylogenetic figure contains any
+  overlapping text span.
+* Compare ecology now scales to very large genome-type datasets: live NCBI
+  taxonomy lookups are capped per run (default 500, cache-driven progress
+  across re-runs; ``SUNSHADE_NCBI_LOOKUP_CAP``), and the phylogenetic
+  models run on a deterministic order-stratified subsample when a type has
+  more than 1500 in-tree species (``SUNSHADE_PHYLO_MAX_TIPS``), recorded in
+  the workbook's ``Input_audit``. The shipped
+  ``config/species_ecology_labels.xlsx`` now carries complete sun/shade
+  annotations for the nuclear (681 species), chloroplast (12,567) and
+  mitochondrial (621) sheets, each row with a source note and a
+  high/medium/low confidence tag.
 * The block degrades gracefully: missing ``ape`` / ``nlme`` / ``phytools``
   (install with
   ``conda install -c conda-forge r-ape r-nlme r-phytools`` and optionally

@@ -58,7 +58,7 @@ Ecology comparison outputs
    * - ``result/ecology_compare/09_figures/phylogenetic_comparative_figures.pdf`` (v1.11.0)
      - portrait A4 page: (a) tree with habitat-coloured tips, (b) ratio per habitat with phyloANOVA P, (c) PGLS coefficient forest, (d) phylogenetic signal, (e) Box 4 vs G-box count scatter, (f) delta-AICc model comparison; the tree panel is drawn as pure vector ggplot2 geometry
    * - ``result/ecology_compare/09_figures/phylogenetic_tree_figure.pdf`` (v1.11.0)
-     - full-page (8.27 × 16.54 in) vector tree figure: ladderized phylogram with species tip labels, tips coloured by light habitat, and order names at each major clade's most recent common ancestor
+     - full-page vector tree figure, one page per genome type: ladderized phylogram with species tip labels (row spacing derived from the label size, so labels never overlap; page height grows with the tip count), order clade bars with vertical order names, a per-species log10(Box 4 / G-box) heat strip, and habitat-coloured tips (trees above 600 tips are deterministically subsampled for display)
    * - ``result/ecology_compare/08_statistics/box4_gbox_sunshade_species_annotated.tsv`` (v1.8.0)
      - the annotated species table (Box 4 / G-box counts, ratio, ratio bin + sun/shade label + taxonomy ranks) as a flat TSV
    * - ``result/ecology_compare/09_figures/box4_gbox_sunshade_relationship.pdf`` (v1.8.0)
