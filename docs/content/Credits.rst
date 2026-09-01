@@ -20,7 +20,9 @@ openxlsx, data.table, stringi, ggplot2, patchwork, scales, curl, xml2, dplyr,
 rentrez, forcats, tidyr, magrittr — the XLSX outputs are written by openxlsx,
 the CRE scan
 runs the bundled C++ Aho-Corasick backend (``bin/cre_scan``) with an R
-``stringi`` fallback, and all figures are made with ggplot2.
+``stringi`` fallback, and all figures are made with ggplot2. The phylogenetic
+comparative block (v1.11.0) uses ape, nlme and phytools (PGLS, phyloANOVA and
+phylogenetic signal) with rotl for the optional Open Tree of Life route.
 
 Tools
 -----
