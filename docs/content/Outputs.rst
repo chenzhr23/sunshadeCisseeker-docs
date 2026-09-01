@@ -56,7 +56,9 @@ Ecology comparison outputs
    * - ``result/ecology_compare/08_statistics/phylogenetic_comparative_results.xlsx`` (v1.11.0)
      - phylogenetic comparative results: ``Tree_species`` / ``Phylogenetic_signal`` (Blomberg K, Pagel lambda) / ``PGLS_models`` (OLS vs Brownian vs Pagel-lambda PGLS with AICc; ratio plus the two counts adjusted for log10 promoters) / ``phyloANOVA`` (999 Brownian simulations) / ``Input_audit``
    * - ``result/ecology_compare/09_figures/phylogenetic_comparative_figures.pdf`` (v1.11.0)
-     - portrait A4 page: (a) tree with habitat-coloured tips, (b) ratio per habitat with phyloANOVA P, (c) PGLS coefficient forest, (d) phylogenetic signal, (e) Box 4 vs G-box count scatter, (f) delta-AICc model comparison
+     - portrait A4 page: (a) tree with habitat-coloured tips, (b) ratio per habitat with phyloANOVA P, (c) PGLS coefficient forest, (d) phylogenetic signal, (e) Box 4 vs G-box count scatter, (f) delta-AICc model comparison; the tree panel is drawn as pure vector ggplot2 geometry
+   * - ``result/ecology_compare/09_figures/phylogenetic_tree_figure.pdf`` (v1.11.0)
+     - full-page (8.27 × 16.54 in) vector tree figure: ladderized phylogram with species tip labels, tips coloured by light habitat, and order names at each major clade's most recent common ancestor
    * - ``result/ecology_compare/08_statistics/box4_gbox_sunshade_species_annotated.tsv`` (v1.8.0)
      - the annotated species table (Box 4 / G-box counts, ratio, ratio bin + sun/shade label + taxonomy ranks) as a flat TSV
    * - ``result/ecology_compare/09_figures/box4_gbox_sunshade_relationship.pdf`` (v1.8.0)

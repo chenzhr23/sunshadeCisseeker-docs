@@ -27,6 +27,13 @@ Changelog
   (b) ratio per habitat with the phyloANOVA P, (c) the PGLS coefficient
   forest (sun − shade, 95% CI, three models), (d) phylogenetic signal
   bars, (e) Box 4 vs G-box count scatter, (f) delta-AICc model comparison.
+  The tree panel is now drawn with pure vector ggplot2 geometry (the
+  earlier display-list grabbing left it empty on headless servers), and a
+  dedicated full-page vector figure ``phylogenetic_tree_figure.pdf``
+  (8.27 × 16.54 in) shows the ladderized tree with species tip labels and
+  order clade names. The ecology end-to-end suite asserts the tree is
+  actually drawn (vector paths, no ``unavailable`` placeholder) and the
+  tree figure geometry.
 * The block degrades gracefully: missing ``ape`` / ``nlme`` / ``phytools``
   (install with
   ``conda install -c conda-forge r-ape r-nlme r-phytools`` and optionally

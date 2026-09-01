@@ -235,7 +235,11 @@ Everything lands in
 (a portrait A4 page: tree with habitat-coloured tips, ratio per habitat
 with the phyloANOVA P, the PGLS coefficient forest, the signal bars, the
 count scatter and the delta-AICc comparison — fixed row heights keep every
-panel complete and non-overlapping).
+panel complete and non-overlapping). The tree is drawn as pure vector
+ggplot2 geometry, and a dedicated full-page figure
+``result/ecology_compare/09_figures/phylogenetic_tree_figure.pdf``
+(8.27 × 16.54 in) shows the same ladderized tree with species tip labels,
+habitat-coloured tips and order names at each major clade.
 
 The block needs the R packages ``ape``, ``nlme`` and ``phytools`` (and
 ``rotl`` for the Open Tree of Life route); install them with
