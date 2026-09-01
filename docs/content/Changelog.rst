@@ -50,7 +50,9 @@ Changelog
   ``config/species_ecology_labels.xlsx`` now carries complete sun/shade
   annotations for the nuclear (681 species), chloroplast (12,567) and
   mitochondrial (621) sheets, each row with a source note and a
-  high/medium/low confidence tag.
+  high/medium/low confidence tag; the legacy ``qc_excluded`` sheet was
+  removed (the label reader never used it and every species is now
+  annotated in its own type sheet).
 * The block degrades gracefully: missing ``ape`` / ``nlme`` / ``phytools``
   (install with
   ``conda install -c conda-forge r-ape r-nlme r-phytools`` and optionally
@@ -242,7 +244,9 @@ Changelog
   ``Phtheirospermum japonicum``), one undetermined species, and five
   species whose annotation contradicts their documented wild habitat. The
   workbook keeps a ``qc_excluded`` sheet listing every removed label with
-  its reason, so the decisions stay auditable and reversible. Unlabelled
+  its reason, so the decisions stay auditable and reversible (the sheet was
+  dropped in 1.11.0, when every shipped species received an annotation).
+  Unlabelled
   species simply stay out of the statistics (same contract as before).
 * ``Sarcandra glabra`` moved from the nuclear sheet to the new
   ``local_genome`` sheet (it was analyzed via Tools → Run local).
