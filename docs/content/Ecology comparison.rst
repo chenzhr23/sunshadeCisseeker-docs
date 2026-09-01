@@ -214,11 +214,14 @@ the Box 4 / G-box × light-habitat association:
   online, otherwise an ultrametric **classification tree** built from the
   resolved order/family/genus ranks; the tree is cached to
   ``result/ecology_compare/08_statistics/phylogenetic_tree.nwk``;
-* **PGLS** (``nlme::gls`` with ``corBrownian`` and ``corPagel``, lambda
-  estimated by maximum likelihood) versus plain OLS for
+* **PGLS** (``nlme::gls`` with ``ape::corBrownian`` and a Pagel-lambda
+  correlation estimated by maximum likelihood with lambda constrained to
+  0–1) versus plain OLS for
   ``log10(Box4/G-box ratio)``, ``log10(Box 4 count)`` and
   ``log10(G-box count)`` — the count models adjust for log10 total
-  promoters — with AICc model comparison;
+  promoters — with AICc model comparison; singular or failed fits (for
+  example a constant covariate on a degenerate input) are skipped
+  gracefully and reported in the log;
 * **phylogenetic ANOVA** (``phytools::phylANOVA``, 999 Brownian
   simulations) of the ratio across sun/shade;
 * **phylogenetic signal** (Blomberg K and Pagel lambda with tests) for the

@@ -13,10 +13,14 @@ Changelog
   writes ``phylogenetic_comparative_results.xlsx``:
   ``Tree_species`` / ``Phylogenetic_signal`` (Blomberg K and Pagel lambda
   with tests) / ``PGLS_models`` (OLS vs Brownian vs Pagel-lambda PGLS with
-  ML-estimated lambda and AICc for log10(Box4/G-box ratio), log10(Box 4
-  count) and log10(G-box count); the count models adjust for log10 total
-  promoters) / ``phyloANOVA`` (phytools, 999 Brownian simulations) /
-  ``Input_audit``.
+  ML-estimated lambda — constrained to 0–1 — and AICc for log10(Box4/G-box
+  ratio), log10(Box 4 count) and log10(G-box count); the count models
+  adjust for log10 total promoters) / ``phyloANOVA`` (phytools, 999
+  Brownian simulations) / ``Input_audit``. The phylo correlation
+  structures come from ``ape`` (``ape::corBrownian`` / a bounded
+  ``corPagel`` wrapper); singular or failed fits (degenerate inputs such
+  as a constant covariate or a response collinear with the label) are
+  skipped gracefully and listed in the 08 log.
 * Step 09 adds ``phylogenetic_comparative_figures.pdf`` — a portrait A4
   figure with fixed row heights so every panel stays complete and
   un-overlapped: (a) the species tree with tips coloured by light habitat,
