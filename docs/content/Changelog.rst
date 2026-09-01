@@ -31,7 +31,10 @@ Changelog
   (install with
   ``conda install -c conda-forge r-ape r-nlme r-phytools`` and optionally
   ``r-rotl``), no taxonomy, or fewer than 6 in-tree species all skip it
-  with a warning instead of an error. The ecology end-to-end suite now
+  with a warning instead of an error. The skip reason is spelled out in
+  the 08 log and in the workbook README sheet (exact missing package,
+  missing Box 4 / G-box elements, or a missing/empty reference-aligned
+  annotation table). The ecology end-to-end suite now
   asserts the workbook sheets, the three PGLS models, the phyloANOVA row,
   the signal table, the cached tree (11 tips) and the A4 figure geometry.
 

@@ -242,6 +242,10 @@ The block needs the R packages ``ape``, ``nlme`` and ``phytools`` (and
 ``conda install -c conda-forge r-ape r-nlme r-phytools r-rotl``. Without
 them, with no taxonomy, or with fewer than six in-tree species, the block
 is skipped with a warning and the rest of Compare ecology is unaffected.
+When the block is skipped, the 08 log and the workbook README sheet state
+the exact reason (which package is missing, whether the Box 4 / G-box
+elements exist in the master table, whether the reference-aligned
+annotation table is available).
 
 Ratio-bin analysis (v1.5.0)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
