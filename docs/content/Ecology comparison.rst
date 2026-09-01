@@ -253,6 +253,22 @@ the exact reason (which package is missing, whether the Box 4 / G-box
 elements exist in the master table, whether the reference-aligned
 annotation table is available).
 
+Phylogenetically paired within-clade contrasts (v1.12.0)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To remove the lineage confounding *by design*, step 08 also pairs the
+light-habitat comparison **inside clades**: every genus (and family) that
+contains both sun- and shade-labeled species contributes one row with the
+within-clade sun − shade difference of log10(Box 4 / G-box ratio). The
+across-clade consistency of the direction is then tested with a two-sided
+sign test and a Wilcoxon signed-rank test (the log10 Box 4 / G-box counts
+are reported as supporting evidence). Results are written to
+``result/ecology_compare/08_statistics/within_clade_paired_contrasts.xlsx``
+(``Summary`` / ``Per_genus`` / ``Per_family``) and visualized in
+``result/ecology_compare/09_figures/within_clade_paired_contrasts.pdf``
+(one A4 page per genome type: per-genus and per-family waterfalls plus a
+genus-level sun-vs-shade median scatter).
+
 Ratio-bin analysis (v1.5.0)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -1,6 +1,28 @@
 Changelog
 =========
 
+1.12.0 — phylogenetically paired within-clade contrasts
+--------------------------------------------------------
+
+* Step 08 adds **phylogenetically paired within-clade contrasts**: for
+  every genus (and family) that contains both sun- and shade-labeled
+  species, the sun − shade difference of log10(Box 4 / G-box ratio) is
+  computed *inside* that clade, so between-lineage confounding is removed
+  by design; the across-clade consistency of the direction is then tested
+  with a two-sided sign test and a Wilcoxon signed-rank test on the
+  per-clade differences. The log10 Box 4 and G-box counts are reported as
+  supporting evidence (not promoter-adjusted at this stage). Everything
+  lands in
+  ``result/ecology_compare/08_statistics/within_clade_paired_contrasts.xlsx``
+  (``Summary`` / ``Per_genus`` / ``Per_family``).
+* Step 09 adds ``within_clade_paired_contrasts.pdf`` — one A4 page per
+  genome type with (a) a per-genus waterfall of the sun − shade
+  differences, (b) the per-family waterfall, and (c) a genus-level sun vs
+  shade median scatter; each waterfall subtitle carries the sign test and
+  signed-rank summary. The ecology end-to-end suite now asserts the
+  workbook sheets, a paired summary row and the figure (A4 geometry, no
+  overlapping text spans).
+
 1.11.0 — phylogenetic comparative analysis (PGLS / phyloANOVA)
 ---------------------------------------------------------------
 

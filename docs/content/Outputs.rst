@@ -59,6 +59,10 @@ Ecology comparison outputs
      - portrait A4 page: (a) tree with habitat-coloured tips, (b) ratio per habitat with phyloANOVA P, (c) PGLS coefficient forest, (d) phylogenetic signal, (e) Box 4 vs G-box count scatter, (f) delta-AICc model comparison; the tree panel is drawn as pure vector ggplot2 geometry
    * - ``result/ecology_compare/09_figures/phylogenetic_tree_figure.pdf`` (v1.11.0)
      - full-page vector tree figure, one page per genome type: ladderized phylogram with species tip labels (row spacing derived from the label size, so labels never overlap; page height grows with the tip count), order clade bars with vertical order names, a per-species log10(Box 4 / G-box) heat strip, and habitat-coloured tips (trees above 600 tips are deterministically subsampled for display)
+   * - ``result/ecology_compare/08_statistics/within_clade_paired_contrasts.xlsx`` (v1.12.0)
+     - phylogenetically paired within-clade contrasts: ``Summary`` (per genome type and clade level: paired-clade count, sun/shade-higher counts, mean/median difference, sign test and Wilcoxon signed-rank P for log10 ratio and the two log10 counts) / ``Per_genus`` / ``Per_family`` (one row per paired clade: sun and shade medians and their difference)
+   * - ``result/ecology_compare/09_figures/within_clade_paired_contrasts.pdf`` (v1.12.0)
+     - one A4 page per genome type: (a) per-genus waterfall of sun − shade differences, (b) per-family waterfall, (c) genus-level sun vs shade median scatter with the sign test / signed-rank summary in the subtitles
    * - ``result/ecology_compare/08_statistics/box4_gbox_sunshade_species_annotated.tsv`` (v1.8.0)
      - the annotated species table (Box 4 / G-box counts, ratio, ratio bin + sun/shade label + taxonomy ranks) as a flat TSV
    * - ``result/ecology_compare/09_figures/box4_gbox_sunshade_relationship.pdf`` (v1.8.0)
