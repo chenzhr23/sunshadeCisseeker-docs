@@ -34,7 +34,10 @@ Changelog
   with a warning instead of an error. ``install.sh`` and
   ``sunshadeCisseeker check --install`` now include ``r-ape`` / ``r-nlme``
   / ``r-phytools`` / ``r-rotl`` in their package list (conda route and the
-  CRAN fallback), so a fresh install covers the block automatically. The
+  CRAN fallback), so a fresh install covers the block automatically; when
+  conda 26.x's classic solver crashes (``TypeError: 'NoneType' object is
+  not iterable``), the installer now retries with the libmamba solver (or
+  a standalone mamba) instead of reporting a network error. The
   skip reason is spelled out in the 08 log and in the workbook README sheet
   (exact missing package, missing Box 4 / G-box elements, or a
   missing/empty reference-aligned annotation table). The ecology
