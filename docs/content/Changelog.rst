@@ -1,6 +1,31 @@
 Changelog
 =========
 
+1.10.0 — every species gets a tax_id and taxonomy in Compare ecology
+---------------------------------------------------------------------
+
+* Custom-genome species used to stay ``unmatched`` (no ``tax_id``, no
+  taxonomy ranks) because ``result/custom_genome/`` never carried species
+  taxonomy. Compare ecology now resolves a **tax_id + full taxonomy for
+  every analyzed species** without touching ``result/custom_genome/``:
+  after ``config/species_taxonomy.xlsx`` and the per-type
+  ``01_species_info`` tables, it falls back to (1) the per-type custom
+  download list's ``taxid`` column, (2) the persistent
+  ``result/ecology_compare/08_statistics/taxonomy_cache.tsv`` (user-editable;
+  resolved rows are written back so re-runs stay offline), and (3) a live
+  NCBI lookup (species name → taxid → kingdom/phylum/class/order/family/
+  genus lineage), rate-limited and failure-tolerant, skipped with
+  ``SUNSHADE_NO_NCBI_TAXONOMY=1``.
+* ``Species_annotated`` gains a ``tax_id`` and a ``taxonomy_source`` column
+  (``config`` / ``ncbi_01_species_info`` / ``custom_download_list`` /
+  ``taxonomy_cache`` / ``ncbi_lookup``); ``Input_audit`` records the per-
+  source row counts, the resolved-taxid coverage and the number of species
+  that remain unresolved. The ``taxid coverage`` line in the 08 log prints
+  e.g. ``11 / 11 species with tax_id``.
+* The ecology end-to-end suite now stages one species with NO 01_species_info
+  row and proves it is resolved from the taxonomy cache (taxid + ranks),
+  with zero unresolved species and an offline run.
+
 1.9.0 — order/family/genus taxonomy is read automatically from step 01
 -------------------------------------------------------------------------
 

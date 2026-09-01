@@ -86,10 +86,18 @@ Compare ecology reads the taxonomy for the order/family/genus strata
 sheet (the NCBI kingdom/phylum/class/order/family/genus that step 01
 fetched). Nothing needs to be provided.
 
+Species step 01 never saw (custom genomes, Run-local species) are resolved
+automatically too (v1.10.0): the per-type custom download list ``taxid``
+column is used first, then the persistent
+``result/ecology_compare/08_statistics/taxonomy_cache.tsv`` (resolved rows
+are written back there, so re-runs stay offline and manual fixes persist),
+and finally a live NCBI lookup (species name → taxid → full lineage).
+``SUNSHADE_NO_NCBI_TAXONOMY=1`` skips the online step. Every species in
+``Species_annotated`` carries its ``tax_id`` and ``taxonomy_source``.
+
 ``config/species_taxonomy.xlsx`` is the **manual override/supplement**: its
-rows win over the 01_species_info rows for the same species, and it is the
-only source for species step 01 never saw (Run-local or manually placed
-custom genomes). The strata feed the reference-aligned
+rows win over all other sources for the same species (an optional
+``tax_id`` column is supported). The strata feed the reference-aligned
 ``box4_gbox_sunshade_results.xlsx`` sheets ``Order_stratified_tests`` /
 ``Family_stratified_tests`` / ``Genus_stratified_tests`` /
 ``Fixed_effect_models`` / ``Family_summary`` / ``Genus_summary`` and the
@@ -105,6 +113,9 @@ those analyses are skipped.
    * - ``species``
      - yes
      - species key matching the pipeline name exactly (spaces → underscores)
+   * - ``tax_id``
+     - no
+     - NCBI taxonomy id override, e.g. ``3981``
    * - ``order``
      - yes
      - taxonomic order, e.g. ``Malpighiales``

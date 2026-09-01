@@ -164,14 +164,20 @@ writes a second, reference-aligned workbook
 ``result/ecology_compare/08_statistics/box4_gbox_sunshade_results.xlsx``
 with the same sheet layout as ``chromosome_promoter_Box4_Gbox_sunshade
 _results.xlsx`` (one extra leading ``genome_type`` column, and species
-matched by name against the per-type ``01_species_info`` NCBI taxonomy
-instead of NCBI ``tax_id`` — ``config/species_taxonomy.xlsx`` optionally
-overrides per species):
+matched by name). Every analyzed species gets a ``tax_id`` + taxonomy: the
+per-type ``01_species_info`` NCBI tables are used first, then the per-type
+custom download list ``taxid`` column, then the persistent
+``result/ecology_compare/08_statistics/taxonomy_cache.tsv`` (v1.10.0), and
+finally a live NCBI lookup whose results are cached back — with
+``config/species_taxonomy.xlsx`` overriding per species):
 
-* ``Species_annotated`` — per genome type × species: Box 4 / G-box counts,
-  gene counts, ratio, log10 ratio, ratio status, ratio bin, total, the
-  sun/shade label and the taxonomy ranks (``kingdom`` / ``phylum`` /
-  ``tax_class`` when provided, ``order`` / ``family`` / ``genus``);
+* ``Species_annotated`` — per genome type × species: the resolved ``tax_id``
+  and ``taxonomy_source`` (``config`` / ``ncbi_01_species_info`` /
+  ``custom_download_list`` / ``taxonomy_cache`` / ``ncbi_lookup``),
+  Box 4 / G-box counts, gene counts, ratio, log10 ratio, ratio status,
+  ratio bin, total, the sun/shade label and the taxonomy ranks
+  (``kingdom`` / ``phylum`` / ``tax_class`` when provided, ``order`` /
+  ``family`` / ``genus``);
 * ``Label_summary`` — per label: species counts plus ratio summary
   statistics (median / mean / Q25 / Q75 / median log10 / total counts);
 * ``Ratio_bin_by_label`` / ``Ratio_bin_enrichment`` /
