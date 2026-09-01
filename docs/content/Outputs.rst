@@ -51,6 +51,12 @@ Ecology comparison outputs
      - reference-aligned Box 4/G-box × sun/shade workbook (same layout as the in-house chromosome pipeline's ``chromosome_promoter_Box4_Gbox_sunshade_results.xlsx``, one ``genome_type`` column added): ``Species_annotated`` (with ``tax_id`` + ``taxonomy_source``; v1.10.0) / ``Label_summary`` / ``Ratio_bin_by_label`` / ``Ratio_bin_enrichment`` / ``Concentrated_ratio_bins`` / ``Relationship_tests`` / ``Order_stratified_tests`` / ``Family_stratified_tests`` / ``Genus_stratified_tests`` / ``Fixed_effect_models`` / ``Family_summary`` / ``Genus_summary`` / ``Input_audit``. The taxonomy ranks come automatically from each type's ``01_species_info`` workbook (v1.9.0); species step 01 never saw are resolved from the custom-list taxid, the taxonomy cache and live NCBI lookups (v1.10.0); ``config/species_taxonomy.xlsx`` optionally overrides per species
    * - ``result/ecology_compare/08_statistics/taxonomy_cache.tsv`` (v1.10.0)
      - persistent taxid + taxonomy cache (species / tax_id / kingdom / phylum / tax_class / order / family / genus / source / resolved_on); resolved NCBI lookups are written back here and re-read on later runs, so re-runs stay offline and manually fixed rows are honoured
+   * - ``result/ecology_compare/08_statistics/phylogenetic_tree.nwk`` (v1.11.0)
+     - cached species tree (Open Tree of Life when available, otherwise an ultrametric classification tree from order/family/genus)
+   * - ``result/ecology_compare/08_statistics/phylogenetic_comparative_results.xlsx`` (v1.11.0)
+     - phylogenetic comparative results: ``Tree_species`` / ``Phylogenetic_signal`` (Blomberg K, Pagel lambda) / ``PGLS_models`` (OLS vs Brownian vs Pagel-lambda PGLS with AICc; ratio plus the two counts adjusted for log10 promoters) / ``phyloANOVA`` (999 Brownian simulations) / ``Input_audit``
+   * - ``result/ecology_compare/09_figures/phylogenetic_comparative_figures.pdf`` (v1.11.0)
+     - portrait A4 page: (a) tree with habitat-coloured tips, (b) ratio per habitat with phyloANOVA P, (c) PGLS coefficient forest, (d) phylogenetic signal, (e) Box 4 vs G-box count scatter, (f) delta-AICc model comparison
    * - ``result/ecology_compare/08_statistics/box4_gbox_sunshade_species_annotated.tsv`` (v1.8.0)
      - the annotated species table (Box 4 / G-box counts, ratio, ratio bin + sun/shade label + taxonomy ranks) as a flat TSV
    * - ``result/ecology_compare/09_figures/box4_gbox_sunshade_relationship.pdf`` (v1.8.0)

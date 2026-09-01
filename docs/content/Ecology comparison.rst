@@ -202,6 +202,44 @@ The matching ``box4_gbox_sunshade_species_annotated.tsv`` and the
 genome type; panels a–h mirror the chromosome figure and panels i/j/k show
 the order- / family- / genus-stratified tested strata) complete the set.
 
+Phylogenetic comparative analysis (v1.11.0)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The order/family/genus fixed-effect models correct taxonomy crudely, so
+step 08 additionally runs proper **phylogenetic comparative methods** for
+the Box 4 / G-box × light-habitat association:
+
+* a species tree — **Open Tree of Life** via ``rotl`` (``tnrs_match_names``
+  on the species binomials → ``tol_induced_subtree``) when installed and
+  online, otherwise an ultrametric **classification tree** built from the
+  resolved order/family/genus ranks; the tree is cached to
+  ``result/ecology_compare/08_statistics/phylogenetic_tree.nwk``;
+* **PGLS** (``nlme::gls`` with ``corBrownian`` and ``corPagel``, lambda
+  estimated by maximum likelihood) versus plain OLS for
+  ``log10(Box4/G-box ratio)``, ``log10(Box 4 count)`` and
+  ``log10(G-box count)`` — the count models adjust for log10 total
+  promoters — with AICc model comparison;
+* **phylogenetic ANOVA** (``phytools::phylANOVA``, 999 Brownian
+  simulations) of the ratio across sun/shade;
+* **phylogenetic signal** (Blomberg K and Pagel lambda with tests) for the
+  ratio and the two counts.
+
+Everything lands in
+``result/ecology_compare/08_statistics/phylogenetic_comparative_results.xlsx``
+(``Tree_species`` / ``Phylogenetic_signal`` / ``PGLS_models`` /
+``phyloANOVA`` / ``Input_audit``) and
+``result/ecology_compare/09_figures/phylogenetic_comparative_figures.pdf``
+(a portrait A4 page: tree with habitat-coloured tips, ratio per habitat
+with the phyloANOVA P, the PGLS coefficient forest, the signal bars, the
+count scatter and the delta-AICc comparison — fixed row heights keep every
+panel complete and non-overlapping).
+
+The block needs the R packages ``ape``, ``nlme`` and ``phytools`` (and
+``rotl`` for the Open Tree of Life route); install them with
+``conda install -c conda-forge r-ape r-nlme r-phytools r-rotl``. Without
+them, with no taxonomy, or with fewer than six in-tree species, the block
+is skipped with a warning and the rest of Compare ecology is unaffected.
+
 Ratio-bin analysis (v1.5.0)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

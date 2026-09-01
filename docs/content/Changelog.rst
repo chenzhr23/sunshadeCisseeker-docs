@@ -1,6 +1,36 @@
 Changelog
 =========
 
+1.11.0 — phylogenetic comparative analysis (PGLS / phyloANOVA)
+---------------------------------------------------------------
+
+* The crude order/family/genus fixed-effect correction is now accompanied
+  by proper **phylogenetic comparative methods** for the Box 4 / G-box ×
+  light-habitat association. Step 08 builds a species tree — Open Tree of
+  Life via ``rotl`` when installed and online, otherwise an ultrametric
+  classification tree from the resolved order/family/genus ranks — caches
+  it to ``result/ecology_compare/08_statistics/phylogenetic_tree.nwk`` and
+  writes ``phylogenetic_comparative_results.xlsx``:
+  ``Tree_species`` / ``Phylogenetic_signal`` (Blomberg K and Pagel lambda
+  with tests) / ``PGLS_models`` (OLS vs Brownian vs Pagel-lambda PGLS with
+  ML-estimated lambda and AICc for log10(Box4/G-box ratio), log10(Box 4
+  count) and log10(G-box count); the count models adjust for log10 total
+  promoters) / ``phyloANOVA`` (phytools, 999 Brownian simulations) /
+  ``Input_audit``.
+* Step 09 adds ``phylogenetic_comparative_figures.pdf`` — a portrait A4
+  figure with fixed row heights so every panel stays complete and
+  un-overlapped: (a) the species tree with tips coloured by light habitat,
+  (b) ratio per habitat with the phyloANOVA P, (c) the PGLS coefficient
+  forest (sun − shade, 95% CI, three models), (d) phylogenetic signal
+  bars, (e) Box 4 vs G-box count scatter, (f) delta-AICc model comparison.
+* The block degrades gracefully: missing ``ape`` / ``nlme`` / ``phytools``
+  (install with
+  ``conda install -c conda-forge r-ape r-nlme r-phytools`` and optionally
+  ``r-rotl``), no taxonomy, or fewer than 6 in-tree species all skip it
+  with a warning instead of an error. The ecology end-to-end suite now
+  asserts the workbook sheets, the three PGLS models, the phyloANOVA row,
+  the signal table, the cached tree (11 tips) and the A4 figure geometry.
+
 1.10.0 — every species gets a tax_id and taxonomy in Compare ecology
 ---------------------------------------------------------------------
 
