@@ -19,8 +19,13 @@ Changelog
   genome type with (a) a per-genus waterfall of the sun − shade
   differences, (b) the per-family waterfall, and (c) a genus-level sun vs
   shade median scatter; each waterfall subtitle carries the sign test and
-  signed-rank summary. The ecology end-to-end suite now asserts the
-  workbook sheets, a paired summary row and the figure (A4 geometry, no
+  signed-rank summary. Step 09 also adds
+  ``element_configuration_spectrum.pdf`` — the lineage "dialect spectrum":
+  per-family and per-order median log10(Box 4 / G-box) ordered by the
+  clade's position in the species tree (left = basal, right = derived)
+  and coloured by major plant group, visualizing the G-box-ancestral →
+  Box 4-derived gradient. The ecology end-to-end suite now asserts the
+  workbook sheets, a paired summary row and both figures (A4 geometry, no
   overlapping text spans).
 
 1.11.0 — phylogenetic comparative analysis (PGLS / phyloANOVA)

@@ -267,7 +267,11 @@ are reported as supporting evidence). Results are written to
 (``Summary`` / ``Per_genus`` / ``Per_family``) and visualized in
 ``result/ecology_compare/09_figures/within_clade_paired_contrasts.pdf``
 (one A4 page per genome type: per-genus and per-family waterfalls plus a
-genus-level sun-vs-shade median scatter).
+genus-level sun-vs-shade median scatter). A companion figure,
+``result/ecology_compare/09_figures/element_configuration_spectrum.pdf``,
+shows the lineage "dialect spectrum": per-family and per-order median
+log10(Box 4 / G-box) ordered along the species tree and coloured by major
+plant group, visualizing the G-box-ancestral → Box 4-derived gradient.
 
 Ratio-bin analysis (v1.5.0)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -63,6 +63,8 @@ Ecology comparison outputs
      - phylogenetically paired within-clade contrasts: ``Summary`` (per genome type and clade level: paired-clade count, sun/shade-higher counts, mean/median difference, sign test and Wilcoxon signed-rank P for log10 ratio and the two log10 counts) / ``Per_genus`` / ``Per_family`` (one row per paired clade: sun and shade medians and their difference)
    * - ``result/ecology_compare/09_figures/within_clade_paired_contrasts.pdf`` (v1.12.0)
      - one A4 page per genome type: (a) per-genus waterfall of sun − shade differences, (b) per-family waterfall, (c) genus-level sun vs shade median scatter with the sign test / signed-rank summary in the subtitles
+   * - ``result/ecology_compare/09_figures/element_configuration_spectrum.pdf`` (v1.12.0)
+     - the lineage "dialect spectrum", one A4 page per genome type: per-family and per-order median log10(Box 4 / G-box) ordered by clade position in the species tree (left = basal, right = derived), bars coloured by major plant group (algae / bryophytes / lycophytes / ferns / gymnosperms / basal angiosperms / monocots / eudicots) with the extreme clades labelled
    * - ``result/ecology_compare/08_statistics/box4_gbox_sunshade_species_annotated.tsv`` (v1.8.0)
      - the annotated species table (Box 4 / G-box counts, ratio, ratio bin + sun/shade label + taxonomy ranks) as a flat TSV
    * - ``result/ecology_compare/09_figures/box4_gbox_sunshade_relationship.pdf`` (v1.8.0)
