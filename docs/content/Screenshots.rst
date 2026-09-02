@@ -72,9 +72,19 @@ editors and the remaining functions.
    :width: 1360
 
    The **Compare ecology** page runs steps 07–09: merge the selected genome
-   datasets into the ecology master table (07), differential statistics —
-   Kruskal-Wallis plus pairwise Wilcoxon with Benjamini-Hochberg correction
-   (08) — and the publication figures (09). The genome-type checkboxes
+   datasets into the ecology master table (07), differential statistics (08)
+   and the publication figures (09). Step 08 covers: Kruskal-Wallis plus
+   pairwise Wilcoxon tests with Benjamini-Hochberg correction; the Box 4 /
+   G-box ratio-bin and reference-aligned sun/shade analysis with
+   order/family/genus strata; tax_id + taxonomy resolution for every
+   species; a phylogenetic comparative analysis (PGLS with Brownian /
+   Pagel-lambda, phyloANOVA and phylogenetic signal on a species tree); and
+   — since v1.12.0 — phylogenetically paired within-clade contrasts (sun
+   vs shade inside every genus/family that has both labels, with sign test
+   and Wilcoxon signed-rank tests across clades). Step 09 renders the
+   figures, including the full-page species-tree figure with tip labels,
+   order bars and a per-species ratio strip, and the within-clade paired
+   contrast waterfalls. The genome-type checkboxes
    match the Label ecology page (only **Nuclear genome** starts checked):
    unchecked types are left out of the merge, and the Tools → Run local
    species join the genome type they were run under.

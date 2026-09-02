@@ -50,7 +50,12 @@ One sheet per genome type — ``nuclear_genome`` / ``chloroplast_genome`` /
 ``mitochondrial_genome`` — each with one row per species; edit the sheets in
 Excel/LibreOffice or through the GUI's **Tools → Ecology labels...** popup
 (pick the sheet in the combo box, ``Reload``, edit, ``Save`` — the other
-sheets are preserved).
+sheets are preserved). The shipped file carries complete ``sun`` / ``shade``
+annotations for every listed species (nuclear 681, chloroplast 12,567,
+mitochondrial 621 rows); each ``note`` states the source of the label
+(manual research, genus/family-level transfer, or a family-level ecological
+prior) and a ``[conf: high|medium|low]`` confidence tag — refine any
+low-confidence rows for your own dataset before publishing.
 
 .. list-table::
    :header-rows: 1
