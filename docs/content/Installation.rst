@@ -20,7 +20,7 @@ Requirements
      - WSL2 works as well
    * - R + R packages
      - installed by ``install.sh``
-     - openxlsx, data.table, stringi, ggplot2, patchwork, scales, curl, xml2, dplyr, rentrez, forcats, tidyr, magrittr, ape, nlme, phytools, rotl (the last four power the phylogenetic comparative block; ``rotl`` only for the Open Tree of Life route)
+     - openxlsx, data.table, stringi, ggplot2, patchwork, scales, curl, xml2, dplyr, rentrez, forcats, tidyr, magrittr, ape, nlme, phytools, rotl, ggnewscale (ape/nlme/phytools/rotl power the phylogenetic comparative block; ``rotl`` only for the Open Tree of Life route; ``ggnewscale`` draws the two-fill-scale TimeTree-style phylogeny figures)
    * - bedtools / samtools
      - installed by ``install.sh``
      - optional accelerators for linear genomes (gzipped FASTA is decompressed once, then indexed)

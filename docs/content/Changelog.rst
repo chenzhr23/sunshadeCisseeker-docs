@@ -1,6 +1,42 @@
 Changelog
 =========
 
+1.13.0 — strict ecology figure overhaul (TimeTree-style trees)
+---------------------------------------------------------------
+
+* ``phylogenetic_tree_figure.pdf`` is replaced by two **TimeTree-style**
+  outputs: ``phylogenetic_tree_order.pdf`` and
+  ``phylogenetic_tree_family.pdf``. Each page is a full species tree with
+  tip labels, habitat-coloured tips, a colour-block column marking the
+  taxonomic order / family with a complete legend (groups below 3 / 5 tips
+  merge into one grey bucket, colours fixed across pages), and a
+  per-species log10(Box 4 / G-box) heat strip (two independent fill
+  scales via ``ggnewscale``). **Every in-tree species is displayed**:
+  each genome type's tree is split into ~700-tip slices, one page per
+  slice, so the 12,000+ chloroplast tips appear in full. The strip and
+  blocks are placed beyond the measured tip-label text width, so long
+  binomials can never collide with them.
+* Panel (a) of ``phylogenetic_comparative_figures.pdf`` is now a **data
+  summary of the comparative analyses** (in-tree species per genome type
+  and light habitat + the log10 Box4/G-box ratio density per genome type)
+  instead of a miniature tree.
+* ``box4_gbox_ratio.pdf`` is rebuilt as a **compact 2-column grid** with
+  moderate panel aspect ratios: the three per-genome-type ratio panels
+  share one row, then motif count balance | ratio-bin composition,
+  sun-vs-shade enrichment | concentrated bins, and raw bin count
+  difference | order- and family-stratified tests; panel letters are
+  re-tagged dynamically so nothing repeats or overlaps.
+* ``ecology_figures.pdf``: all boxplots became **violin plots** (jittered
+  points + median dot), the three per-genome-type ratio panels (h–j) sit
+  **side by side in one row**, and the panel row heights were rebalanced
+  so no panel is squashed and no axis text overlaps.
+* Genome-type page titles across all per-type figures now read
+  **"Nuclear genome" / "Chloroplast genome" / "Mitochondrial genome"** so
+  the three pages are unambiguous in the viewer.
+* ``r-ggnewscale`` was added to every installer path (``install.sh``,
+  ``sunshadeCisseeker check --install``, the CRAN fallback list) and to
+  the documentation requirements table.
+
 1.12.0 — phylogenetically paired within-clade contrasts
 --------------------------------------------------------
 

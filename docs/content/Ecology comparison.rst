@@ -121,7 +121,7 @@ excluded from the tests (but remain visible in the per-species table).
 * ``Box4_Gbox_tests`` — pairwise Wilcoxon with BH correction and
   ``log2FC = log2(median1 / median2)``;
 * ``Box4_Gbox_groups`` — per-group median/mean ratio and species counts;
-* ``box4_gbox_ratio.pdf`` (step 09) — boxplots of the ratio per ecology
+* ``box4_gbox_ratio.pdf`` (step 09) — violin plots of the ratio per ecology
   group and genome type on a log10 scale.
 
 A sun group median ratio clearly above the shade group median (significant
@@ -133,27 +133,31 @@ Step 09 — publication figures
 -----------------------------
 
 ``ecology_figures.pdf`` is a single **portrait A4 figure** whose panels
-follow a logical analytical progression (v1.4.0):
+follow a logical analytical progression (v1.4.0, panels revised v1.13.0):
 
 1. **(a) Global differential landscape** — a volcano plot of every pairwise
    test (log2 fold change vs ``-log10`` BH-adjusted q) with the significant
    tests highlighted and the significant/total count annotated.
-2. **(b) Top differential elements** — boxplots of the up-to-six most
+2. **(b) Top differential elements** — violin plots of the up-to-six most
    significant elements (ordered by BH-adjusted q), with the pairwise
    Wilcoxon **q-value brackets and asterisks drawn on the panels** and the
    per-element Kruskal-Wallis P in each panel title.
-3. **(c) Box 4 / G-box ratio test** — the per-species ratio per ecology
-   group, with the ratio statistics (Kruskal-Wallis P, pairwise q brackets)
-   drawn on the panel.
-4. **(d) Box 4 / G-box count decomposition** — the per-species counts of the
+3. **(h-j) Box 4 / G-box ratio panels** — the per-species ratio per ecology
+   group for each genome type, side by side **in a single row**, with the
+   ratio statistics (Kruskal-Wallis P, pairwise q brackets) drawn on each
+   panel.
+4. **(k) Box 4 / G-box count decomposition** — the per-species counts of the
    two elements, showing which of them drives the ratio, with per-element
    Kruskal-Wallis P values annotated.
 
-``box4_gbox_ratio.pdf`` is a focused portrait A4 figure (v1.5.0) with the
-ratio distributions, the Box 4 / G-box count balance, the ratio-bin
+Every distribution is a **violin plot** (jittered points + median dot).
+``box4_gbox_ratio.pdf`` is a focused portrait A4 figure (v1.5.0, layout
+revised v1.13.0) in a compact 2-column grid: the per-genome-type ratio
+panels share one row, then the Box 4 / G-box count balance, the ratio-bin
 composition, the sun-vs-shade bin enrichment (Fisher tests with BH stars),
 the concentrated bins and the raw bin count difference — plus order- and
-family-stratified tests when ``config/species_taxonomy.xlsx`` exists.
+family-stratified tests side by side when ``config/species_taxonomy.xlsx``
+exists.
 
 Reference-aligned Box 4/G-box × sun/shade outputs (v1.8.0)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -232,20 +236,26 @@ Everything lands in
 (``Tree_species`` / ``Phylogenetic_signal`` / ``PGLS_models`` /
 ``phyloANOVA`` / ``Input_audit``) and
 ``result/ecology_compare/09_figures/phylogenetic_comparative_figures.pdf``
-(a portrait A4 page: tree with habitat-coloured tips, ratio per habitat
-with the phyloANOVA P, the PGLS coefficient forest, the signal bars, the
-count scatter and the delta-AICc comparison — fixed row heights keep every
-panel complete and non-overlapping). The tree is drawn as pure vector
-ggplot2 geometry, and a dedicated full-page figure
-``result/ecology_compare/09_figures/phylogenetic_tree_figure.pdf`` shows
-the same ladderized tree per genome type with species tip labels (the page
-height is computed from the tip count, so labels never overlap), order
-clade bars with vertical order names, a per-species log10(Box 4 / G-box)
-heat strip, and habitat-coloured tips.
+(a portrait A4 page: a data summary of the comparative analyses —
+in-tree species per genome type and light habitat plus the log10
+Box4/G-box ratio density per genome type — followed by the ratio per
+habitat with the phyloANOVA P, the PGLS coefficient forest, the signal
+bars, the count scatter and the delta-AICc comparison — fixed row heights
+keep every panel complete and non-overlapping). All panels are drawn as
+pure vector ggplot2 geometry, and two dedicated TimeTree-style full-page
+figures ``result/ecology_compare/09_figures/phylogenetic_tree_order.pdf``
+and ``.../phylogenetic_tree_family.pdf`` show the same ladderized tree
+coloured by taxonomic order / family with species tip labels, a complete
+per-order / per-family colour-block legend and a per-species log10(Box 4 /
+G-box) heat strip. Every in-tree species is displayed: each genome type's
+tree is split into ~700-tip slices, one page per slice (the page height is
+computed from the tip count, so labels never overlap).
 
 The block needs the R packages ``ape``, ``nlme`` and ``phytools`` (and
 ``rotl`` for the Open Tree of Life route); install them with
-``conda install -c conda-forge r-ape r-nlme r-phytools r-rotl``. Without
+``conda install -c conda-forge r-ape r-nlme r-phytools r-rotl``. The
+TimeTree-style tree figures additionally need ``ggnewscale`` (bundled
+installers include it automatically). Without
 them, with no taxonomy, or with fewer than six in-tree species, the block
 is skipped with a warning and the rest of Compare ecology is unaffected.
 When the block is skipped, the 08 log and the workbook README sheet state

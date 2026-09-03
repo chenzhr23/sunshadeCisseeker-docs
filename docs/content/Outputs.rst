@@ -44,7 +44,7 @@ Ecology comparison outputs
    * - ``result/ecology_compare/08_statistics/ecology_differential_volcano.pdf``
      - volcano of pairwise tests + top significant element boxplots
    * - ``result/ecology_compare/09_figures/ecology_figures.pdf``
-     - single portrait A4 figure, panels (a) global differential landscape, (b) top differential elements with pairwise q-value brackets, (c) Box 4 / G-box ratio test, (d) Box 4 / G-box count decomposition
+     - single portrait A4 figure, panels (a) global differential landscape, (b) top differential elements with pairwise q-value brackets, (h-j) Box 4 / G-box ratio violins (one per genome type, side by side in a single row), (k) Box 4 / G-box count decomposition; all distributions are violin plots with a median dot
    * - ``result/ecology_compare/09_figures/box4_gbox_ratio.pdf``
      - portrait A4 multi-panel figure for the light-response hypothesis (ratio distributions, count balance, ratio-bin composition/enrichment, concentrated bins, raw bin count difference, optional order/family-stratified tests)
    * - ``result/ecology_compare/08_statistics/box4_gbox_sunshade_results.xlsx`` (v1.8.0)
@@ -56,9 +56,11 @@ Ecology comparison outputs
    * - ``result/ecology_compare/08_statistics/phylogenetic_comparative_results.xlsx`` (v1.11.0)
      - phylogenetic comparative results: ``Tree_species`` / ``Phylogenetic_signal`` (Blomberg K, Pagel lambda) / ``PGLS_models`` (OLS vs Brownian vs Pagel-lambda PGLS with AICc; ratio plus the two counts adjusted for log10 promoters) / ``phyloANOVA`` (999 Brownian simulations) / ``Input_audit``
    * - ``result/ecology_compare/09_figures/phylogenetic_comparative_figures.pdf`` (v1.11.0)
-     - portrait A4 page: (a) tree with habitat-coloured tips, (b) ratio per habitat with phyloANOVA P, (c) PGLS coefficient forest, (d) phylogenetic signal, (e) Box 4 vs G-box count scatter, (f) delta-AICc model comparison; the tree panel is drawn as pure vector ggplot2 geometry
-   * - ``result/ecology_compare/09_figures/phylogenetic_tree_figure.pdf`` (v1.11.0)
-     - full-page vector tree figure, one page per genome type: ladderized phylogram in the classic orientation (basal lineages at the bottom) with species tip labels (row spacing derived from the label size, so labels never overlap; page height grows with the tip count), clade bars and rotated labels for every order with 2+ tips (three left-margin label columns, no collisions), a per-species log10(Box 4 / G-box) heat strip, and habitat-coloured tips (trees above 800 tips are deterministically subsampled for display, with orders of up to 8 tips kept in full)
+     - portrait A4 page: (a) data summary of the comparative analyses (in-tree species per genome type and light habitat + the log10 Box4/G-box ratio density per genome type), (b) ratio per habitat with phyloANOVA P, (c) PGLS coefficient forest, (d) phylogenetic signal, (e) Box 4 vs G-box count scatter, (f) delta-AICc model comparison; every panel is drawn as pure vector ggplot2 geometry
+   * - ``result/ecology_compare/09_figures/phylogenetic_tree_order.pdf`` (v1.13.0)
+     - TimeTree-style species phylogeny coloured by taxonomic order, one page per ~700-tip slice so EVERY in-tree species appears: ladderized phylogram in the classic orientation (basal lineages at the bottom) with species tip labels (row spacing derived from the label size, so labels never overlap), habitat-coloured tips, an order colour-block column with a complete legend (orders below 3 tips merge into one grey bucket) and a per-species log10(Box 4 / G-box) heat strip (two fill scales via ggnewscale)
+   * - ``result/ecology_compare/09_figures/phylogenetic_tree_family.pdf`` (v1.13.0)
+     - the same TimeTree-style tree coloured by taxonomic family (families below 5 tips merge into one grey bucket)
    * - ``result/ecology_compare/08_statistics/within_clade_paired_contrasts.xlsx`` (v1.12.0)
      - phylogenetically paired within-clade contrasts: ``Summary`` (per genome type and clade level: paired-clade count, sun/shade-higher counts, mean/median difference, sign test and Wilcoxon signed-rank P for log10 ratio and the two log10 counts) / ``Per_genus`` / ``Per_family`` (one row per paired clade: sun and shade medians and their difference)
    * - ``result/ecology_compare/09_figures/within_clade_paired_contrasts.pdf`` (v1.12.0)
