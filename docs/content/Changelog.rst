@@ -4,6 +4,18 @@ Changelog
 1.12.0 — phylogenetically paired within-clade contrasts
 --------------------------------------------------------
 
+* The figure set was overhauled to publication standard: the tree figure
+  now uses the classic orientation with **basal lineages at the bottom**,
+  every order with 2+ tips gets a clade bar and a rotated label (placed
+  greedily into three left-margin columns so labels never overlap), and
+  all title/subtitle/caption text stays inside the page boundary; axis
+  ticks and panel titles of ``box4_gbox_ratio.pdf`` and
+  ``ecology_figures.pdf`` were thinned so no text collides; and
+  ``within_clade_paired_contrasts.pdf``,
+  ``element_configuration_spectrum.pdf`` and
+  ``element_expansion_contraction.pdf`` are now written as one PDF page
+  per genome type (bold 12 pt page titles) so each type's panels are
+  easy to tell apart in the viewer.
 * Step 08 adds **phylogenetically paired within-clade contrasts**: for
   every genus (and family) that contains both sun- and shade-labeled
   species, the sun − shade difference of log10(Box 4 / G-box ratio) is
