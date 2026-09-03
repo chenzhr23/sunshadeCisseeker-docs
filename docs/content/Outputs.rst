@@ -65,6 +65,10 @@ Ecology comparison outputs
      - one A4 page per genome type: (a) per-genus waterfall of sun − shade differences, (b) per-family waterfall, (c) genus-level sun vs shade median scatter with the sign test / signed-rank summary in the subtitles
    * - ``result/ecology_compare/09_figures/element_configuration_spectrum.pdf`` (v1.12.0)
      - the lineage "dialect spectrum", one A4 page per genome type: per-family and per-order median log10(Box 4 / G-box) ordered by clade position in the species tree (left = basal, right = derived), bars coloured by major plant group (algae / bryophytes / lycophytes / ferns / gymnosperms / basal angiosperms / monocots / eudicots) with the extreme clades labelled
+   * - ``result/ecology_compare/08_statistics/element_expansion_contraction.xlsx`` (v1.12.0)
+     - per-species Box 4 / G-box expansion-contraction quantification: ``Per_species`` (counts, log10 values, lineage-relative residuals vs the genus/family median, and phylogenetic terminal-branch deltas via ``phytools::fastAnc`` with expanded/contracted flags) / ``Summary`` (expansion and contraction counts per type and element, the Box 4-vs-G-box trade-off Spearman test, and the delta-by-habitat Kruskal-Wallis test)
+   * - ``result/ecology_compare/09_figures/element_expansion_contraction.pdf`` (v1.12.0)
+     - one A4 page per genome type: (a) the Box 4 vs G-box terminal-branch delta scatter (quadrant-coloured, with the Spearman trade-off test annotated), (b) the deltas per element split by light habitat with the Kruskal-Wallis P annotated
    * - ``result/ecology_compare/08_statistics/box4_gbox_sunshade_species_annotated.tsv`` (v1.8.0)
      - the annotated species table (Box 4 / G-box counts, ratio, ratio bin + sun/shade label + taxonomy ranks) as a flat TSV
    * - ``result/ecology_compare/09_figures/box4_gbox_sunshade_relationship.pdf`` (v1.8.0)

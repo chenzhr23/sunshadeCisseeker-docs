@@ -19,6 +19,17 @@ Changelog
   in several genome types (e.g. ``Sarcandra_glabra`` in both the nuclear
   and chloroplast results) appear on every type's tree page instead of
   being deduplicated away.
+* Step 08 also quantifies **Box 4 / G-box expansion and contraction per
+  species** in ``element_expansion_contraction.xlsx``: (1)
+  lineage-relative residuals (log10 count minus the genus/family median)
+  and (2) phylogenetic terminal-branch deltas (tip log10 count minus the
+  ML ancestral value at the parent node, ``phytools::fastAnc``; positive =
+  expansion, negative = contraction). The ``Summary`` sheet counts
+  expansions/contractions per type and element and tests the Box 4-vs-G-box
+  trade-off (Spearman) and the delta-by-habitat association
+  (Kruskal-Wallis). Step 09 visualizes it in
+  ``element_expansion_contraction.pdf`` (one A4 page per type: the
+  delta-delta trade-off scatter and the by-habitat violin panels).
 * Step 09 adds ``within_clade_paired_contrasts.pdf`` — one A4 page per
   genome type with (a) a per-genus waterfall of the sun − shade
   differences, (b) the per-family waterfall, and (c) a genus-level sun vs
