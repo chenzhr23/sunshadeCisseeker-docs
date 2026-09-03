@@ -14,7 +14,11 @@ Changelog
   supporting evidence (not promoter-adjusted at this stage). Everything
   lands in
   ``result/ecology_compare/08_statistics/within_clade_paired_contrasts.xlsx``
-  (``Summary`` / ``Per_genus`` / ``Per_family``).
+  (``Summary`` / ``Per_genus`` / ``Per_family``). The ``Tree_species``
+  sheet now keeps one row per (species, genome type), so species present
+  in several genome types (e.g. ``Sarcandra_glabra`` in both the nuclear
+  and chloroplast results) appear on every type's tree page instead of
+  being deduplicated away.
 * Step 09 adds ``within_clade_paired_contrasts.pdf`` — one A4 page per
   genome type with (a) a per-genus waterfall of the sun − shade
   differences, (b) the per-family waterfall, and (c) a genus-level sun vs
@@ -61,8 +65,9 @@ Changelog
   clade bars with vertical order names and a per-species
   log10(Box 4 / G-box) heat strip. The page height is computed from the
   tip count and the label size, so adjacent tip labels and order names
-  can never overlap (trees above 600 display tips are deterministically
-  subsampled for the figure). Axis ticks, percent labels and stratum
+  can never overlap (trees above 800 display tips are deterministically
+  subsampled for the figure, and every order keeps at least one tip so
+  small basal clades are never dropped). Axis ticks, percent labels and stratum
   subtitles across the other figures were thinned to remove all remaining
   text collisions. The ecology end-to-end suite asserts the tree is
   actually drawn (vector paths, no ``unavailable`` placeholder), the tree
