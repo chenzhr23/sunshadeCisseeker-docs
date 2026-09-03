@@ -77,8 +77,8 @@ Changelog
   log10(Box 4 / G-box) heat strip. The page height is computed from the
   tip count and the label size, so adjacent tip labels and order names
   can never overlap (trees above 800 display tips are deterministically
-  subsampled for the figure, and every order keeps at least one tip so
-  small basal clades are never dropped). Axis ticks, percent labels and stratum
+  subsampled for the figure, with orders of up to 8 tips kept in full so
+  small basal clades such as Chloranthales always appear). Axis ticks, percent labels and stratum
   subtitles across the other figures were thinned to remove all remaining
   text collisions. The ecology end-to-end suite asserts the tree is
   actually drawn (vector paths, no ``unavailable`` placeholder), the tree
