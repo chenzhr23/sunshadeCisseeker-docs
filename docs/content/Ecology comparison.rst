@@ -242,14 +242,24 @@ Box4/G-box ratio density per genome type — followed by the ratio per
 habitat with the phyloANOVA P, the PGLS coefficient forest, the signal
 bars, the count scatter and the delta-AICc comparison — fixed row heights
 keep every panel complete and non-overlapping). All panels are drawn as
-pure vector ggplot2 geometry, and two dedicated TimeTree-style full-page
-figures ``result/ecology_compare/09_figures/phylogenetic_tree_order.pdf``
-and ``.../phylogenetic_tree_family.pdf`` show the same ladderized tree
-coloured by taxonomic order / family with species tip labels, a complete
-per-order / per-family colour-block legend and a per-species log10(Box 4 /
-G-box) heat strip. Every in-tree species is displayed: each genome type's
-tree is split into ~700-tip slices, one page per slice (the page height is
-computed from the tip count, so labels never overlap).
+pure vector ggplot2 geometry, and two dedicated full-page figures
+``result/ecology_compare/09_figures/phylogenetic_tree_order.pdf`` and
+``.../phylogenetic_tree_family.pdf`` show the same tree as a
+**rectangular (orthogonal) phylogram on an approximate evolutionary time
+axis** (Mya, rank-calibrated: species tips = 0, genus crown = 10, family =
+45, order = 80, backbone = 100; the geological periods are drawn as
+background bands, the present sits at the right and basal lineages at the
+bottom), coloured by taxonomic order / family with species tip labels, a
+complete per-order / per-family colour-block legend, a **per-clade heat
+strip with its own scale** (the within-clade percentile of log10(Box 4 /
+G-box) — clades never share one heat-map dimension) and a **within-clade
+Spearman trend test** on every clade label (ancestral-low → derived-high
+hypothesis: rho between the species' position along the displayed clade
+block and its log10 ratio, ``*`` = P < 0.05; complete statistics in
+``.../clade_trend_tests.tsv``). Every in-tree species is displayed: each
+genome type's tree is split into ~700-tip slices, one page per slice (the
+page height is computed from the tip count, so labels never overlap, and
+the margins keep everything inside the A4-width page).
 
 The block needs the R packages ``ape``, ``nlme`` and ``phytools`` (and
 ``rotl`` for the Open Tree of Life route); install them with

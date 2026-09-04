@@ -1,6 +1,33 @@
 Changelog
 =========
 
+1.14.0 — time-calibrated rectangular phylogenies with per-clade trend tests
+----------------------------------------------------------------------------
+
+* ``phylogenetic_tree_order.pdf`` and ``phylogenetic_tree_family.pdf`` are
+  redrawn as **rectangular (orthogonal) phylograms on an evolutionary time
+  axis**: branch lengths are Mya calibrated from the taxonomic ranks
+  (species tips = 0, genus crown = 10, family = 45, order = 80, backbone
+  above orders = 100 Mya, literature-averaged and clearly labelled as
+  approximate), the **present sits at the right**, basal lineages at the
+  bottom, and the **geological periods** (Quaternary … Cretaceous, ICS
+  timescale) are drawn as background bands with names. Every in-tree
+  species is still shown across ~700-tip pages.
+* **Every order/family now has its OWN heat scale**: the far-right strip
+  shows the *within-clade percentile* of log10(Box 4 / G-box) (blue =
+  lowest, red = highest inside that clade), so clades never share one
+  heat-map dimension.
+* Each clade label carries the **within-clade Spearman trend test** of the
+  "ancestral species low → derived species high" hypothesis (rho between
+  the species' position along the displayed clade block — bottom = most
+  basal, top = most derived — and its log10 ratio; ``*`` = P < 0.05), and
+  the per-type subtitle summarizes how many clades show the derived-high
+  direction and how many are significant. The complete per-clade
+  statistics are written to ``09_figures/clade_trend_tests.tsv``.
+* The tree pages keep a wider margin (A4 width) and every title, band
+  name, clade label and strip stays inside the page boundary (wrapped
+  captions, fixed-point text-width layout).
+
 1.13.0 — strict ecology figure overhaul (TimeTree-style trees)
 ---------------------------------------------------------------
 
