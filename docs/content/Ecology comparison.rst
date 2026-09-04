@@ -264,7 +264,7 @@ the margins keep everything inside the A4-width page).
 The block needs the R packages ``ape``, ``nlme`` and ``phytools`` (and
 ``rotl`` for the Open Tree of Life route); install them with
 ``conda install -c conda-forge r-ape r-nlme r-phytools r-rotl``. The
-TimeTree-style tree figures additionally need ``ggnewscale`` (bundled
+time-calibrated tree figures additionally need ``ggnewscale`` (bundled
 installers include it automatically). Without
 them, with no taxonomy, or with fewer than six in-tree species, the block
 is skipped with a warning and the rest of Compare ecology is unaffected.

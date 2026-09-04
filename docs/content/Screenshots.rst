@@ -82,9 +82,14 @@ editors and the remaining functions.
    — since v1.12.0 — phylogenetically paired within-clade contrasts (sun
    vs shade inside every genus/family that has both labels, with sign test
    and Wilcoxon signed-rank tests across clades). Step 09 renders the
-   figures, including the full-page species-tree figure with tip labels,
-   order bars and a per-species ratio strip, and the within-clade paired
-   contrast waterfalls. The genome-type checkboxes
+   figures, including the time-calibrated rectangular species-tree figures
+   (``phylogenetic_tree_order.pdf`` / ``phylogenetic_tree_family.pdf``:
+   Mya axis with geological periods, per-clade colour blocks, an
+   independent within-clade heat scale per order/family and the
+   within-clade ancestral-low → derived-high Spearman trend annotation;
+   full per-clade statistics in ``clade_trend_tests.tsv``), the
+   within-clade paired contrast waterfalls and the expansion/contraction
+   figures. The genome-type checkboxes
    match the Label ecology page (only **Nuclear genome** starts checked):
    unchecked types are left out of the merge, and the Tools → Run local
    species join the genome type they were run under.
