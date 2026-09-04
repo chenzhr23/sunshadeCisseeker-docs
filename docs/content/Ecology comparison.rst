@@ -243,23 +243,54 @@ habitat with the phyloANOVA P, the PGLS coefficient forest, the signal
 bars, the count scatter and the delta-AICc comparison — fixed row heights
 keep every panel complete and non-overlapping). All panels are drawn as
 pure vector ggplot2 geometry, and two dedicated full-page figures
-``result/ecology_compare/09_figures/phylogenetic_tree_order.pdf`` and
-``.../phylogenetic_tree_family.pdf`` show the same tree as a
+``result/ecology_compare/09_figures/phylogenetic_tree_order_Box4_Gbox.pdf``
+and ``.../phylogenetic_tree_family_Box4_Gbox.pdf`` show the same tree as a
 **rectangular (orthogonal) phylogram on an approximate evolutionary time
 axis** (Mya, rank-calibrated: species tips = 0, genus crown = 10, family =
 45, order = 80, backbone = 100; the geological periods are drawn as
 background bands, the present sits at the right and basal lineages at the
-bottom), coloured by taxonomic order / family with species tip labels, a
-complete per-order / per-family colour-block legend, a **per-clade heat
-strip with its own scale** (the within-clade percentile of log10(Box 4 /
-G-box) — clades never share one heat-map dimension) and a **within-clade
+bottom), coloured by taxonomic order / family with species tip labels, an
+adaptive per-order / per-family colour-block legend (always inside the
+page), a **per-clade heat strip with its own scale** (the within-clade
+percentile of log10(Box 4 / G-box) — clades never share one heat-map
+dimension — with white gaps between the clade blocks) and a **within-clade
 Spearman trend test** on every clade label (ancestral-low → derived-high
 hypothesis: rho between the species' position along the displayed clade
 block and its log10 ratio, ``*`` = P < 0.05; complete statistics in
-``.../clade_trend_tests.tsv``). Every in-tree species is displayed: each
-genome type's tree is split into ~700-tip slices, one page per slice (the
-page height is computed from the tip count, so labels never overlap, and
-the margins keep everything inside the A4-width page).
+``.../clade_trend_tests_Box4_Gbox.tsv``). Every in-tree species is
+displayed: each genome type's tree is split into ~700-tip slices, one page
+per slice (the page height is computed from the tip count, so labels never
+overlap, and the margins keep everything inside the A4-width page).
+
+Pairwise motif-ratio trees (v1.15.0)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The same time-calibrated order/family tree machinery runs for **every
+unordered pair of cis-element motifs** in the master dataset: for
+``log10(count motif A / count motif B)`` it writes
+``phylogenetic_tree_order_<A>_vs_<B>.pdf`` and
+``phylogenetic_tree_family_<A>_vs_<B>.pdf`` (same layout, heat scale and
+trend annotations as the Box 4 / G-box figures) and collects the per-clade
+trend statistics into ``element_pair_clade_trends.xlsx`` (one sheet per
+pair and level). A pair is analysed only when both motifs occur in at
+least 10 labeled species (otherwise the ratio is meaningless for most
+species); the number of processed pairs is capped by the environment
+variable ``SUNSHADE_MAX_MOTIF_PAIRS`` (default 200 — raise it to include
+all pairs).
+
+Clade extremes (v1.15.0)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Step 08 additionally computes, per order and per family, the clade's
+**maximum** log10(Box 4 / G-box) as its **Box 4 expansion limit** and its
+**minimum** as its **G-box contraction limit** (with the species achieving
+each extreme; species whose ratio is 0 — Box 4 absent, log10 undefined —
+are counted separately in ``n_zero_box4``), written to
+``result/ecology_compare/08_statistics/clade_extremes.xlsx``
+(``Order_extremes`` / ``Family_extremes``, sorted by decreasing maximum).
+Step 09 draws the ranked order-vs-order and family-vs-family comparisons in
+``clade_extremes.pdf`` (one A4 page per genome type; the 12 most extreme
+clades labelled).
 
 The block needs the R packages ``ape``, ``nlme`` and ``phytools`` (and
 ``rotl`` for the Open Tree of Life route); install them with

@@ -1,6 +1,41 @@
 Changelog
 =========
 
+1.15.0 — publication-grade tree figures, clade extremes and pairwise motif-ratio trees
+---------------------------------------------------------------------------------------
+
+* ``phylogenetic_comparative_figures.pdf`` panel (a) no longer carries the
+  separate title strip that overlapped the data-summary panels: the tag and
+  the summary line are baked into the bar panel's own title/subtitle.
+* The time-calibrated tree figures were polished to publication standard:
+  the legend is **adaptive** (3/4/5 columns and smaller keys for long
+  legends, always inside the page) and the per-clade heat strip now has
+  **white separator gaps between the order/family blocks**, so each clade
+  reads as a distinct unit.
+* The Box 4 / G-box tree figures and their trend table are renamed
+  explicitly: ``phylogenetic_tree_order_Box4_Gbox.pdf`` /
+  ``phylogenetic_tree_family_Box4_Gbox.pdf`` and
+  ``clade_trend_tests_Box4_Gbox.tsv``.
+* **Pairwise motif-ratio trees (v1.15.0)**: for every unordered pair of
+  cis-element motifs present in the master dataset (both motifs must occur
+  in >= 10 labeled species), the same time-calibrated order/family tree
+  figures are generated for ``log10(motif A / motif B)`` —
+  ``phylogenetic_tree_order_<A>_vs_<B>.pdf`` and
+  ``phylogenetic_tree_family_<A>_vs_<B>.pdf`` — with the per-clade trend
+  statistics collected into ``element_pair_clade_trends.xlsx`` (one sheet
+  per pair and level). The pair count is capped by
+  ``SUNSHADE_MAX_MOTIF_PAIRS`` (default 200; raise the variable to include
+  all pairs).
+* **Clade extremes (v1.15.0)**: each order's (family's) maximum
+  log10(Box 4 / G-box) is interpreted as its **Box 4 expansion limit** and
+  its minimum as its **G-box contraction limit**; both are tabulated with
+  the achieving species in ``clade_extremes.xlsx``
+  (``Order_extremes`` / ``Family_extremes``; species with ratio 0 are
+  counted in ``n_zero_box4``) and drawn as ranked comparison panels in
+  ``clade_extremes.pdf`` (one A4 page per genome type).
+* The ecology end-to-end suite now audits **every** tree PDF and the
+  extremes figure for overlapping and out-of-bounds text.
+
 1.14.0 — time-calibrated rectangular phylogenies with per-clade trend tests
 ----------------------------------------------------------------------------
 

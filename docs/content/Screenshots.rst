@@ -83,11 +83,13 @@ editors and the remaining functions.
    vs shade inside every genus/family that has both labels, with sign test
    and Wilcoxon signed-rank tests across clades). Step 09 renders the
    figures, including the time-calibrated rectangular species-tree figures
-   (``phylogenetic_tree_order.pdf`` / ``phylogenetic_tree_family.pdf``:
-   Mya axis with geological periods, per-clade colour blocks, an
-   independent within-clade heat scale per order/family and the
-   within-clade ancestral-low → derived-high Spearman trend annotation;
-   full per-clade statistics in ``clade_trend_tests.tsv``), the
+   (``phylogenetic_tree_order_Box4_Gbox.pdf`` /
+   ``phylogenetic_tree_family_Box4_Gbox.pdf``: Mya axis with geological
+   periods, per-clade colour blocks, an independent within-clade heat
+   scale per order/family and the within-clade ancestral-low → derived-high
+   Spearman trend annotation; every motif pair gets the same figures for
+   log10(A/B) since v1.15.0, plus the clade-extremes comparison
+   ``clade_extremes.pdf``), the
    within-clade paired contrast waterfalls and the expansion/contraction
    figures. The genome-type checkboxes
    match the Label ecology page (only **Nuclear genome** starts checked):
