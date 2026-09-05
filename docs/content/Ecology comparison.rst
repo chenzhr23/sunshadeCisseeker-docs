@@ -272,11 +272,11 @@ unordered pair of cis-element motifs** in the master dataset: for
 ``phylogenetic_tree_family_<A>_vs_<B>.pdf`` (same layout, heat scale and
 trend annotations as the Box 4 / G-box figures) and collects the per-clade
 trend statistics into ``element_pair_clade_trends.xlsx`` (one sheet per
-pair and level). A pair is analysed only when both motifs occur in at
-least 10 labeled species (otherwise the ratio is meaningless for most
-species); the number of processed pairs is capped by the environment
-variable ``SUNSHADE_MAX_MOTIF_PAIRS`` (default 200 — raise it to include
-all pairs).
+pair and level). **All motif pairs are processed by default** (a pair is
+included when both motifs occur in at least 2 labeled species, so the
+ratio and its heat strip are defined); the optional environment variable
+``SUNSHADE_MAX_MOTIF_PAIRS`` can still cap the run for very large motif
+libraries.
 
 Clade extremes (v1.15.0)
 ~~~~~~~~~~~~~~~~~~~~~~~~

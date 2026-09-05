@@ -1,6 +1,31 @@
 Changelog
 =========
 
+1.15.1 — panel-grid and label-overlap fixes, all motif pairs processed
+----------------------------------------------------------------------
+
+* ``phylogenetic_comparative_figures.pdf`` was rebuilt on a **flat 2-column
+  grid** ((a) species summary | (b) ratio density, then c-g): the nested
+  panel (a) and its title strip are gone, so panel (a) can no longer
+  overlap itself or panel (b). Panels are re-lettered a-g accordingly.
+* ``clade_extremes.pdf``: the extreme-clade labels now point away from the
+  plot edges (below the maxima, above the minima) and use
+  ``check_overlap``, so the labels no longer collide with each other or
+  with the panel titles.
+* **All motif pairs are processed by default**: the 200-pair cap is gone
+  (``SUNSHADE_MAX_MOTIF_PAIRS`` remains as an optional cap) and the
+  presence filter is relaxed to "both motifs occur in >= 2 labeled
+  species", so every qualifying pair gets its own
+  ``phylogenetic_tree_order_<A>_vs_<B>.pdf`` /
+  ``phylogenetic_tree_family_<A>_vs_<B>.pdf`` with the corresponding
+  log10(A/B) heat strip.
+* ``box4_gbox_ratio.pdf`` panel (d) (the motif count balance): fewer
+  log10 axis breaks and smaller facet strip / axis text, so the tick
+  labels no longer overlap in the three per-type facets.
+* The ecology end-to-end publication audit now also checks
+  ``box4_gbox_ratio.pdf``, ``ecology_figures.pdf`` and the other A4
+  figures for overlapping and out-of-bounds text.
+
 1.15.0 — publication-grade tree figures, clade extremes and pairwise motif-ratio trees
 ---------------------------------------------------------------------------------------
 
