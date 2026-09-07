@@ -1,6 +1,23 @@
 Changelog
 =========
 
+1.15.2 — always-visible heat strips and tie annotations
+--------------------------------------------------------
+
+* The per-clade heat strip of the time-calibrated tree figures could look
+  "absent" when a clade's percentiles fell near the scale midpoint, which
+  was mapped to a near-white yellow (#FFFFBF). The palette is now
+  **blue → grey → red** (midpoint #9AA0A6), so every percentile is clearly
+  visible against the white page, the strip column is widened 5 → 8 mm and
+  every tile gets a thin white outline.
+* Clade labels now annotate **heavy ties**: when >= 15% of a clade's
+  species share the same log10 ratio (rank averaging squeezes their
+  percentiles onto one colour), the label shows ``ties=NN%``. The same
+  ``ties_pct`` column is added to ``clade_trend_tests_Box4_Gbox.tsv`` and
+  ``element_pair_clade_trends.xlsx``.
+* The ecology end-to-end suite now asserts that no heat tile uses the
+  legacy near-white midpoint colour in any tree PDF.
+
 1.15.1 — panel-grid and label-overlap fixes, all motif pairs processed
 ----------------------------------------------------------------------
 
