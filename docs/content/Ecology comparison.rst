@@ -44,6 +44,25 @@ so the density metric is unchanged), and a genome type whose only outputs
 are Run-local is still merged. Every staged species therefore joins the
 comparison inside its physical type instead of a separate group.
 
+Functional-group selection (v1.17.0)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Compare ecology page additionally offers **Functional groups**
+checkboxes, populated from the ``functional_group`` column of
+``config/cis_element_motif_library.xlsx`` (Light, Core, Hormone, Stress,
+ABA, Development, Circadian). Ticking one or more classes forwards
+``--ecology-groups=Light,Core`` to ``run_all.sh ecology`` (the
+``SUNSHADE_ECOLOGY_GROUPS`` environment variable is also accepted), and the
+merged master is restricted to the ticked classes — so the differential
+statistics, the volcano, and the pairwise motif-ratio tree figures all
+compare only the chosen cis-element classes. No tick = every class is
+compared (the previous behaviour). The species tree is built for **any**
+selection, so the pairwise tree figures keep working for every class; the
+dedicated Box 4 / G-box sun-shade analyses (reference-aligned workbook,
+comparative phylogenetics, BG tree figures, extremes, paired contrasts,
+expansion/contraction, spectrum) are skipped automatically whenever the
+selection does not contain the Box 4 / G-box elements.
+
 1. For each selected genome type, merge the per-species element counts
    (``Species_element_counts``) with the per-species **total promoter
    number** (from the step-05 summary workbook's ``Per_species`` sheet —
@@ -56,8 +75,9 @@ comparison inside its physical type instead of a separate group.
    and the three compartments are directly comparable.
 3. Join the ``sun`` / ``shade`` label from the Label
    ecology assignment (by genome type + species).
-4. Write the long-format ``Master_long`` table plus three auxiliary tables to
-   ``ecology_master_dataset.xlsx``.
+4. Restrict to the selected functional groups when a selection is active.
+5. Write the long-format ``Master_long`` table plus three auxiliary tables to
+   ``ecology_master_dataset.xlsx`` (the README sheet records the selection).
 
 Step 08 — differential statistics
 ---------------------------------
@@ -257,10 +277,15 @@ dimension — with white gaps between the clade blocks) and a **within-clade
 Spearman trend test** on every clade label (ancestral-low → derived-high
 hypothesis: rho between the species' position along the displayed clade
 block and its log10 ratio, ``*`` = P < 0.05; complete statistics in
-``.../clade_trend_tests_Box4_Gbox.tsv``). Every in-tree species is
-displayed: each genome type's tree is split into ~1,400-tip slices, one page
-per slice (the page height is computed from the tip count, so labels never
-overlap, and the margins keep everything inside the A4-width page).
+``.../clade_trend_tests_Box4_Gbox.tsv``). **Every labeled species is
+displayed**: each genome type's tree is split into ~1,400-tip slices, one
+page per slice (the page height is computed from the tip count, so labels
+never overlap, and the margins keep everything inside the A4-width page).
+Since v1.17.0 species that the published tree could not place (unresolved
+taxonomy ranks) are **attached at the root** and drawn at the base in their
+own grey ``not in tree`` block (no clade statistics or heat percentile,
+noted in the subtitle and caption), so no species is ever dropped from the
+figures.
 
 Pairwise motif-ratio trees (v1.15.0)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -276,7 +301,9 @@ pair and level). **All motif pairs are processed by default** (a pair is
 included when both motifs occur in at least 2 labeled species, so the
 ratio and its heat strip are defined); the optional environment variable
 ``SUNSHADE_MAX_MOTIF_PAIRS`` can still cap the run for very large motif
-libraries.
+libraries. When the Compare ecology functional-group selection is active,
+only pairs **inside the selected classes** are processed, and the species
+tree is built regardless, so the figures keep working for any selection.
 
 Clade extremes (v1.15.0)
 ~~~~~~~~~~~~~~~~~~~~~~~~

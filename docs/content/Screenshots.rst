@@ -91,10 +91,19 @@ editors and the remaining functions.
    log10(A/B) since v1.15.0, plus the clade-extremes comparison
    ``clade_extremes.pdf``), the
    within-clade paired contrast waterfalls and the expansion/contraction
-   figures. The genome-type checkboxes
+   figures. Every labeled species is drawn in the tree figures — since
+   v1.17.0 species outside the published tree are attached at the base in a
+   grey "not in tree" block. The genome-type checkboxes
    match the Label ecology page (only **Nuclear genome** starts checked):
    unchecked types are left out of the merge, and the Tools → Run local
-   species join the genome type they were run under.
+   species join the genome type they were run under. Since v1.17.0 a
+   **Functional groups** row of checkboxes (loaded from the motif library's
+   ``functional_group`` column; Reload re-reads the library) selects which
+   cis-element classes the comparison covers: the merged master, the
+   differential statistics and the pairwise motif tree figures are then
+   restricted to the ticked classes (tick none = all classes, and the
+   Box 4 / G-box reference analyses run only while their elements stay in
+   the selection).
    It requires the Label ecology page to have run first. Results land under
    ``result/ecology_compare/``.
 

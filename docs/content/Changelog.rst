@@ -1,6 +1,37 @@
 Changelog
 =========
 
+1.17.0 — all species in the tree figures + functional-group selection
+----------------------------------------------------------------------
+
+* **Every labeled species is now displayed** in the time-calibrated tree
+  figures (``phylogenetic_tree_order_Box4_Gbox.pdf``,
+  ``phylogenetic_tree_family_Box4_Gbox.pdf`` and every pairwise
+  ``phylogenetic_tree_<level>_<A>_vs_<B>.pdf``). Species that the published
+  phylogenetic tree could not place (unresolved taxonomy ranks) were
+  previously dropped from the figures; they are now **attached at the root
+  and shown at the base in their own grey "not in tree" block** (no clade
+  statistics or heat percentile), with the count noted in the subtitle and
+  caption. The species table behind the tree (08 ``Tree_species`` /
+  ``Species_annotated``) now covers every species of the merged master, not
+  only the ones carrying Box 4 / G-box rows.
+* The **Compare ecology page can now select which cis-element functional
+  classes to compare**: new ``Functional groups`` checkboxes (populated
+  from the ``functional_group`` column of
+  ``config/cis_element_motif_library.xlsx`` — e.g. Light, Core, Hormone,
+  Stress, ABA, Development, Circadian) are forwarded to run_all.sh as
+  ``--ecology-groups=Light,Core`` (``SUNSHADE_ECOLOGY_GROUPS`` env variable
+  is also supported). The merged master, the Kruskal-Wallis / pairwise
+  statistics and the pairwise motif tree figures are then restricted to the
+  ticked classes; no tick = all classes. The species tree is still built
+  for ANY selection (so the pairwise tree figures keep working), while the
+  dedicated Box 4 / G-box sun-shade analyses and figures are skipped
+  automatically when their elements are out of scope.
+* The ecology end-to-end suite now covers the grafted "not in tree"
+  display, the ``--ecology-groups=Light`` restriction (only Box 4 / G-box
+  merged and compared) and the ``--ecology-groups=Core`` restriction (tree
+  preserved, zero-count reference table, Box 4 / G-box figures gated).
+
 1.16.0 — order-of-magnitude faster pairwise motif-ratio trees
 ---------------------------------------------------------------
 

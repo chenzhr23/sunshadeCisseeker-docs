@@ -1,4 +1,4 @@
-# sunshadeCisseeker documentation build configuration.
+﻿# sunshadeCisseeker documentation build configuration.
 #
 # Read the Docs theme (sphinx_rtd_theme): full-width layout, search box,
 # light/dark modes and a mobile-friendly hamburger navigation, with content
@@ -9,8 +9,8 @@ author = "sunshadeCisseeker developers"
 copyright = "2026, sunshadeCisseeker developers"
 
 # The short X.Y version and the full release version.
-version = "v1.16.0"
-release = "v1.16.0"
+version = "v1.17.0"
+release = "v1.17.0"
 
 extensions = [
     "sphinx.ext.autosectionlabel",

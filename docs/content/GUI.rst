@@ -37,7 +37,7 @@ There are exactly six sliding pages, in this order:
    * - **Label ecology**
      - assigns the sun/shade labels to the merged datasets (cross-genome step 06), one label sheet per genome type; checkboxes select the types to label
    * - **Compare ecology**
-     - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first); checkboxes select the genome types to merge
+     - runs the cross-genome ecology comparison (steps 07-09; requires Label ecology first); checkboxes select the genome types to merge and, since v1.17.0, the cis-element functional groups to compare (Light / Core / Hormone / ... from the motif library's functional_group column)
 
 Each analysis page shows the step description, the result directory hint and
 a live log panel. The three genome pages additionally offer an **NCBI API key
@@ -55,7 +55,15 @@ checked): they become the ``--label-types`` / ``--ecology-types`` flags of
 the respective runs, so both steps analyze exactly the selected genome
 types. The three checkboxes are the three physical types only: a species
 analyzed by *Tools → Run local* joins the genome type it was run under
-(see below), so there is no separate pseudo-type to select. A screenshot
+(see below), so there is no separate pseudo-type to select. The **Compare
+ecology** page additionally shows, since v1.17.0, a **Functional groups**
+row of checkboxes (populated lazily from the motif library's
+``functional_group`` column; a Reload button re-reads the library): ticked
+classes become ``--ecology-groups=<comma list>`` and restrict the merged
+master, the differential statistics and the pairwise motif tree figures to
+those classes — tick none = all classes. When the library cannot be read
+through the R helper, a plain comma-separated text field takes the
+checkboxes' place. A screenshot
 of every page and popup, with explanations, is on the :doc:`Screenshots`
 page.
 
