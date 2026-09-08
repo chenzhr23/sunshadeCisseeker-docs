@@ -1,6 +1,17 @@
 Changelog
 =========
 
+1.17.1 — Compare ecology page: stray table removed
+--------------------------------------------------
+
+* The Compare ecology page no longer shows a small empty table in its
+  top-left corner: the internal working table behind the functional-group
+  checkboxes (it holds the ``functional_group`` column read from the motif
+  library by the R helper) was parented to the page but never hidden, so it
+  was displayed together with the page. It is now explicitly hidden — the
+  page shows only the title, description, genome-type checkboxes, the
+  functional-group selector and the run log.
+
 1.17.0 — all species in the tree figures + functional-group selection
 ----------------------------------------------------------------------
 
