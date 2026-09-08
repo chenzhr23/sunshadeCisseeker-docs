@@ -258,7 +258,7 @@ Spearman trend test** on every clade label (ancestral-low → derived-high
 hypothesis: rho between the species' position along the displayed clade
 block and its log10 ratio, ``*`` = P < 0.05; complete statistics in
 ``.../clade_trend_tests_Box4_Gbox.tsv``). Every in-tree species is
-displayed: each genome type's tree is split into ~700-tip slices, one page
+displayed: each genome type's tree is split into ~1,400-tip slices, one page
 per slice (the page height is computed from the tip count, so labels never
 overlap, and the margins keep everything inside the A4-width page).
 

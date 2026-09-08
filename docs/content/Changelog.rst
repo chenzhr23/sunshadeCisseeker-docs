@@ -1,6 +1,23 @@
 Changelog
 =========
 
+1.16.0 — order-of-magnitude faster pairwise motif-ratio trees
+---------------------------------------------------------------
+
+* The pairwise motif-ratio tree analysis is now **~10x faster**: the
+  tree-derived context (ladderized tip order, rank-calibrated time tree,
+  slice trees, clade membership/palette and display positions) is computed
+  **once per genome type and clade level** and reused by every motif pair
+  (previously it was recomputed for every pair x level x type), each page
+  now carries **~1,400 tips instead of ~700** (halving the number of
+  rendered pages), and the per-pair figures are rendered **in parallel**
+  (``SUNSHADE_RENDER_CORES``, default ``min(8, cores-1)``; the optional
+  ``SUNSHADE_MAX_MOTIF_PAIRS`` cap still works).
+* The runtime of Compare ecology on large datasets drops from hours to
+  minutes: with N master elements the pairwise part costs roughly
+  ``C(N,2) x 2 figures x ~10 pages / cores`` instead of
+  ``C(N,2) x 2 figures x 20 pages + repeated tree preparation``.
+
 1.15.2 — always-visible heat strips and tie annotations
 --------------------------------------------------------
 
